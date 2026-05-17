@@ -1,6 +1,6 @@
 window.BLOG_POSTS = [
   {
-    link: "/blogs/how-to-save-money-fast.html",
+    link: "../blogs/how-to-save-money-fast.html",
     title: "How To Save Money Fast",
     desc: "Discover practical and effective money-saving strategies that help beginners reduce daily expenses, build better financial habits, and grow their savings faster in 2026.",
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f",
