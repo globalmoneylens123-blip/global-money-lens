@@ -820,7 +820,7 @@
                         <h3 class="blog-title">${post.title}</h3>
                         <div class="blog-desc">${post.desc}</div>
                         <div class="blog-date">${post.date}</div>
-                        <a href="${"../" + post.link}" class="read-btn">Read More</a>
+                        <a href="${post.link}" class="read-btn">Read More</a>
                     </div>
                 </article>
             `;
@@ -833,7 +833,7 @@
             .sort((a, b) => new Date(b.date) - new Date(a.date))
             .slice(0, 4);
         popularPosts.innerHTML = posts.map(post =>
-            `<li><a href="${"../" + post.link}">${post.title}</a></li>`
+            `<li><a href="${post.link}">${post.title}</a></li>`
         ).join("");
     }
 
