@@ -37,7 +37,7 @@
             padding: 0.5rem 0;
         }
         .nav-container {
-            width: 92%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
@@ -75,6 +75,52 @@
         .nav-menu a:hover {
             background: var(--accent);
             color: var(--white);
+        }
+        /* Hamburger for mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 3px;
+            background: var(--primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        @media (max-width: 800px) {
+            .nav-menu {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                width: 100vw;
+                max-width: 320px;
+                box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+                gap: 0;
+                padding: 1rem 0;
+                display: none;
+                z-index: 1000;
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-radius: 0;
+                border-bottom: 1px solid #eee;
+                font-size: 1.1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-container {
+                position: relative;
+            }
         }
         /* Hero Section */
         .about-hero {
@@ -262,6 +308,7 @@
             justify-content: center;
             gap: 2rem;
             margin-bottom: 0.7rem;
+            flex-wrap: wrap;
         }
         .footer-links a {
             color: var(--accent);
@@ -271,7 +318,7 @@
         .footer-links a:hover {
             color: var(--white);
         }
-         .footer-social {
+        .footer-social {
             margin-top: 0.7rem;
             display: flex;
             justify-content: center;
@@ -355,7 +402,12 @@
                 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
                 <span class="brand-name">Global Money Lens</span>
             </div>
-            <div class="nav-menu">
+            <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-menu" id="navMenu">
                 <a href="../index.html">Home</a>
                 <a href="blog.html">Blog</a>
                 <a href="tools.html">Tools</a>
@@ -383,93 +435,14 @@
             <img class="founder-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrnrajKbKU9BmPthXu-mtxMg8x_2VrXXoTiRAdXqEwYWP9fgHSHo2zrfqKDztRWepqG3vAlt7AtdZYOkCGjGCuraafWIS2zJFbI5JZXZN-xUMAbJNqrWa9OmoTiLOmCW8ggy5D_C-CCDITX-jwqv03YVKB_C1fDEn1hdWmLrwJHR_jK4opOOY7YnTDVjXj/s1600/WhatsApp%20Image%202026-04-26%20at%2017.30.51.jpeg" alt="Founder">
             <div class="founder-story">
                 <div class="founder-text">
-                    
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f8fafc;
-    color: #0f172a;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 60px 20px;
-}
-
-h1 {
-    font-size: 36px;
-    color: #0f172a;
-    margin-bottom: 20px;
-}
-
-.highlight {
-    color: #1abc9c;
-    font-weight: bold;
-}
-
-p {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    border-left: 5px solid #1abc9c;
-}
-
-.footer-note {
-    margin-top: 30px;
-    font-weight: bold;
-    color: #334155;
-}
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-    <h1>About <span class="highlight">Thashmina Sandeepa</span></h1>
-
-    <div class="card">
-
-        <p>
-        I am the founder of <strong>Global Money Lens</strong>, a modern finance platform dedicated to delivering clear, strategic, and actionable financial insights for a global audience.
-        </p>
-
-        <p>
-        With a focus on investing, wealth-building, and financial intelligence, my mission is to simplify complex financial concepts into practical knowledge that individuals can apply in real life to build long-term financial independence.
-        </p>
-
-        <p>
-        Global Money Lens was created with a single vision: <strong>to bridge the gap between financial knowledge and financial success.</strong>
-        </p>
-
-        <p>
-        In a world where information is abundant but clarity is rare, this platform exists to provide structured, high-quality financial education that empowers readers to make informed decisions with confidence.
-        </p>
-
-        <p>
-        Every article is designed with precision — focusing on real-world strategies in investing, saving, and income generation, rather than theory alone.
-        </p>
-
-        <p>
-        This is not just a blog. It is a curated financial intelligence platform built for individuals who are serious about improving their financial future.
-        </p>
-
-        <p class="footer-note">
-        — Founder, Global Money Lens
-        </p>
-
-</div>
-
+                    <strong>About Thashmina Sandeepa</strong><br><br>
+                    I am the founder of <strong>Global Money Lens</strong>, a modern finance platform dedicated to delivering clear, strategic, and actionable financial insights for a global audience.<br><br>
+                    With a focus on investing, wealth-building, and financial intelligence, my mission is to simplify complex financial concepts into practical knowledge that individuals can apply in real life to build long-term financial independence.<br><br>
+                    Global Money Lens was created with a single vision: <strong>to bridge the gap between financial knowledge and financial success.</strong><br><br>
+                    In a world where information is abundant but clarity is rare, this platform exists to provide structured, high-quality financial education that empowers readers to make informed decisions with confidence.<br><br>
+                    Every article is designed with precision — focusing on real-world strategies in investing, saving, and income generation, rather than theory alone.<br><br>
+                    This is not just a blog. It is a curated financial intelligence platform built for individuals who are serious about improving their financial future.<br><br>
+                    <span style="font-weight:bold; color:#334155;">— Founder, Global Money Lens</span>
                 </div>
             </div>
         </section>
@@ -520,6 +493,27 @@ p {
         </div>
         <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
     </footer>
-   
+    <script>
+    // Mobile nav hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+    });
+    hamburger.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        }
+    });
+    // Close menu when clicking a link (mobile)
+    Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+        });
+    });
+    </script>
 </body>
 </html>
