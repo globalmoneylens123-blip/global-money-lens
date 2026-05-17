@@ -20,6 +20,14 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             background: var(--gray);
             color: var(--text);
+            /* Prevent horizontal scroll */
+            width: 100vw;
+            overflow-x: hidden;
+        }
+        body {
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
         }
         a {
             text-decoration: none;
@@ -532,6 +540,10 @@
             }
         }
         @media (max-width: 600px) {
+            html, body {
+                width: 100vw;
+                overflow-x: hidden;
+            }
             .blog-hero-content {
                 margin: 0 0.5rem;
             }
@@ -570,6 +582,10 @@
             }
         }
         @media (max-width: 500px) {
+            html, body {
+                width: 100vw;
+                overflow-x: hidden;
+            }
             .nav-menu {
                 gap: 1rem;
             }
