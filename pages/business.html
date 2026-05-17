@@ -177,12 +177,12 @@
         </div>
     </section>
     <nav class="category-bar" aria-label="Categories">
-        <button class="category-btn" onclick="window.location.href='blog.html'">All</button>
-        <button class="category-btn" onclick="window.location.href='investing.html'">Investing</button>
-        <button class="category-btn" onclick="window.location.href='saving.html'">Saving</button>
-        <button class="category-btn" onclick="window.location.href='passive-income.html'">Passive Income</button>
-        <button class="category-btn" onclick="window.location.href='crypto.html'">Crypto</button>
-        <button class="category-btn active" onclick="window.location.href='business.html'">Business</button>
+        <button class="category-btn" type="button" data-category="All">All</button>
+        <button class="category-btn" type="button" data-category="Investing">Investing</button>
+        <button class="category-btn" type="button" data-category="Saving">Saving</button>
+        <button class="category-btn" type="button" data-category="Passive Income">Passive Income</button>
+        <button class="category-btn" type="button" data-category="Crypto">Crypto</button>
+        <button class="category-btn active" type="button" data-category="Business">Business</button>
     </nav>
     <main class="blog-main">
         <section class="blog-content">
@@ -248,17 +248,17 @@
     // Mobile nav hamburger
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => {
+    hamburger?.addEventListener('click', () => {
         navMenu.classList.toggle('open');
         hamburger.classList.toggle('active');
     });
-    hamburger.addEventListener('keypress', (e) => {
+    hamburger?.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             navMenu.classList.toggle('open');
             hamburger.classList.toggle('active');
         }
     });
-    Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+    Array.from(navMenu?.querySelectorAll('a') || []).forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('open');
             hamburger.classList.remove('active');
@@ -266,23 +266,26 @@
     });
     </script>
     <script>
-    // Only show posts in the "Business" category
+    // Blog post filtering and rendering for Business category
     const CATEGORY = "Business";
     const grid = document.getElementById("blogGrid");
     const loadMoreBtn = document.getElementById("loadMoreBtn");
     const searchInput = document.getElementById("searchInput");
     const popularPosts = document.getElementById("popularPosts");
+    const categoryBtns = document.querySelectorAll('.category-btn');
     let visibleCount = 6;
     let filteredPosts = [];
+    let currentCategory = CATEGORY;
 
     function filterPosts() {
         const q = (searchInput?.value || "").toLowerCase();
-        filteredPosts = window.BLOG_POSTS
+        filteredPosts = (window.BLOG_POSTS || [])
             .filter(post =>
-                post.category === CATEGORY &&
+                (currentCategory === "All" || post.category === currentCategory) &&
                 (
                     post.title.toLowerCase().includes(q) ||
-                    post.desc.toLowerCase().includes(q)
+                    post.desc.toLowerCase().includes(q) ||
+                    post.category.toLowerCase().includes(q)
                 )
             )
             .sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -308,7 +311,7 @@
                         <h3 class="blog-title">${post.title}</h3>
                         <div class="blog-desc">${post.desc}</div>
                         <div class="blog-date">${post.date}</div>
-                        <a href="${post.link}" class="read-btn">Read More</a>
+                        <a href="../${post.link}" class="read-btn">Read More</a>
                     </div>
                 </article>
             `;
@@ -317,13 +320,12 @@
     }
 
     function renderPopular() {
-        // Show top 2 most recent posts in this category
-        const posts = window.BLOG_POSTS
+        const posts = (window.BLOG_POSTS || [])
             .filter(post => post.category === CATEGORY)
             .sort((a, b) => new Date(b.date) - new Date(a.date))
             .slice(0, 2);
         popularPosts.innerHTML = posts.map(post =>
-            `<li><a href="${post.link}">${post.title}</a></li>`
+            `<li><a href="../${post.link}">${post.title}</a></li>`
         ).join("");
     }
 
@@ -335,6 +337,16 @@
     searchInput.addEventListener("input", () => {
         visibleCount = 6;
         renderPosts();
+    });
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener("click", function() {
+            categoryBtns.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+            currentCategory = this.getAttribute("data-category");
+            visibleCount = 6;
+            renderPosts();
+        });
     });
 
     document.addEventListener("DOMContentLoaded", function() {
