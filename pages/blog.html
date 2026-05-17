@@ -747,146 +747,109 @@
     </footer>
     <div id="footer"></div>
     <script src="../assets/posts.js"></script>
-
-<script>
-// Mobile nav hamburger
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('open');
-    hamburger.classList.toggle('active');
-});
-
-hamburger.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    <script>
+    // Mobile nav hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('open');
         hamburger.classList.toggle('active');
-    }
-});
-
-Array.from(navMenu.querySelectorAll('a')).forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        hamburger.classList.remove('active');
     });
-});
-</script>
+    hamburger.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        }
+    });
+    Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+        });
+    });
+    </script>
+    <script>
+    const grid = document.getElementById("blogGrid");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const searchInput = document.getElementById("searchInput");
+    const popularPosts = document.getElementById("popularPosts");
+    let visibleCount = 6;
+    let filteredPosts = [];
+    let currentCategory = "All";
 
-<script>
-const grid = document.getElementById("blogGrid");
-const loadMoreBtn = document.getElementById("loadMoreBtn");
-const searchInput = document.getElementById("searchInput");
-const popularPosts = document.getElementById("popularPosts");
-
-let visibleCount = 6;
-let filteredPosts = [];
-let currentCategory = "All";
-
-/* 🔥 AUTO FIX PATH SYSTEM */
-function getBasePath() {
-    // If we are inside /pages/ folder → need ../
-    if (window.location.pathname.includes("/pages/")) {
-        return "../";
-    }
-    return "";
-}
-
-function fixLink(path) {
-    // Ensures GitHub Pages + Home + Pages all work
-    const base = getBasePath();
-    
-    // remove leading slash if exists
-    path = path.replace(/^\/+/, "");
-    
-    return base + path;
-}
-
-function setCategory(category, btn) {
-    currentCategory = category;
-    visibleCount = 6;
-    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderPosts();
-}
-
-function filterPosts() {
-    const q = (searchInput?.value || "").toLowerCase();
-
-    filteredPosts = window.BLOG_POSTS
-        .filter(post => {
-            if (currentCategory !== "All" && post.category !== currentCategory) return false;
-
-            return (
-                post.title.toLowerCase().includes(q) ||
-                post.desc.toLowerCase().includes(q) ||
-                post.category.toLowerCase().includes(q)
-            );
-        })
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-
-function renderPosts() {
-    filterPosts();
-    grid.innerHTML = "";
-
-    const posts = filteredPosts.slice(0, visibleCount);
-
-    if (posts.length === 0) {
-        grid.innerHTML = "<div>No articles found.</div>";
-        loadMoreBtn.style.display = "none";
-        return;
+    function setCategory(category, btn) {
+        currentCategory = category;
+        visibleCount = 6;
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPosts();
     }
 
-    posts.forEach(post => {
-        grid.innerHTML += `
-            <article class="blog-card">
-                <div class="blog-img-wrap">
-                    <img class="blog-img" src="${post.image}" alt="${post.title}">
-                </div>
-                <div class="blog-card-content">
-                    <span class="blog-category">${post.category}</span>
-                    <h3 class="blog-title">${post.title}</h3>
-                    <div class="blog-desc">${post.desc}</div>
-                    <div class="blog-date">${post.date}</div>
-                    
-                    <!-- FIXED LINK -->
-                    <a href="${fixLink(post.link)}" class="read-btn">Read More</a>
-                </div>
-            </article>
-        `;
+    function filterPosts() {
+        const q = (searchInput?.value || "").toLowerCase();
+        filteredPosts = window.BLOG_POSTS
+            .filter(post => {
+                if (currentCategory !== "All" && post.category !== currentCategory) return false;
+                return (
+                    post.title.toLowerCase().includes(q) ||
+                    post.desc.toLowerCase().includes(q) ||
+                    post.category.toLowerCase().includes(q)
+                );
+            })
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    function renderPosts() {
+        filterPosts();
+        grid.innerHTML = "";
+        const posts = filteredPosts.slice(0, visibleCount);
+        if (posts.length === 0) {
+            grid.innerHTML = "<div>No articles found.</div>";
+            loadMoreBtn.style.display = "none";
+            return;
+        }
+        posts.forEach(post => {
+            grid.innerHTML += `
+                <article class="blog-card">
+                    <div class="blog-img-wrap">
+                        <img class="blog-img" src="${post.image}" alt="${post.title}">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-category">${post.category}</span>
+                        <h3 class="blog-title">${post.title}</h3>
+                        <div class="blog-desc">${post.desc}</div>
+                        <div class="blog-date">${post.date}</div>
+                        <a href="${post.link}" class="read-btn">Read More</a>
+                    </div>
+                </article>
+            `;
+        });
+        loadMoreBtn.style.display = visibleCount >= filteredPosts.length ? "none" : "block";
+    }
+
+    function renderPopular() {
+        const posts = window.BLOG_POSTS
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, 4);
+        popularPosts.innerHTML = posts.map(post =>
+            `<li><a href="${post.link}">${post.title}</a></li>`
+        ).join("");
+    }
+
+    loadMoreBtn.addEventListener("click", () => {
+        visibleCount += 6;
+        renderPosts();
     });
 
-    loadMoreBtn.style.display =
-        visibleCount >= filteredPosts.length ? "none" : "block";
-}
+    searchInput.addEventListener("input", () => {
+        visibleCount = 6;
+        renderPosts();
+    });
 
-function renderPopular() {
-    const posts = [...window.BLOG_POSTS]
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 4);
-
-    popularPosts.innerHTML = posts.map(post => `
-        <li>
-            <a href="${fixLink(post.link)}">${post.title}</a>
-        </li>
-    `).join("");
-}
-
-loadMoreBtn.addEventListener("click", () => {
-    visibleCount += 6;
-    renderPosts();
-});
-
-searchInput.addEventListener("input", () => {
-    visibleCount = 6;
-    renderPosts();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    renderPopular();
-    renderPosts();
-});
-</script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderPopular();
+        renderPosts();
+    });
+    </script>
 </body>
 </html>
