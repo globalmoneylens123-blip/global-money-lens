@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Money Lens | Master Your Money</title>
     <style>
-        
         :root {
             --primary: #0a2342;
             --accent: #1abc9c;
@@ -76,6 +75,52 @@
         .nav-menu a:hover {
             background: var(--accent);
             color: var(--white);
+        }
+        /* Hamburger for mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 3px;
+            background: var(--primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        @media (max-width: 800px) {
+            .nav-menu {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                width: 100vw;
+                max-width: 320px;
+                box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+                gap: 0;
+                padding: 1rem 0;
+                display: none;
+                z-index: 1000;
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-radius: 0;
+                border-bottom: 1px solid #eee;
+                font-size: 1.1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-container {
+                position: relative;
+            }
         }
         /* Hero Banner */
         .hero {
@@ -338,6 +383,7 @@
             justify-content: center;
             gap: 2rem;
             margin-bottom: 0.7rem;
+            flex-wrap: wrap;
         }
         .footer-links a {
             color: var(--accent);
@@ -347,7 +393,7 @@
         .footer-links a:hover {
             color: var(--white);
         }
-         .footer-social {
+        .footer-social {
             margin-top: 0.7rem;
             display: flex;
             justify-content: center;
@@ -395,6 +441,15 @@
             .signup-form input[type="email"] {
                 width: 98%;
             }
+            .section-title {
+                font-size: 1.1rem;
+            }
+            .post-title {
+                font-size: 1rem;
+            }
+            .post-desc {
+                font-size: 0.95rem;
+            }
         }
         .pagination-section {
             display: flex;
@@ -431,7 +486,12 @@
                 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
                 <span class="brand-name">Global Money Lens</span>
             </div>
-            <div class="nav-menu">
+            <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-menu" id="navMenu">
                 <a href="index.html">Home</a>
                 <a href="pages/blog.html">Blog</a>
                 <a href="pages/tools.html">Tools</a>
@@ -524,38 +584,57 @@
         <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
     </footer>
     <div id="footer"></div>
-    <!-- ...existing code... -->
-<script src="assets/posts.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const FEATURED_LIMIT = 6;
-    if (window.BLOG_POSTS && Array.isArray(window.BLOG_POSTS)) {
-        const posts = [...window.BLOG_POSTS]
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .slice(0, FEATURED_LIMIT);
-
-        const featuredContainer = document.getElementById("featuredPosts");
-        featuredContainer.innerHTML = "";
-        posts.forEach(post => {
-            featuredContainer.innerHTML += `
-                <div class="post-card">
-                    <img class="post-img" src="${post.image}" alt="${post.title}">
-                    <div class="post-content">
-                        <div class="post-title">${post.title}</div>
-                        <div class="post-desc">${post.desc}</div>
-                        <a href="${post.link}" class="read-btn">Read More</a>
-                    </div>
-                </div>
-            `;
-        });
-
-        if (window.BLOG_POSTS.length > FEATURED_LIMIT) {
-            document.getElementById("featuredPagination").style.display = "flex";
+    <script src="assets/posts.js"></script>
+    <script>
+    // Mobile nav hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+    });
+    hamburger.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
         }
-    }
-});
-</script>
-<!-- ...existing code... -->
-   
+    });
+    // Close menu when clicking a link (mobile)
+    Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+        });
+    });
+    </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const FEATURED_LIMIT = 6;
+        if (window.BLOG_POSTS && Array.isArray(window.BLOG_POSTS)) {
+            const posts = [...window.BLOG_POSTS]
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, FEATURED_LIMIT);
+
+            const featuredContainer = document.getElementById("featuredPosts");
+            featuredContainer.innerHTML = "";
+            posts.forEach(post => {
+                featuredContainer.innerHTML += `
+                    <div class="post-card">
+                        <img class="post-img" src="${post.image}" alt="${post.title}">
+                        <div class="post-content">
+                            <div class="post-title">${post.title}</div>
+                            <div class="post-desc">${post.desc}</div>
+                            <a href="${post.link}" class="read-btn">Read More</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (window.BLOG_POSTS.length > FEATURED_LIMIT) {
+                document.getElementById("featuredPagination").style.display = "flex";
+            }
+        }
+    });
+    </script>
 </body>
 </html>
