@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,63 +21,70 @@
       background: var(--bg);
       color: var(--primary);
       min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
     }
     a {
       text-decoration: none;
       color: inherit;
     }
     /* NAVBAR */
-   .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--white);
-            box-shadow: 0 2px 8px rgba(10,35,66,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-        }
-        .nav-container {
-            width: 92%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo img {
-            height: 42px;
-            max-height: 50px;
-            width: auto;
-            margin-right: 0.7rem;
-        }
-        .brand-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 2.2rem;
-        }
-        .nav-menu a {
-            color: var(--primary);
-            font-size: 1.05rem;
-            font-weight: 550;
-            padding: 0.4rem 0.7rem;
-            border-radius: 2rem;
-            transition: background 0.2s, color 0.2s;
-        }
-        .nav-menu a:hover {
-            background: var(--accent);
-            color: var(--white);
-        }
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+    .nav-container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 42px;
+      max-height: 50px;
+      width: auto;
+      margin-right: 0.7rem;
+    }
+    .brand-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-menu a {
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 550;
+      padding: 0.4rem 0.7rem;
+      border-radius: 2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-menu a:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
     /* HEADER */
     .header-section {
       text-align: center;
@@ -270,6 +276,10 @@
       }
     }
     @media (max-width: 500px) {
+      html, body {
+        width: 100vw;
+        overflow-x: hidden;
+      }
       .nav-menu {
         gap: 1rem;
       }
@@ -290,11 +300,11 @@
       </div>
       <div class="nav-menu">
         <a href="../index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="tools.html">Tools</a>
-                <a href="about-us.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="subscribe-page.html">Subscribe</a>
+        <a href="blog.html">Blog</a>
+        <a href="tools.html">Tools</a>
+        <a href="about-us.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="subscribe-page.html">Subscribe</a>
       </div>
     </div>
   </nav>
@@ -438,6 +448,5 @@
       updateResults();
     });
   </script>
- 
 </body>
 </html>
