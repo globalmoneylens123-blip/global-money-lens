@@ -265,7 +265,8 @@
             gap: 1.2rem;
             margin-bottom: 2.5rem;
         }
-        .category-card {
+        .category-card,
+        .category-btn {
             background: var(--white);
             border-radius: 0.8rem;
             box-shadow: var(--shadow);
@@ -275,8 +276,12 @@
             color: var(--primary);
             transition: background 0.2s, color 0.2s;
             cursor: pointer;
+            border: none;
+            outline: none;
         }
-        .category-card:hover {
+        .category-card:hover,
+        .category-btn:hover,
+        .category-btn.active {
             background: var(--accent);
             color: var(--white);
         }
@@ -513,6 +518,14 @@
     <main class="main-container">
         <!-- Featured Posts -->
         <div class="section-title">Featured Posts</div>
+        <div class="categories-list" id="categoryButtons">
+            <button class="category-btn active" data-category="All">All</button>
+            <button class="category-btn" data-category="Investing">Investing</button>
+            <button class="category-btn" data-category="Saving">Saving</button>
+            <button class="category-btn" data-category="Passive Income">Passive Income</button>
+            <button class="category-btn" data-category="Crypto">Crypto</button>
+            <button class="category-btn" data-category="Business">Business</button>
+        </div>
         <div class="featured-grid" id="featuredPosts"></div>
         <div class="pagination-section" id="featuredPagination" style="display:none;">
             <a href="pages/blog.html" class="load-more-btn">See All Blog Posts</a>
@@ -608,32 +621,58 @@
     });
     </script>
     <script>
+    // Category filter for posts
     document.addEventListener("DOMContentLoaded", () => {
         const FEATURED_LIMIT = 6;
+        const PREFIX = "pages/";
+        let currentCategory = "All";
+        let allPosts = [];
         if (window.BLOG_POSTS && Array.isArray(window.BLOG_POSTS)) {
-            const posts = [...window.BLOG_POSTS]
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, FEATURED_LIMIT);
+            allPosts = [...window.BLOG_POSTS].sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+        const featuredContainer = document.getElementById("featuredPosts");
+        const categoryButtons = document.getElementById("categoryButtons").querySelectorAll(".category-btn");
+        const featuredPagination = document.getElementById("featuredPagination");
 
-            const featuredContainer = document.getElementById("featuredPosts");
+        function renderPosts(category) {
+            let posts = allPosts;
+            if (category && category !== "All") {
+                posts = posts.filter(post => post.category === category);
+            }
+            const limitedPosts = posts.slice(0, FEATURED_LIMIT);
             featuredContainer.innerHTML = "";
-            posts.forEach(post => {
+            if (limitedPosts.length === 0) {
+                featuredContainer.innerHTML = "<div>No posts found for this category.</div>";
+                featuredPagination.style.display = "none";
+                return;
+            }
+            limitedPosts.forEach(post => {
                 featuredContainer.innerHTML += `
                     <div class="post-card">
                         <img class="post-img" src="${post.image}" alt="${post.title}">
                         <div class="post-content">
                             <div class="post-title">${post.title}</div>
                             <div class="post-desc">${post.desc}</div>
-                            <a href="${post.link}" class="read-btn">Read More</a>
+                            <a href="${PREFIX + post.link}" class="read-btn">Read More</a>
                         </div>
                     </div>
                 `;
             });
-
-            if (window.BLOG_POSTS.length > FEATURED_LIMIT) {
-                document.getElementById("featuredPagination").style.display = "flex";
-            }
+            featuredPagination.style.display = posts.length > FEATURED_LIMIT ? "flex" : "none";
         }
+
+        // Initial render
+        renderPosts(currentCategory);
+
+        // Category button click
+        categoryButtons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                categoryButtons.forEach(b => b.classList.remove("active"));
+                this.classList.add("active");
+                currentCategory = this.getAttribute("data-category");
+                renderPosts(currentCategory);
+            });
+        });
     });
     </script>
 </body>
