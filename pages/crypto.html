@@ -1,349 +1,577 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto | Global Money Lens</title>
-    <meta name="description" content="Crypto articles and guides from Global Money Lens.">
-    <style>
-        :root { --primary: #0a2342; --accent: #1abc9c; --white: #fff; --gray: #f4f6fa; --text: #222; --shadow: 0 2px 16px rgba(15,23,42,0.07);}
-        html, body {margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--gray);color:var(--text);overflow-x:hidden;}
-        body {max-width:100vw;overflow-x:hidden;}
-        a{text-decoration:none;color:inherit;}
-        .navbar{position:sticky;top:0;z-index:100;background:var(--white);box-shadow:0 2px 8px rgba(10,35,66,0.06);display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0;}
-        .nav-container{width:100%;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
-        .logo{display:flex;align-items:center;}
-        .logo img{height:42px;max-height:50px;width:auto;margin-right:0.7rem;}
-        .brand-name{font-size:1.3rem;font-weight:700;color:var(--primary);letter-spacing:1px;}
-        .nav-menu{display:flex;gap:2.2rem;}
-        .nav-menu a{color:var(--primary);font-size:1.05rem;font-weight:500;padding:0.4rem 0.7rem;border-radius:2rem;transition:background 0.2s,color 0.2s;}
-        .nav-menu a:hover{background:var(--accent);color:var(--white);}
-        /* Hamburger for mobile */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-        .hamburger span {
-            width: 26px;
-            height: 3px;
-            background: var(--primary);
-            margin: 4px 0;
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-        @media (max-width: 800px) {
-            .nav-menu {
-                position: absolute;
-                top: 60px;
-                right: 0;
-                left: auto;
-                background: var(--white);
-                flex-direction: column;
-                width: 100vw;
-                max-width: 320px;
-                box-shadow: 0 8px 24px rgba(10,35,66,0.13);
-                gap: 0;
-                padding: 1rem 0;
-                display: none;
-                z-index: 1000;
-            }
-            .nav-menu.open {
-                display: flex;
-            }
-            .nav-menu a {
-                padding: 1rem 2rem;
-                border-radius: 0;
-                border-bottom: 1px solid #eee;
-                font-size: 1.1rem;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .nav-container {
-                position: relative;
-            }
-        }
-        .blog-hero{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;min-height:220px;max-height:320px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--primary);}
-        .blog-hero-img{width:100%;height:100%;min-height:220px;max-height:320px;object-fit:cover;filter:brightness(0.6);position:absolute;top:0;left:0;z-index:1;}
-        .blog-hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,rgba(15,23,42,0.85) 60%,rgba(34,197,94,0.10) 100%);z-index:2;}
-        .blog-hero-content{position:relative;z-index:3;text-align:left;max-width:700px;margin:0 2rem;color:var(--white);display:flex;flex-direction:column;align-items:flex-start;}
-        .blog-hero-title{font-size:2.2rem;font-weight:800;margin-bottom:0.7rem;letter-spacing:1px;}
-        .blog-hero-sub{font-size:1.15rem;color:#d1fae5;font-weight:400;}
-        .category-bar{width:100%;background:var(--white);box-shadow:0 1px 8px rgba(15,23,42,0.04);padding:1.1rem 0 0.7rem 0;display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;}
-        .category-btn{background:#f4f6fa;color:var(--primary);border:none;border-radius:2rem;padding:0.5rem 1.3rem;font-size:1rem;font-weight:500;cursor:pointer;transition:background 0.18s,color 0.18s,box-shadow 0.18s;outline:none;}
-        .category-btn.active,.category-btn:focus{background:var(--accent);color:var(--white);box-shadow:0 2px 12px rgba(34,197,94,0.13);}
-        .category-btn:hover{background:#e6f9f0;color:var(--accent);}
-        .blog-main{width:100%;max-width:1200px;margin:0 auto;margin-top:2.5rem;display:flex;gap:2.5rem;box-sizing:border-box;}
-        .blog-content{flex:3;min-width:0;}
-        .featured-post{display:none;} /* Hide featured on category pages */
-        .blog-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-            gap:2rem;
-        }
-        .blog-card{
-            background:var(--white);
-            border-radius:1rem;
-            box-shadow:var(--shadow);
-            overflow:hidden;
-            display:flex;
-            flex-direction:column;
-            transition:transform 0.2s,box-shadow 0.2s;
-            min-height:340px;
-        }
-        .blog-card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 6px 24px rgba(34,197,94,0.13);}
-        .blog-img-wrap{overflow:hidden;height:180px;}
-        .blog-img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
-        .blog-card:hover .blog-img{transform:scale(1.08);}
-        .blog-card-content{padding:1.2rem 1.2rem 1.1rem 1.2rem;flex:1;display:flex;flex-direction:column;}
-        .blog-category{background:#e6f9f0;color:var(--accent);font-size:0.92rem;font-weight:600;border-radius:1rem;padding:0.2rem 0.9rem;display:inline-block;margin-bottom:0.6rem;}
-        .blog-title{font-size:1.13rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem;line-height:1.3;}
-        .blog-desc{font-size:1rem;color:#444;margin-bottom:1.1rem;flex:1;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-        .read-btn{background:var(--accent);color:var(--white);border:none;padding:0.6rem 1.3rem;border-radius:2rem;font-size:1rem;cursor:pointer;align-self:flex-start;transition:background 0.2s,transform 0.2s;text-decoration:none;font-weight:500;}
-        .read-btn:hover{background:#1abc9c;transform:scale(1.04);}
-        .sidebar{flex:1.1;min-width:270px;max-width:340px;display:flex;flex-direction:column;gap:2.2rem;}
-        .sidebar-box{background:var(--white);border-radius:1rem;box-shadow:var(--shadow);padding:1.5rem 1.2rem;margin-bottom:0.7rem;}
-        .sidebar-title{font-size:1.08rem;font-weight:700;color:var(--primary);margin-bottom:0.7rem;}
-        .sidebar-search{width:100%;padding:0.7rem 1.1rem;border-radius:2rem;border:1px solid #dbe6f3;font-size:1rem;background:#f8fafc;margin-bottom:0.5rem;}
-        .sidebar-search:focus{outline:2px solid var(--accent);border-color:var(--accent);}
-        .sidebar-list{list-style:none;padding:0;margin:0;}
-        .sidebar-list li{margin-bottom:0.7rem;}
-        .sidebar-list a{color:var(--primary);font-size:1rem;transition:color 0.2s;}
-        .sidebar-list a:hover{color:var(--accent);}
-        .sidebar-subscribe input[type="email"]{width:100%;padding:0.7rem 1.1rem;border-radius:2rem;border:1px solid #dbe6f3;font-size:1rem;background:#f8fafc;margin-bottom:0.7rem;}
-        .sidebar-subscribe button{background:var(--accent);color:var(--white);border:none;padding:0.7rem 2rem;border-radius:2rem;font-size:1.05rem;font-weight:600;cursor:pointer;transition:background 0.2s;width:100%;}
-        .sidebar-subscribe button:hover{background:#1abc9c;}
-        .pagination-section{display:flex;justify-content:center;margin:2.5rem 0 1.5rem 0;}
-        .load-more-btn{background:var(--accent);color:var(--white);border:none;padding:0.9rem 2.2rem;border-radius:2rem;font-size:1.08rem;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.2s;box-shadow:0 2px 8px rgba(34,197,94,0.07);}
-        .load-more-btn:hover{background:#1abc9c;transform:scale(1.04);}
-        .signup-section{background:var(--primary);color:var(--white);border-radius:1rem;padding:2.2rem 1.2rem;text-align:center;margin:2.5rem auto 2rem auto;box-shadow:var(--shadow);max-width:700px;}
-        .signup-title{font-size:1.3rem;font-weight:600;margin-bottom:0.7rem;}
-        .signup-form{margin-top:1.1rem;display:flex;flex-direction:column;align-items:center;gap:0.8rem;}
-        .signup-form input[type="email"]{padding:0.7rem 1.2rem;border-radius:2rem;border:none;font-size:1rem;width:260px;margin-bottom:0.5rem;}
-        .signup-form button{background:var(--accent);color:var(--white);border:none;padding:0.7rem 2rem;border-radius:2rem;font-size:1.05rem;font-weight:600;cursor:pointer;transition:background 0.2s;}
-        .signup-form button:hover{background:#1abc9c;}
-        .signup-trust{font-size:0.95rem;color:#a7f3d0;margin-top:0.7rem;}
-        footer{background:var(--primary);color:var(--white);padding:1.5rem 0 1rem 0;text-align:center;}
-        .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:0.7rem;flex-wrap:wrap;}
-        .footer-links a{color:var(--accent);font-size:1rem;transition:color 0.2s;}
-        .footer-links a:hover{color:var(--white);}
-        .footer-social{margin-top:0.7rem;display:flex;justify-content:center;gap:1.2rem;}
-        .footer-social a{color:var(--white);font-size:1.3rem;transition:color 0.2s;}
-        .footer-social a:hover{color:var(--accent);}
-        @media (max-width:1100px){.blog-main{width:98%;}.nav-container{width:98%;}}
-        @media (max-width:900px){.blog-main{flex-direction:column;gap:1.5rem;}.sidebar{max-width:100%;flex-direction:row;gap:1.2rem;}.sidebar-box{flex:1;}}
-        @media (max-width:700px){
-            .blog-hero-title{font-size:1.3rem;}
-            .blog-main{margin-top:1.2rem;width:100vw;box-sizing:border-box;padding-left:8px;padding-right:8px;}
-            .blog-grid{grid-template-columns:1fr;gap:1.2rem;}
-            .sidebar{flex-direction:column;gap:1.2rem;}
-            .nav-container{width:98%;}
-        }
-        @media (max-width:500px){
-            .nav-menu{gap:1rem;}
-            .logo img{height:28px;}
-            .signup-form input[type="email"]{width:98%;}
-            .blog-main{padding-left:0;padding-right:0;}
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investment Tracker | Global Money Lens</title>
+  <meta name="description" content="Track and grow your investments over time with the premium Investment Tracker from Global Money Lens.">
+  <style>
+    :root {
+      --primary: #0a2342;
+      --accent: #1abc9c;
+      --accent-dark: #1abc9c;
+      --bg: #f8fafc;
+      --white: #fff;
+      --shadow: 0 8px 32px rgba(15,23,42,0.10);
+      --card-radius: 1.1rem;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      /* Prevent horizontal scroll on mobile */
+      max-width: 100vw;
+    }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+    .nav-container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 42px;
+      max-height: 50px;
+      width: auto;
+      margin-right: 0.7rem;
+    }
+    .brand-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-menu a {
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 550;
+      padding: 0.4rem 0.7rem;
+      border-radius: 2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-menu a:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+    /* Hamburger for mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 800px) {
+      .nav-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: auto;
+        background: var(--white);
+        flex-direction: column;
+        width: 100vw;
+        max-width: 320px;
+        box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+        gap: 0;
+        padding: 1rem 0;
+        display: none;
+        z-index: 1000;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .nav-menu a {
+        padding: 1rem 2rem;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-container {
+        position: relative;
+      }
+    }
+    /* HEADER */
+    .header-section {
+      text-align: center;
+      margin: 2.5rem 0 1.5rem 0;
+    }
+    .header-section h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .header-section p {
+      font-size: 1.13rem;
+      color: #3a4a5d;
+      margin: 0;
+    }
+    /* CARD */
+    .calc-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 60vh;
+      padding-bottom: 40px;
+      box-sizing: border-box;
+      width: 100vw;
+      max-width: 100vw;
+    }
+    .calc-card {
+      background: var(--white);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding: 2.2rem 2rem 1.7rem 2rem;
+      width: 100%;
+      max-width: 410px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 0 auto;
+      transition: box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .calc-card:focus-within {
+      box-shadow: 0 12px 36px rgba(34,197,94,0.10);
+    }
+    /* INPUTS */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .input-group label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+    .input-group input[type="number"] {
+      padding: 12px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      background: #f8fafc;
+      transition: border 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .input-group input[type="number"]:focus {
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 0 0 2px #bbf7d0;
+    }
+    /* BUTTON */
+    .calc-btn {
+      margin-top: 10px;
+      padding: 14px 0;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(34,197,94,0.08);
+      transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.5px;
+    }
+    .calc-btn:hover, .calc-btn:focus {
+      background: var(--accent-dark);
+      transform: scale(1.035);
+      box-shadow: 0 4px 16px rgba(34,197,94,0.18);
+    }
+    /* RESULTS */
+    .result-section {
+      margin-top: 22px;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(.4,0,.2,1), transform 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    .result-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+    .result-label {
+      color: #3a4a5d;
+      font-weight: 500;
+    }
+    .result-value {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .result-value.profit {
+      color: var(--accent);
+    }
+    .result-value.neutral {
+      color: var(--primary);
+    }
+    /* BAR VISUALIZATION */
+    .bar-visual {
+      margin-top: 18px;
+      height: 18px;
+      background: #e5e7eb;
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.04);
+    }
+    .bar-invested {
+      background: var(--accent);
+      height: 100%;
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    .bar-profit {
+      background: #0f172a;
+      height: 100%;
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: var(--white);
+      padding: 1.5rem 0 1rem 0;
+      text-align: center;
+      margin-top: 48px;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--accent);
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--white);
+    }
+    .footer-social {
+      margin-top: 0.7rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    .footer-social a {
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover {
+      color: var(--accent);
+    }
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .nav-container { width: 98%; }
+    }
+    @media (max-width: 900px) {
+      .calc-container {
+        padding-bottom: 20px;
+      }
+      .header-section {
+        margin: 1.5rem 0 1rem 0;
+      }
+    }
+    @media (max-width: 700px) {
+      .calc-card {
+        padding: 1.3rem 0.5rem 1.1rem 0.5rem;
+        max-width: 98vw;
+      }
+      .calc-container {
+        padding-bottom: 20px;
+        width: 100vw;
+        max-width: 100vw;
+      }
+      .header-section {
+        margin: 1.5rem 0 1rem 0;
+      }
+    }
+    @media (max-width: 600px) {
+      html, body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      .header-section h1 {
+        font-size: 1.3rem;
+      }
+      .header-section p {
+        font-size: 1rem;
+      }
+      .calc-card {
+        padding: 1rem 0.2rem 0.7rem 0.2rem;
+        max-width: 100vw;
+      }
+      .result-row {
+        font-size: 0.98rem;
+      }
+      .footer-links {
+        gap: 1rem;
+      }
+    }
+    @media (max-width: 500px) {
+      html, body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      .nav-menu {
+        gap: 1rem;
+      }
+      .logo img {
+        height: 28px;
+      }
+      .calc-container, .calc-card, footer {
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
-                <span class="brand-name">Global Money Lens</span>
-            </div>
-            <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="nav-menu" id="navMenu">
-                <a href="../index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="tools.html">Tools</a>
-                <a href="about-us.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="subscribe-page.html">Subscribe</a>
-            </div>
-        </div>
-    </nav>
-    <section class="blog-hero">
-        <img class="blog-hero-img" src="https://images.unsplash.com/photo-1515168833906-d2a3b82b1a48?auto=format&fit=crop&w=1200&q=80" alt="Crypto Banner">
-        <div class="blog-hero-overlay"></div>
-        <div class="blog-hero-content">
-            <div class="blog-hero-title">Crypto Insights</div>
-            <div class="blog-hero-sub">Track cryptocurrency prices, portfolio value, and market trends in real time</div>
-        </div>
-    </section>
-    <nav class="category-bar" aria-label="Categories">
-        <a href="blog.html" class="category-btn">All</a>
-        <a href="investing.html" class="category-btn">Investing</a>
-        <a href="saving.html" class="category-btn">Saving</a>
-        <a href="passive-income.html" class="category-btn">Passive Income</a>
-        <a href="crypto.html" class="category-btn active">Crypto</a>
-        <a href="business.html" class="category-btn">Business</a>
-    </nav>
-    <main class="blog-main">
-        <section class="blog-content">
-            <div class="blog-grid" id="blogGrid"></div>
-            <div class="pagination-section">
-                <button class="load-more-btn" id="loadMoreBtn">Load More Articles</button>
-            </div>
-        </section>
-        <aside class="sidebar">
-            <div class="sidebar-box">
-                <div class="sidebar-title">Search</div>
-                <input class="sidebar-search" type="text" placeholder="Search articles..." id="searchInput">
-            </div>
-            <div class="sidebar-box">
-                <div class="sidebar-title">Popular Posts</div>
-                <ul class="sidebar-list" id="popularPosts"></ul>
-            </div>
-            <div class="sidebar-box">
-                <div class="sidebar-title">Subscribe</div>
-                <form class="sidebar-subscribe" autocomplete="off">
-                    <input type="email" placeholder="Your email address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-            <div class="sidebar-box">
-                <div class="sidebar-title">Categories</div>
-                <ul class="sidebar-list">
-                    <li><a href="investing.html">Investing</a></li>
-                    <li><a href="saving.html">Saving</a></li>
-                    <li><a href="passive-income.html">Passive Income</a></li>
-                    <li><a href="crypto.html">Crypto</a></li>
-                    <li><a href="business.html">Business</a></li>
-                </ul>
-            </div>
-        </aside>
-    </main>
-    <section class="signup-section">
-        <div class="signup-title">Join Smart Crypto Investors</div>
-        <form class="signup-form" autocomplete="off">
-            <input type="email" placeholder="Your email address" required>
-            <button type="submit">Subscribe</button>
-        </form>
-        <div class="signup-trust">No spam. Unsubscribe anytime.</div>
-    </section>
-    <footer>
-        <div class="footer-links">
-            <a href="PP.html">Privacy Policy</a>
-            <a href="contact.html">Contact</a>
-            <a href="about-us.html">About</a>
-        </div>
-        <div class="footer-social">
-            <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
-            </a>
-            <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
-            </a>
-        </div>
-        <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
-    </footer>
-    <script>
-        // Mobile nav hamburger
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        hamburger?.addEventListener('click', () => {
-            navMenu.classList.toggle('open');
-            hamburger.classList.toggle('active');
-        });
-        hamburger?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                navMenu.classList.toggle('open');
-                hamburger.classList.toggle('active');
-            }
-        });
-        Array.from(navMenu?.querySelectorAll('a') || []).forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('open');
-                hamburger.classList.remove('active');
-            });
-        });
-    </script>
-    <script src="../assets/posts.js"></script>
-    <script>
-    // Only show posts in the "Crypto" category
-    const CATEGORY = "Crypto";
-    const grid = document.getElementById("blogGrid");
-    const loadMoreBtn = document.getElementById("loadMoreBtn");
-    const searchInput = document.getElementById("searchInput");
-    const popularPosts = document.getElementById("popularPosts");
-    let visibleCount = 6;
-    let filteredPosts = [];
-
-    function filterPosts() {
-        const q = (searchInput?.value || "").toLowerCase();
-        filteredPosts = window.BLOG_POSTS
-            .filter(post =>
-                post.category === CATEGORY &&
-                (
-                    post.title.toLowerCase().includes(q) ||
-                    post.desc.toLowerCase().includes(q)
-                )
-            )
-            .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort newest first
-    }
-
-    function renderPosts() {
-        filterPosts();
-        grid.innerHTML = "";
-        const posts = filteredPosts.slice(0, visibleCount);
-        if (posts.length === 0) {
-            grid.innerHTML = "<div>No articles found.</div>";
-            loadMoreBtn.style.display = "none";
-            return;
-        }
-        posts.forEach(post => {
-            grid.innerHTML += `
-                <article class="blog-card">
-                    <div class="blog-img-wrap">
-                        <img class="blog-img" src="${post.image}" alt="${post.title}">
-                    </div>
-                    <div class="blog-card-content">
-                        <span class="blog-category">${post.category}</span>
-                        <h3 class="blog-title">${post.title}</h3>
-                        <div class="blog-desc">${post.desc}</div>
-                        <div class="blog-date">${post.date}</div>
-                        <a href="${post.link}" class="read-btn">Read More</a>
-                    </div>
-                </article>
-            `;
-        });
-        loadMoreBtn.style.display = visibleCount >= filteredPosts.length ? "none" : "block";
-    }
-
-    function renderPopular() {
-        // Show top 2 most recent posts in this category
-        const posts = window.BLOG_POSTS
-            .filter(post => post.category === CATEGORY)
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .slice(0, 2);
-        popularPosts.innerHTML = posts.map(post =>
-            `<li><a href="${post.link}">${post.title}</a></li>`
-        ).join("");
-    }
-
-    loadMoreBtn.addEventListener("click", () => {
-        visibleCount += 6;
-        renderPosts();
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+        <span class="brand-name">Global Money Lens</span>
+      </div>
+      <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-menu" id="navMenu">
+        <a href="../index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="tools.html">Tools</a>
+        <a href="about-us.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="subscribe-page.html">Subscribe</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Header Section -->
+  <section class="header-section">
+    <h1>Investment Tracker</h1>
+    <p>Track and grow your investments over time</p>
+  </section>
+  <!-- Calculator Card -->
+  <div class="calc-container">
+    <form class="calc-card" id="investment-form" autocomplete="off" onsubmit="return false;">
+      <div class="input-group">
+        <label for="initial">Initial Investment Amount</label>
+        <input type="number" id="initial" min="0" step="0.01" placeholder="e.g. 5000" required>
+      </div>
+      <div class="input-group">
+        <label for="monthly">Monthly Contribution <span style="color:#888;font-weight:400;">(optional)</span></label>
+        <input type="number" id="monthly" min="0" step="0.01" placeholder="e.g. 200">
+      </div>
+      <div class="input-group">
+        <label for="rate">Annual Return Rate (%)</label>
+        <input type="number" id="rate" min="0" step="0.01" placeholder="e.g. 8" required>
+      </div>
+      <div class="input-group">
+        <label for="years">Investment Duration (years)</label>
+        <input type="number" id="years" min="1" step="1" placeholder="e.g. 10" required>
+      </div>
+      <button type="submit" class="calc-btn" id="calc-btn">Calculate Growth</button>
+      <div class="result-section" id="result-section"></div>
+      <div class="bar-visual" id="bar-visual" style="display:none;">
+        <div class="bar-invested" id="bar-invested" style="width:0%"></div>
+        <div class="bar-profit" id="bar-profit" style="width:0%"></div>
+      </div>
+    </form>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="PP.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+      <a href="about-us.html">About</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
+        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
+        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+      </a>
+    </div>
+    <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
+  </footer>
+  <script>
+    // Mobile nav hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger?.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+    hamburger?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        navMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+      }
+    });
+    Array.from(navMenu?.querySelectorAll('a') || []).forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+      });
     });
 
-    searchInput.addEventListener("input", () => {
-        visibleCount = 6;
-        renderPosts();
-    });
+    // Format as currency
+    function formatCurrency(val) {
+      return '$' + Number(val).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        renderPopular();
-        renderPosts();
+    // Compound interest with monthly contributions
+    function calculateInvestment(initial, monthly, rate, years) {
+      const n = 12; // compounding periods per year
+      const r = rate / 100 / n;
+      const t = years;
+      let futureValue = initial * Math.pow(1 + r, n * t);
+      if (monthly > 0) {
+        futureValue += monthly * ((Math.pow(1 + r, n * t) - 1) / r);
+      }
+      return futureValue;
+    }
+
+    function updateResults() {
+      const initial = parseFloat(document.getElementById('initial').value) || 0;
+      const monthly = parseFloat(document.getElementById('monthly').value) || 0;
+      const rate = parseFloat(document.getElementById('rate').value) || 0;
+      const years = parseFloat(document.getElementById('years').value) || 0;
+
+      // Validation
+      if (initial < 0 || monthly < 0 || rate < 0 || years < 1) {
+        document.getElementById('result-section').innerHTML = '';
+        document.getElementById('result-section').classList.remove('visible');
+        document.getElementById('bar-visual').style.display = 'none';
+        return;
+      }
+
+      // Calculate
+      const totalInvested = initial + (monthly * 12 * years);
+      const finalValue = calculateInvestment(initial, monthly, rate, years);
+      const profit = finalValue - totalInvested;
+
+      // Results
+      document.getElementById('result-section').innerHTML = `
+        <div class="result-row">
+          <span class="result-label">Final Investment Value</span>
+          <span class="result-value">${formatCurrency(finalValue)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Invested Amount</span>
+          <span class="result-value neutral">${formatCurrency(totalInvested)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Profit</span>
+          <span class="result-value profit">${formatCurrency(profit)}</span>
+        </div>
+      `;
+      document.getElementById('result-section').classList.add('visible');
+
+      // Visualization bar
+      const barVisual = document.getElementById('bar-visual');
+      if (finalValue > 0 && profit > 0) {
+        let investedPct = Math.max(0, Math.min(100, (totalInvested / finalValue) * 100));
+        let profitPct = 100 - investedPct;
+        document.getElementById('bar-invested').style.width = investedPct + '%';
+        document.getElementById('bar-profit').style.width = profitPct + '%';
+        document.getElementById('bar-invested').title = 'Invested';
+        document.getElementById('bar-profit').title = 'Profit';
+        barVisual.style.display = 'flex';
+      } else {
+        barVisual.style.display = 'none';
+      }
+    }
+
+    // Input validation: prevent negative numbers
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('input', function() {
+          if (this.value < 0) this.value = '';
+          updateResults();
+        });
+      });
+      // Calculate on button click or form submit
+      document.getElementById('investment-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        updateResults();
+      });
+      // Calculate in real-time as user types
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('keyup', updateResults);
+        input.addEventListener('change', updateResults);
+      });
+      // Initial state
+      updateResults();
     });
-    </script>
+  </script>
 </body>
 </html>
