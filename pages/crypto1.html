@@ -9,7 +9,7 @@
     :root {
       --primary: #0a2342;
       --accent: #1abc9c;
-      --accent-dark: #1abc9c;
+      --accent-dark: #159c82;
       --bg: #f8fafc;
       --white: #fff;
       --shadow: 0 8px 32px rgba(15,23,42,0.10);
@@ -30,57 +30,57 @@
       color: inherit;
     }
     /* NAVBAR */
-   .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--white);
-            box-shadow: 0 2px 8px rgba(10,35,66,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-        }
-        .nav-container {
-            width: 92%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo img {
-            height: 42px;
-            max-height: 50px;
-            width: auto;
-            margin-right: 0.7rem;
-        }
-        .brand-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 2.2rem;
-        }
-        .nav-menu a {
-            color: var(--primary);
-            font-size: 1.05rem;
-            font-weight: 550;
-            padding: 0.4rem 0.7rem;
-            border-radius: 2rem;
-            transition: background 0.2s, color 0.2s;
-        }
-        .nav-menu a:hover {
-            background: var(--accent);
-            color: var(--white);
-        }
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+    .nav-container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 42px;
+      max-height: 50px;
+      width: auto;
+      margin-right: 0.7rem;
+    }
+    .brand-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-menu a {
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 550;
+      padding: 0.4rem 0.7rem;
+      border-radius: 2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-menu a:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
     /* HEADER */
     .header-section {
       text-align: center;
@@ -105,6 +105,8 @@
       align-items: flex-start;
       min-height: 60vh;
       padding-bottom: 40px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .tracker-card {
       background: var(--white);
@@ -118,6 +120,7 @@
       gap: 12px;
       margin: 0 auto;
       transition: box-shadow 0.2s;
+      box-sizing: border-box;
     }
     .tracker-card:focus-within {
       box-shadow: 0 12px 36px rgba(34,197,94,0.10);
@@ -224,6 +227,14 @@
       color: var(--red);
     }
     /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-container {
+        width: 98%;
+      }
+      .tracker-container {
+        width: 98%;
+      }
+    }
     @media (max-width: 700px) {
       .tracker-card {
         padding: 1.3rem 0.5rem 1.1rem 0.5rem;
@@ -231,6 +242,8 @@
       }
       .tracker-container {
         padding-bottom: 20px;
+        width: 100vw;
+        box-sizing: border-box;
       }
       .header-section {
         margin: 1.5rem 0 1rem 0;
@@ -242,6 +255,18 @@
       }
       .logo img {
         height: 32px;
+      }
+      .header-section {
+        margin: 1.1rem 0 0.7rem 0;
+      }
+      .tracker-card {
+        padding: 1rem 0.2rem 0.7rem 0.2rem;
+        max-width: 100vw;
+      }
+      .tracker-container {
+        width: 100vw;
+        padding-left: 0;
+        padding-right: 0;
       }
     }
     /* FOOTER */
@@ -257,6 +282,7 @@
       justify-content: center;
       gap: 2rem;
       margin-bottom: 0.7rem;
+      flex-wrap: wrap;
     }
     .footer-links a {
       color: var(--accent);
@@ -293,11 +319,11 @@
       </div>
       <div class="nav-menu">
         <a href="../index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="tools.html">Tools</a>
-                <a href="about-us.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="subscribe-page.html">Subscribe</a>
+        <a href="blog.html">Blog</a>
+        <a href="tools.html">Tools</a>
+        <a href="about-us.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="subscribe-page.html">Subscribe</a>
       </div>
     </div>
   </nav>
@@ -322,6 +348,18 @@
           <option value="polkadot">Polkadot (DOT)</option>
           <option value="tron">TRON (TRX)</option>
           <option value="litecoin">Litecoin (LTC)</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="currency">Currency</label>
+        <select id="currency" class="currency-select">
+          <option value="usd" selected>USD ($)</option>
+          <option value="eur">EUR (€)</option>
+          <option value="gbp">GBP (£)</option>
+          <option value="inr">INR (₹)</option>
+          <option value="jpy">JPY (¥)</option>
+          <option value="try">TRY (₺)</option>
+          <option value="lkr">LKR (₨)</option>
         </select>
       </div>
       <div class="input-group">
@@ -366,8 +404,22 @@
       litecoin: { name: "Litecoin", symbol: "LTC" }
     };
 
-    function formatCurrency(val) {
-      return '$' + Number(val).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    // Currency symbols map
+    const currencySymbols = {
+      usd: "$",
+      eur: "€",
+      gbp: "£",
+      inr: "₹",
+      jpy: "¥",
+      try: "₺",
+      lkr: "₨"
+    };
+
+    function formatCurrency(val, currency) {
+      let symbol = currencySymbols[currency] || "$";
+      // For INR, JPY, TRY, LKR show no decimals if integer
+      let decimals = (currency === "jpy" || currency === "inr" || currency === "try" || currency === "lkr") ? 0 : 2;
+      return symbol + Number(val).toLocaleString(undefined, {minimumFractionDigits: decimals, maximumFractionDigits: decimals});
     }
 
     function showLoading(show) {
@@ -384,14 +436,14 @@
       res.classList.add('visible');
     }
 
-    async function fetchCryptoPrice(coinId) {
-      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd&include_24hr_change=true`;
+    async function fetchCryptoPrice(coinId, currency) {
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=${currency}&include_24hr_change=true`;
       const resp = await fetch(url);
       if (!resp.ok) throw new Error('Failed to fetch price');
       return resp.json();
     }
 
-    function renderResults(coinId, price, change, amount) {
+    function renderResults(coinId, price, change, amount, currency) {
       const coin = COINS[coinId];
       const value = amount > 0 ? price * amount : null;
       let changeClass = "neutral", arrow = "";
@@ -407,12 +459,12 @@
       return `
         <div class="result-row">
           <span class="result-label">Current Price (${coin.symbol})</span>
-          <span class="result-value">${formatCurrency(price)}</span>
+          <span class="result-value">${formatCurrency(price, currency)}</span>
         </div>
         ${value !== null ? `
         <div class="result-row">
           <span class="result-label">Value of Holdings</span>
-          <span class="result-value neutral">${formatCurrency(value)}</span>
+          <span class="result-value neutral">${formatCurrency(value, currency)}</span>
         </div>
         ` : ""}
         <div class="result-row">
@@ -430,13 +482,14 @@
 
       const coinId = document.getElementById('coin').value;
       const amount = parseFloat(document.getElementById('amount').value) || 0;
+      const currency = document.getElementById('currency').value;
 
       try {
-        const data = await fetchCryptoPrice(coinId);
-        const price = data[coinId]?.usd;
-        const change = data[coinId]?.usd_24h_change;
+        const data = await fetchCryptoPrice(coinId, currency);
+        const price = data[coinId]?.[currency];
+        const change = data[coinId]?.[`${currency}_24h_change`];
         if (typeof price !== "number") throw new Error("Price unavailable");
-        showResults(renderResults(coinId, price, change, amount));
+        showResults(renderResults(coinId, price, change, amount, currency));
       } catch (err) {
         showError("Could not fetch price. Please try again later.");
       } finally {
@@ -451,15 +504,16 @@
       autoRefreshTimer = setInterval(() => {
         const coinId = document.getElementById('coin').value;
         const amount = parseFloat(document.getElementById('amount').value) || 0;
+        const currency = document.getElementById('currency').value;
         // Only refresh if results are visible
         if (document.getElementById('result-section').innerHTML.trim()) {
           showLoading(true);
-          fetchCryptoPrice(coinId)
+          fetchCryptoPrice(coinId, currency)
             .then(data => {
-              const price = data[coinId]?.usd;
-              const change = data[coinId]?.usd_24h_change;
+              const price = data[coinId]?.[currency];
+              const change = data[coinId]?.[`${currency}_24h_change`];
               if (typeof price === "number") {
-                showResults(renderResults(coinId, price, change, amount));
+                showResults(renderResults(coinId, price, change, amount, currency));
               }
             })
             .catch(() => {})
@@ -481,9 +535,15 @@
           document.getElementById('crypto-form').dispatchEvent(new Event('submit'));
         }
       });
+      document.getElementById('currency').addEventListener('change', function() {
+        // If results are visible, update all values
+        const html = document.getElementById('result-section').innerHTML;
+        if (html.trim()) {
+          document.getElementById('crypto-form').dispatchEvent(new Event('submit'));
+        }
+      });
       setupAutoRefresh();
     });
   </script>
- 
 </body>
 </html>
