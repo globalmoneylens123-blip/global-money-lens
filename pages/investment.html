@@ -85,6 +85,53 @@
       background: var(--accent);
       color: var(--white);
     }
+    /* Hamburger for mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 800px) {
+      .nav-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: auto;
+        background: var(--white);
+        flex-direction: column;
+        width: 100vw;
+        max-width: 320px;
+        box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+        gap: 0;
+        padding: 1rem 0;
+        display: none;
+        z-index: 1000;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .nav-menu a {
+        padding: 1rem 2rem;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-container {
+        position: relative;
+      }
+    }
     /* HEADER */
     .header-section {
       text-align: center;
@@ -263,6 +310,17 @@
       color: var(--accent);
     }
     /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .nav-container { width: 98%; }
+    }
+    @media (max-width: 900px) {
+      .calc-container {
+        padding-bottom: 20px;
+      }
+      .header-section {
+        margin: 1.5rem 0 1rem 0;
+      }
+    }
     @media (max-width: 700px) {
       .calc-card {
         padding: 1.3rem 0.5rem 1.1rem 0.5rem;
@@ -275,6 +333,28 @@
         margin: 1.5rem 0 1rem 0;
       }
     }
+    @media (max-width: 600px) {
+      html, body {
+        width: 100vw;
+        overflow-x: hidden;
+      }
+      .header-section h1 {
+        font-size: 1.3rem;
+      }
+      .header-section p {
+        font-size: 1rem;
+      }
+      .calc-card {
+        padding: 1rem 0.2rem 0.7rem 0.2rem;
+        max-width: 100vw;
+      }
+      .result-row {
+        font-size: 0.98rem;
+      }
+      .footer-links {
+        gap: 1rem;
+      }
+    }
     @media (max-width: 500px) {
       html, body {
         width: 100vw;
@@ -284,21 +364,24 @@
         gap: 1rem;
       }
       .logo img {
-        height: 32px;
+        height: 28px;
       }
     }
   </style>
 </head>
 <body>
-  <div id="header"></div>
-  <!-- Sticky Navbar -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
         <span class="brand-name">Global Money Lens</span>
       </div>
-      <div class="nav-menu">
+      <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-menu" id="navMenu">
         <a href="../index.html">Home</a>
         <a href="blog.html">Blog</a>
         <a href="tools.html">Tools</a>
@@ -358,6 +441,26 @@
     <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
   </footer>
   <script>
+    // Mobile nav hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger?.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+    hamburger?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        navMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+      }
+    });
+    Array.from(navMenu?.querySelectorAll('a') || []).forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+      });
+    });
+
     // Format as currency
     function formatCurrency(val) {
       return '$' + Number(val).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
