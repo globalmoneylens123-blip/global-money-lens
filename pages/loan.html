@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Calculator | Global Money Lens</title>
+  <meta name="description" content="Calculate your monthly loan payments instantly with the Loan Calculator from Global Money Lens.">
+  <style>
+    :root {
+      --primary: #0a2342;
+      --accent: #1abc9c;
+      --accent-dark: #1abc9c;
+      --bg: #f8fafc;
+      --white: #fff;
+      --shadow: 0 8px 32px rgba(15,23,42,0.10);
+      --card-radius: 1.1rem;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* NAVBAR */
+   .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        .nav-container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 42px;
+            max-height: 50px;
+            width: auto;
+            margin-right: 0.7rem;
+        }
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2.2rem;
+        }
+        .nav-menu a {
+            color: var(--primary);
+            font-size: 1.05rem;
+            font-weight: 550;
+            padding: 0.4rem 0.7rem;
+            border-radius: 2rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-menu a:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+    /* HEADER */
+    .header-section {
+      text-align: center;
+      margin: 2.5rem 0 1.5rem 0;
+    }
+    .header-section h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .header-section p {
+      font-size: 1.13rem;
+      color: #3a4a5d;
+      margin: 0;
+    }
+    /* CARD */
+    .calc-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 60vh;
+      padding-bottom: 40px;
+    }
+    .calc-card {
+      background: var(--white);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding: 2.2rem 2rem 1.7rem 2rem;
+      width: 100%;
+      max-width: 410px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 0 auto;
+      transition: box-shadow 0.2s;
+    }
+    .calc-card:focus-within {
+      box-shadow: 0 12px 36px rgba(34,197,94,0.10);
+    }
+    /* INPUTS */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .input-group label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+    .input-group input[type="number"] {
+      padding: 12px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      background: #f8fafc;
+      transition: border 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .input-group input[type="number"]:focus {
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 0 0 2px #bbf7d0;
+    }
+    /* BUTTON */
+    .calc-btn {
+      margin-top: 10px;
+      padding: 14px 0;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(34,197,94,0.08);
+      transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.5px;
+    }
+    .calc-btn:hover, .calc-btn:focus {
+      background: var(--accent-dark);
+      transform: scale(1.035);
+      box-shadow: 0 4px 16px rgba(34,197,94,0.18);
+    }
+    /* RESULTS */
+    .result-section {
+      margin-top: 22px;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(.4,0,.2,1), transform 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    .result-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+    .result-label {
+      color: #3a4a5d;
+      font-weight: 500;
+    }
+    .result-value {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .result-value.key {
+      color: var(--accent);
+    }
+    .result-value.neutral {
+      color: var(--primary);
+    }
+    /* BAR VISUALIZATION */
+    .bar-visual {
+      margin-top: 18px;
+      height: 18px;
+      background: #e5e7eb;
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.04);
+    }
+    .bar-principal {
+      background: var(--accent);
+      height: 100%;
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    .bar-interest {
+      background: #0f172a;
+      height: 100%;
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: var(--white);
+      padding: 1.5rem 0 1rem 0;
+      text-align: center;
+      margin-top: 48px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.7rem;
+    }
+    .footer-links a {
+      color: var(--accent);
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--white);
+    }
+    .footer-social {
+      margin-top: 0.7rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    .footer-social a {
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover {
+      color: var(--accent);
+    }
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .calc-card {
+        padding: 1.3rem 0.5rem 1.1rem 0.5rem;
+        max-width: 98vw;
+      }
+      .calc-container {
+        padding-bottom: 20px;
+      }
+      .header-section {
+        margin: 1.5rem 0 1rem 0;
+      }
+    }
+    @media (max-width: 500px) {
+      .nav-menu {
+        gap: 1rem;
+      }
+      .logo img {
+        height: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+        <span class="brand-name">Global Money Lens</span>
+      </div>
+      <div class="nav-menu">
+        <a href="../index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="tools.html">Tools</a>
+                <a href="about-us.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="subscribe-page.html">Subscribe</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Header Section -->
+  <section class="header-section">
+    <h1>Loan Calculator</h1>
+    <p>Calculate your monthly loan payments instantly</p>
+  </section>
+  <!-- Calculator Card -->
+  <div class="calc-container">
+    <form class="calc-card" id="loan-form" autocomplete="off" onsubmit="return false;">
+      <div class="input-group">
+        <label for="amount">Loan Amount</label>
+        <input type="number" id="amount" min="0" step="0.01" placeholder="e.g. 20000" required>
+      </div>
+      <div class="input-group">
+        <label for="rate">Interest Rate (% per year)</label>
+        <input type="number" id="rate" min="0" step="0.01" placeholder="e.g. 7.5" required>
+      </div>
+      <div class="input-group">
+        <label for="years">Loan Term (years)</label>
+        <input type="number" id="years" min="1" step="1" placeholder="e.g. 5" required>
+      </div>
+      <button type="submit" class="calc-btn" id="calc-btn">Calculate Payment</button>
+      <div class="result-section" id="result-section"></div>
+      <div class="bar-visual" id="bar-visual" style="display:none;">
+        <div class="bar-principal" id="bar-principal" style="width:0%"></div>
+        <div class="bar-interest" id="bar-interest" style="width:0%"></div>
+      </div>
+    </form>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="PP.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+      <a href="about-us.html">About</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
+        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
+        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+      </a>
+    </div>
+    <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
+  </footer>
+  <script>
+    function formatCurrency(val) {
+      return '$' + Number(val).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    function updateResults() {
+      const amount = parseFloat(document.getElementById('amount').value) || 0;
+      const rate = parseFloat(document.getElementById('rate').value) || 0;
+      const years = parseFloat(document.getElementById('years').value) || 0;
+
+      // Validation
+      if (amount <= 0 || rate < 0 || years < 1) {
+        document.getElementById('result-section').innerHTML = '';
+        document.getElementById('result-section').classList.remove('visible');
+        document.getElementById('bar-visual').style.display = 'none';
+        return;
+      }
+
+      const n = years * 12;
+      const r = rate / 100 / 12;
+      let monthly = 0, totalPayment = 0, totalInterest = 0;
+
+      if (r === 0) {
+        monthly = amount / n;
+      } else {
+        monthly = amount * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+      }
+      totalPayment = monthly * n;
+      totalInterest = totalPayment - amount;
+
+      document.getElementById('result-section').innerHTML = `
+        <div class="result-row">
+          <span class="result-label">Monthly Payment</span>
+          <span class="result-value key">${formatCurrency(monthly)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Payment</span>
+          <span class="result-value neutral">${formatCurrency(totalPayment)}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Interest Paid</span>
+          <span class="result-value key">${formatCurrency(totalInterest)}</span>
+        </div>
+      `;
+      document.getElementById('result-section').classList.add('visible');
+
+      // Visualization bar
+      const barVisual = document.getElementById('bar-visual');
+      if (totalPayment > 0 && totalInterest > 0) {
+        let principalPct = Math.max(0, Math.min(100, (amount / totalPayment) * 100));
+        let interestPct = 100 - principalPct;
+        document.getElementById('bar-principal').style.width = principalPct + '%';
+        document.getElementById('bar-interest').style.width = interestPct + '%';
+        document.getElementById('bar-principal').title = 'Principal';
+        document.getElementById('bar-interest').title = 'Interest';
+        barVisual.style.display = 'flex';
+      } else {
+        barVisual.style.display = 'none';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('input', function() {
+          if (this.value < 0) this.value = '';
+          updateResults();
+        });
+      });
+      document.getElementById('loan-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        updateResults();
+      });
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('keyup', updateResults);
+        input.addEventListener('change', updateResults);
+      });
+      updateResults();
+    });
+  </script>
+  <div id="footer"></div>
+
+<script>
+fetch("header.html")
+  .then(res => res.text())
+  .then(data => document.getElementById("header").innerHTML = data);
+
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => document.getElementById("footer").innerHTML = data);
+</script>
+</body>
+</html>

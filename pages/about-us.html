@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Global Money Lens</title>
+    <style>
+        :root {
+            --primary: #0a2342;
+            --accent: #1abc9c;
+            --white: #fff;
+            --gray: #f4f6fa;
+            --text: #222;
+            --shadow: 0 2px 12px rgba(10,35,66,0.07);
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--gray);
+            color: var(--text);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        .nav-container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 42px;
+            max-height: 50px;
+            width: auto;
+            margin-right: 0.7rem;
+        }
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2.2rem;
+        }
+        .nav-menu a {
+            color: var(--primary);
+            font-size: 1.05rem;
+            font-weight: 550;
+            padding: 0.4rem 0.7rem;
+            border-radius: 2rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-menu a:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+        /* Hero Section */
+        .about-hero {
+            background: var(--white);
+            padding: 3.5rem 0 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(10,35,66,0.04);
+        }
+        .about-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .about-subtitle {
+            font-size: 1.25rem;
+            color: #444;
+            font-weight: 400;
+        }
+        /* Main Container */
+        .about-main {
+            width: 92%;
+            max-width: 900px;
+            margin: 0 auto;
+            margin-top: 2.5rem;
+        }
+        /* Mission */
+        .mission-section {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 2.2rem 1.5rem 2rem 1.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        .mission-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.7rem;
+        }
+        .mission-text {
+            font-size: 1.08rem;
+            color: #222;
+            line-height: 1.7;
+        }
+        /* Founder */
+        .founder-section {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .founder-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #eafaf6;
+            border: 3px solid var(--accent);
+            flex-shrink: 0;
+        }
+        .founder-story {
+            flex: 1;
+        }
+        .founder-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        .founder-text {
+            font-size: 1.05rem;
+            color: #222;
+            line-height: 1.7;
+        }
+        /* Values */
+        .values-section {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .values-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .values-list {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .value-item {
+            background: #f4f6fa;
+            border-radius: 0.7rem;
+            padding: 1.2rem 1.5rem;
+            min-width: 180px;
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: 0 1px 4px rgba(10,35,66,0.04);
+        }
+        /* Stats */
+        .stats-section {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        .stat-item {
+            flex: 1;
+            min-width: 150px;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        .stat-label {
+            font-size: 1.05rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        /* CTA */
+        .about-cta-section {
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 1rem;
+            padding: 2.2rem 1.2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+        .about-cta-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.1rem;
+        }
+        .about-cta-btn {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .about-cta-btn:hover {
+            background: #159c82;
+            transform: scale(1.05);
+        }
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1.5rem 0 1rem 0;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 0.7rem;
+        }
+        .footer-links a {
+            color: var(--accent);
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--white);
+        }
+         .footer-social {
+            margin-top: 0.7rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.3rem;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .about-main {
+                width: 98%;
+            }
+            .nav-container {
+                width: 98%;
+            }
+            .founder-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.2rem;
+                text-align: left;
+            }
+            .values-list {
+                gap: 1rem;
+            }
+            .stats-section {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .about-title {
+                font-size: 1.3rem;
+            }
+            .about-main {
+                margin-top: 1.2rem;
+            }
+            .mission-section,
+            .founder-section,
+            .values-section,
+            .stats-section,
+            .about-cta-section {
+                padding: 1.2rem 0.7rem;
+            }
+        }
+    </style>
+    <script>
+        // Simple animated counters for stats
+        document.addEventListener("DOMContentLoaded", function() {
+            function animateCounter(id, target, duration) {
+                const el = document.getElementById(id);
+                let start = 0;
+                const increment = Math.ceil(target / (duration / 20));
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        el.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        el.textContent = start.toLocaleString();
+                    }
+                }, 20);
+            }
+            animateCounter('stat-articles', 320, 1000);
+            animateCounter('stat-readers', 48000, 1200);
+            animateCounter('stat-growth', 220, 1000);
+        });
+    </script>
+</head>
+<body>
+    <div id="header"></div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+                <span class="brand-name">Global Money Lens</span>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="tools.html">Tools</a>
+                <a href="about-us.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="subscribe-page.html">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="about-title">About Global Money Lens</div>
+        <div class="about-subtitle">Helping people make smarter financial decisions</div>
+    </section>
+    <main class="about-main">
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="mission-title">Our Mission</div>
+            <div class="mission-text">
+                Global Money Lens exists to empower individuals to achieve financial freedom. We focus on smart investing, effective saving, and building passive income streams. Our goal is to make financial education accessible, actionable, and inspiring for everyone.
+            </div>
+        </section>
+        <!-- Founder Section -->
+        <section class="founder-section">
+            <img class="founder-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrnrajKbKU9BmPthXu-mtxMg8x_2VrXXoTiRAdXqEwYWP9fgHSHo2zrfqKDztRWepqG3vAlt7AtdZYOkCGjGCuraafWIS2zJFbI5JZXZN-xUMAbJNqrWa9OmoTiLOmCW8ggy5D_C-CCDITX-jwqv03YVKB_C1fDEn1hdWmLrwJHR_jK4opOOY7YnTDVjXj/s1600/WhatsApp%20Image%202026-04-26%20at%2017.30.51.jpeg" alt="Founder">
+            <div class="founder-story">
+                <div class="founder-text">
+                    
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #0f172a;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #1abc9c;
+    font-weight: bold;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-left: 5px solid #1abc9c;
+}
+
+.footer-note {
+    margin-top: 30px;
+    font-weight: bold;
+    color: #334155;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>About <span class="highlight">Thashmina Sandeepa</span></h1>
+
+    <div class="card">
+
+        <p>
+        I am the founder of <strong>Global Money Lens</strong>, a modern finance platform dedicated to delivering clear, strategic, and actionable financial insights for a global audience.
+        </p>
+
+        <p>
+        With a focus on investing, wealth-building, and financial intelligence, my mission is to simplify complex financial concepts into practical knowledge that individuals can apply in real life to build long-term financial independence.
+        </p>
+
+        <p>
+        Global Money Lens was created with a single vision: <strong>to bridge the gap between financial knowledge and financial success.</strong>
+        </p>
+
+        <p>
+        In a world where information is abundant but clarity is rare, this platform exists to provide structured, high-quality financial education that empowers readers to make informed decisions with confidence.
+        </p>
+
+        <p>
+        Every article is designed with precision — focusing on real-world strategies in investing, saving, and income generation, rather than theory alone.
+        </p>
+
+        <p>
+        This is not just a blog. It is a curated financial intelligence platform built for individuals who are serious about improving their financial future.
+        </p>
+
+        <p class="footer-note">
+        — Founder, Global Money Lens
+        </p>
+
+</div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="values-title">Our Values</div>
+            <div class="values-list">
+                <div class="value-item">Smart Investing</div>
+                <div class="value-item">Financial Education</div>
+                <div class="value-item">Long-Term Wealth Building</div>
+            </div>
+        </section>
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-item">
+                <span class="stat-number" id="stat-articles">0</span>
+                <div class="stat-label">Articles Published</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="stat-readers">0</span>
+                <div class="stat-label">Readers Helped</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="stat-growth">0%</span>
+                <div class="stat-label">Yearly Growth</div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="about-cta-section">
+            <div class="about-cta-title">Ready to master your money?</div>
+            <a href="hero.html" class="about-cta-btn">Start Learning Now</a>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="PP.html">Privacy Policy</a>
+            <a href="contact.html">Contact</a>
+            <a href="about-us.html">About</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+            </a>
+        </div>
+        <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
+    </footer>
+    <div id="footer"></div>
+
+<script>
+fetch("header.html")
+  .then(res => res.text())
+  .then(data => document.getElementById("header").innerHTML = data);
+
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => document.getElementById("footer").innerHTML = data);
+</script>
+</body>
+</html>

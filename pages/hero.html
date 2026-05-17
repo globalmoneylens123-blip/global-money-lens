@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Money Lens | Master Your Money</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #1abc9c;
+            --white: #fff;
+            --overlay: linear-gradient(120deg, rgba(15,23,42,0.85) 60%, rgba(34,197,94,0.10) 100%);
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--primary);
+            color: var(--white);
+        }
+        body {
+            min-height: 100vh;
+        }
+        .hero {
+            position: relative;
+            width: 100vw;
+            min-height: 90vh;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--primary);
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.6) blur(0.5px);
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 650px;
+            margin: 0 2rem;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+        .hero-headline {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.1rem;
+            letter-spacing: 1px;
+            color: var(--white);
+            text-shadow: 0 4px 24px rgba(15,23,42,0.25);
+        }
+        .hero-sub {
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            color: #e0f7e9;
+            text-shadow: 0 2px 8px rgba(15,23,42,0.13);
+        }
+        .hero-support {
+            font-size: 1.08rem;
+            color: #e2e8f0;
+            margin-bottom: 2.1rem;
+            max-width: 500px;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1.1rem;
+            flex-wrap: wrap;
+        }
+        .hero-btn {
+            padding: 1rem 2.3rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 2.2rem;
+            border: none;
+            cursor: pointer;
+            transition: 
+                background 0.18s,
+                color 0.18s,
+                box-shadow 0.18s,
+                transform 0.18s;
+            box-shadow: 0 2px 16px rgba(34,197,94,0.10);
+            outline: none;
+        }
+        .hero-btn.primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 0 0 0 rgba(34,197,94,0.25);
+        }
+        .hero-btn.primary:hover, .hero-btn.primary:focus {
+            background: #1abc9c;
+            transform: scale(1.05);
+            box-shadow: 0 0 16px 2px rgba(34,197,94,0.25);
+        }
+        .hero-btn.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        .hero-btn.secondary:hover, .hero-btn.secondary:focus {
+            background: var(--accent);
+            color: var(--white);
+            transform: scale(1.05);
+            box-shadow: 0 0 16px 2px rgba(34,197,94,0.18);
+        }
+        .hero-trust {
+            font-size: 0.98rem;
+            color: #a7f3d0;
+            margin-bottom: 1.7rem;
+            margin-top: 0.2rem;
+            letter-spacing: 0.2px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2.2rem;
+            margin-top: 0.7rem;
+            font-size: 1.08rem;
+            color: #e0f7e9;
+            font-weight: 600;
+            opacity: 0.93;
+            animation: fadeInUp 1.5s 0.5s both;
+        }
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .hero-stat .stat-num {
+            color: var(--accent);
+            font-size: 1.25em;
+            font-weight: 800;
+            min-width: 60px;
+            display: inline-block;
+        }
+        /* Floating Elements */
+        .floating-graph {
+            position: absolute;
+            right: 6vw;
+            bottom: 10vh;
+            z-index: 4;
+            opacity: 0.18;
+            pointer-events: none;
+            animation: floatGraph 6s ease-in-out infinite alternate;
+        }
+        @keyframes floatGraph {
+            0% { transform: translateY(0) scale(1);}
+            100% { transform: translateY(-18px) scale(1.04);}
+        }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-content {
+                max-width: 98vw;
+                margin: 0 1rem;
+            }
+            .floating-graph {
+                display: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .hero {
+                min-height: 80vh;
+                height: 80vh;
+            }
+            .hero-headline {
+                font-size: 2rem;
+            }
+            .hero-sub {
+                font-size: 1.05rem;
+            }
+            .hero-support {
+                font-size: 0.98rem;
+            }
+            .hero-btns {
+                flex-direction: column;
+                gap: 0.7rem;
+                width: 100%;
+            }
+            .hero-btn {
+                width: 100%;
+                padding: 0.9rem 0;
+                font-size: 1.05rem;
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <img class="hero-bg" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1600&q=80" alt="Finance Banner">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-headline">Master Your Money</div>
+            <div class="hero-sub">Smart financial decisions start here</div>
+            <div class="hero-support">
+                Learn investing, saving, and wealth-building strategies that actually work.
+            </div>
+            <div class="hero-btns">
+                <a href="blog.html" class="hero-btn primary">Start Learning</a>
+                <a href="tools.html" class="hero-btn secondary">Explore Tools</a>
+            </div>
+            <div class="hero-trust">100% Free &bull; No Spam &bull; Beginner Friendly</div>
+            <div class="hero-stats">
+                <div class="hero-stat"><span class="stat-num" id="stat-readers">0</span>10K+ Readers</div>
+                <div class="hero-stat"><span class="stat-num" id="stat-guides">0</span>50+ Guides</div>
+                <div class="hero-stat"><span class="stat-num" id="stat-updates">0</span>Weekly Updates</div>
+            </div>
+        </div>
+        <!-- Optional Floating SVG Graph -->
+        <svg class="floating-graph" width="120" height="70" viewBox="0 0 120 70" fill="none">
+            <polyline points="0,60 20,50 40,55 60,30 80,40 100,10 120,20"
+                stroke="#22c55e" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="100" cy="10" r="6" fill="#22c55e"/>
+        </svg>
+    </section>
+    <script>
+        // Fade-in stats animation
+        function animateStat(id, target, duration) {
+            const el = document.getElementById(id);
+            let start = 0;
+            const increment = Math.ceil(target / (duration / 20));
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    el.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    el.textContent = start.toLocaleString();
+                }
+            }, 20);
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            animateStat('stat-readers', 10000, 900);
+            animateStat('stat-guides', 50, 700);
+            animateStat('stat-updates', 1, 500);
+        });
+    </script>
+</body>
+</html>

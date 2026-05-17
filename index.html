@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Money Lens | Master Your Money</title>
+    <style>
+        :root {
+            --primary: #0a2342;
+            --accent: #1abc9c;
+            --white: #fff;
+            --gray: #f4f6fa;
+            --text: #222;
+            --shadow: 0 2px 12px rgba(10,35,66,0.07);
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--gray);
+            color: var(--text);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Sticky Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        .nav-container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 42px;
+            max-height: 50px;
+            width: auto;
+            margin-right: 0.7rem;
+        }
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2.2rem;
+        }
+        .nav-menu a {
+            color: var(--primary);
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 0.4rem 0.7rem;
+            border-radius: 2rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-menu a:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+        /* Hero Banner */
+        .hero {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            min-height: 340px;
+            max-height: 420px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-banner {
+            width: 100%;
+            height: 100%;
+            min-height: 340px;
+            max-height: 420px;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            background: linear-gradient(90deg, rgba(10,35,66,0.7) 0%, rgba(26,188,156,0.2) 100%);
+        }
+        .hero-headline {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px rgba(10,35,66,0.18);
+        }
+        .hero-sub {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            text-shadow: 0 2px 8px rgba(10,35,66,0.13);
+        }
+        .hero-cta {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 0.95rem 2.2rem;
+            border-radius: 2rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .hero-cta:hover {
+            background: #159c82;
+            transform: scale(1.05);
+        }
+        /* Main Container */
+        .main-container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 2.5rem;
+        }
+        /* Featured Posts */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .post-card {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .post-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(10,35,66,0.13);
+        }
+        .post-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 1.2rem 1.2rem 1.1rem 1.2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .post-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.7rem;
+        }
+        .post-desc {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 1.1rem;
+            flex: 1;
+        }
+        .read-btn {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 0.6rem 1.3rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background 0.2s;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .read-btn:hover {
+            background: #159c82;
+        }
+        /* Categories */
+        .categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .category-card {
+            background: var(--white);
+            border-radius: 0.8rem;
+            box-shadow: var(--shadow);
+            padding: 1.1rem 1.7rem;
+            font-size: 1.08rem;
+            font-weight: 500;
+            color: var(--primary);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .category-card:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+        /* Best Tools */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.7rem;
+            margin-bottom: 2.5rem;
+        }
+        .tool-card {
+            background: var(--white);
+            border-radius: 0.9rem;
+            box-shadow: var(--shadow);
+            padding: 1.2rem 1.1rem 1.1rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.2s;
+        }
+        .tool-card:hover {
+            transform: translateY(-4px) scale(1.03);
+        }
+        .tool-name {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+        .tool-desc {
+            font-size: 0.97rem;
+            color: #444;
+            margin-bottom: 0.7rem;
+        }
+        .tool-cta {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1.1rem;
+            border-radius: 2rem;
+            font-size: 0.98rem;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: auto;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .tool-cta:hover {
+            background: #159c82;
+        }
+        /* Email Signup */
+        .signup-section {
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 1rem;
+            padding: 2.2rem 1.2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+        .signup-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+        }
+        .signup-form {
+            margin-top: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .signup-form input[type="email"] {
+            padding: 0.7rem 1.2rem;
+            border-radius: 2rem;
+            border: none;
+            font-size: 1rem;
+            width: 260px;
+            margin-bottom: 0.5rem;
+        }
+        .signup-form button {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 0.7rem 2rem;
+            border-radius: 2rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .signup-form button:hover {
+            background: #159c82;
+        }
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1.5rem 0 1rem 0;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 0.7rem;
+        }
+        .footer-links a {
+            color: var(--accent);
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--white);
+        }
+         .footer-social {
+            margin-top: 0.7rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.3rem;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-container {
+                width: 98%;
+            }
+            .nav-container {
+                width: 98%;
+            }
+        }
+        @media (max-width: 700px) {
+            .hero-headline {
+                font-size: 2rem;
+            }
+            .main-container {
+                margin-top: 1.2rem;
+            }
+            .featured-grid, .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            .categories-list {
+                flex-direction: column;
+                gap: 0.7rem;
+            }
+        }
+        @media (max-width: 500px) {
+            .nav-menu {
+                gap: 1rem;
+            }
+            .logo img {
+                height: 32px;
+            }
+            .signup-form input[type="email"] {
+                width: 98%;
+            }
+        }
+        .pagination-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+        .load-more-btn {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 0.9rem 2.2rem;
+            border-radius: 2rem;
+            font-size: 1.08rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(34,197,94,0.07);
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .load-more-btn:hover {
+            background: #159c82;
+            transform: scale(1.04);
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <!-- Sticky Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+                <span class="brand-name">Global Money Lens</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="pages/blog.html">Blog</a>
+                <a href="pages/tools.html">Tools</a>
+                <a href="pages/about-us.html">About</a>
+                <a href="pages/contact.html">Contact</a>
+                <a href="pages/subscribe-page.html">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img class="hero-banner" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLP9zyjilExm1cG5JCWTl-8r_olD5thM8sk6aFRqGg8RFwQIa9jWzgIiAUdO3IczLr2AcOLveCCVYjCM-5imnWvtefsAcrBLHKhMMxc3CKoPFh2z_AK8-EdolilWEKyAL8EzoLJRmST_X2AUmdE_02IvglXcS3t0gI9wXFtSYiNP6ngp7qmzeHLI-yoQp3/s1600/ChatGPT%20Image%20Apr%2025,%202026,%2009_58_43%20AM.png" alt="Finance Banner">
+        <div class="hero-overlay">
+            <div class="hero-headline">Master Your Money</div>
+            <div class="hero-sub">Smart financial decisions start here</div>
+            <a href="pages/hero.html" class="hero-cta">Start Learning</a>
+        </div>
+    </section>
+    <main class="main-container">
+        <!-- Featured Posts -->
+        <div class="section-title">Featured Posts</div>
+        <div class="featured-grid" id="featuredPosts"></div>
+        <div class="pagination-section" id="featuredPagination" style="display:none;">
+            <a href="pages/blog.html" class="load-more-btn">See All Blog Posts</a>
+        </div>
+        <!-- Categories Section -->
+        <div class="section-title">Categories</div>
+        <div class="categories-list">
+            <a href="pages/blog.html" class="category-card">All</a>
+            <a href="pages/investing.html" class="category-card">Investing</a>
+            <a href="pages/saving.html" class="category-card">Saving</a>
+            <a href="pages/passive-income.html" class="category-card">Passive Income</a>
+            <a href="pages/crypto.html" class="category-card">Crypto</a>
+            <a href="pages/business.html" class="category-card">Business</a>
+        </div>
+        <!-- Best Tools (Affiliate Section) -->
+        <div class="section-title">Best Tools to Make Money Online</div>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-name">Upwork</div>
+                <div class="tool-desc">Find freelance jobs and work with global clients.</div>
+                <a href="#" class="tool-cta">Start Now</a>
+            </div>
+            <div class="tool-card">
+                <div class="tool-name">Fiverr</div>
+                <div class="tool-desc">Offer your skills and services starting at $5.</div>
+                <a href="#" class="tool-cta">Start Now</a>
+            </div>
+            <div class="tool-card">
+                <div class="tool-name">Etsy</div>
+                <div class="tool-desc">Sell handmade or digital products to a global audience.</div>
+                <a href="#" class="tool-cta">Start Now</a>
+            </div>
+            <div class="tool-card">
+                <div class="tool-name">Amazon FBA</div>
+                <div class="tool-desc">Start your own e-commerce business with Amazon's fulfillment.</div>
+                <a href="#" class="tool-cta">Start Now</a>
+            </div>
+            <div class="tool-card">
+                <div class="tool-name">Teachable</div>
+                <div class="tool-desc">Create and sell your own online courses easily.</div>
+                <a href="#" class="tool-cta">Start Now</a>
+            </div>
+        </div>
+        <!-- Email Signup -->
+        <section class="signup-section">
+            <div class="signup-title">Get Smart Money Tips in Your Inbox</div>
+            <div>Join our newsletter for the latest finance guides, tools, and exclusive offers.</div>
+            <form class="signup-form" autocomplete="off">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="pages/PP.html">Privacy Policy</a>
+            <a href="pages/contact.html">Contact</a>
+            <a href="pages/about-us.html">About</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+            </a>
+        </div>
+        <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
+    </footer>
+    <div id="footer"></div>
+    <!-- ...existing code... -->
+<script src="assets/posts.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const FEATURED_LIMIT = 6;
+    if (window.BLOG_POSTS && Array.isArray(window.BLOG_POSTS)) {
+        const posts = [...window.BLOG_POSTS]
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, FEATURED_LIMIT);
+
+        const featuredContainer = document.getElementById("featuredPosts");
+        featuredContainer.innerHTML = "";
+        posts.forEach(post => {
+            featuredContainer.innerHTML += `
+                <div class="post-card">
+                    <img class="post-img" src="${post.image}" alt="${post.title}">
+                    <div class="post-content">
+                        <div class="post-title">${post.title}</div>
+                        <div class="post-desc">${post.desc}</div>
+                        <a href="${post.link}" class="read-btn">Read More</a>
+                    </div>
+                </div>
+            `;
+        });
+
+        if (window.BLOG_POSTS.length > FEATURED_LIMIT) {
+            document.getElementById("featuredPagination").style.display = "flex";
+        }
+    }
+});
+</script>
+<!-- ...existing code... -->
+    <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+    </script>
+</body>
+</html>

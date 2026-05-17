@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passive Income | Global Money Lens</title>
+    <meta name="description" content="Passive income articles and guides from Global Money Lens.">
+    <style>
+        :root { --primary: #0a2342; --accent: #1abc9c; --white: #fff; --gray: #f4f6fa; --text: #222; --shadow: 0 2px 16px rgba(15,23,42,0.07);}
+        html, body {margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--gray);color:var(--text);}
+        a{text-decoration:none;color:inherit;}
+        .navbar{position:sticky;top:0;z-index:100;background:var(--white);box-shadow:0 2px 8px rgba(10,35,66,0.06);display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0;}
+        .nav-container{width:92%;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+        .logo{display:flex;align-items:center;}
+        .logo img{height:42px;max-height:50px;width:auto;margin-right:0.7rem;}
+        .brand-name{font-size:1.3rem;font-weight:700;color:var(--primary);letter-spacing:1px;}
+        .nav-menu{display:flex;gap:2.2rem;}
+        .nav-menu a{color:var(--primary);font-size:1.05rem;font-weight:500;padding:0.4rem 0.7rem;border-radius:2rem;transition:background 0.2s,color 0.2s;}
+        .nav-menu a:hover{background:var(--accent);color:var(--white);}
+        .blog-hero{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;min-height:220px;max-height:320px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--primary);}
+        .blog-hero-img{width:100%;height:100%;min-height:220px;max-height:320px;object-fit:cover;filter:brightness(0.6);position:absolute;top:0;left:0;z-index:1;}
+        .blog-hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,rgba(15,23,42,0.85) 60%,rgba(34,197,94,0.10) 100%);z-index:2;}
+        .blog-hero-content{position:relative;z-index:3;text-align:left;max-width:700px;margin:0 2rem;color:var(--white);display:flex;flex-direction:column;align-items:flex-start;}
+        .blog-hero-title{font-size:2.2rem;font-weight:800;margin-bottom:0.7rem;letter-spacing:1px;}
+        .blog-hero-sub{font-size:1.15rem;color:#d1fae5;font-weight:400;}
+        .category-bar{width:100%;background:var(--white);box-shadow:0 1px 8px rgba(15,23,42,0.04);padding:1.1rem 0 0.7rem 0;display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;}
+        .category-btn{background:#f4f6fa;color:var(--primary);border:none;border-radius:2rem;padding:0.5rem 1.3rem;font-size:1rem;font-weight:500;cursor:pointer;transition:background 0.18s,color 0.18s,box-shadow 0.18s;outline:none;}
+        .category-btn.active,.category-btn:focus{background:var(--accent);color:var(--white);box-shadow:0 2px 12px rgba(34,197,94,0.13);}
+        .category-btn:hover{background:#e6f9f0;color:var(--accent);}
+        .blog-main{width:92%;max-width:1200px;margin:0 auto;margin-top:2.5rem;display:flex;gap:2.5rem;}
+        .blog-content{flex:3;min-width:0;}
+        .featured-post{display:none;} /* Hide featured on category pages */
+        .blog-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:2rem;
+        }
+        .blog-card{
+            background:var(--white);
+            border-radius:1rem;
+            box-shadow:var(--shadow);
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            transition:transform 0.2s,box-shadow 0.2s;
+            min-height:340px;
+        }
+        .blog-card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 6px 24px rgba(34,197,94,0.13);}
+        .blog-img-wrap{overflow:hidden;height:180px;}
+        .blog-img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
+        .blog-card:hover .blog-img{transform:scale(1.08);}
+        .blog-card-content{padding:1.2rem 1.2rem 1.1rem 1.2rem;flex:1;display:flex;flex-direction:column;}
+        .blog-category{background:#e6f9f0;color:var(--accent);font-size:0.92rem;font-weight:600;border-radius:1rem;padding:0.2rem 0.9rem;display:inline-block;margin-bottom:0.6rem;}
+        .blog-title{font-size:1.13rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem;line-height:1.3;}
+        .blog-desc{font-size:1rem;color:#444;margin-bottom:1.1rem;flex:1;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+        .blog-date{font-size:0.97rem;color:#888;margin-bottom:0.7rem;}
+        .read-btn{background:var(--accent);color:var(--white);border:none;padding:0.6rem 1.3rem;border-radius:2rem;font-size:1rem;cursor:pointer;align-self:flex-start;transition:background 0.2s,transform 0.2s;text-decoration:none;font-weight:500;}
+        .read-btn:hover{background:#1abc9c;transform:scale(1.04);}
+        .sidebar{flex:1.1;min-width:270px;max-width:340px;display:flex;flex-direction:column;gap:2.2rem;}
+        .sidebar-box{background:var(--white);border-radius:1rem;box-shadow:var(--shadow);padding:1.5rem 1.2rem;margin-bottom:0.7rem;}
+        .sidebar-title{font-size:1.08rem;font-weight:700;color:var(--primary);margin-bottom:0.7rem;}
+        .sidebar-search{width:100%;padding:0.7rem 1.1rem;border-radius:2rem;border:1px solid #dbe6f3;font-size:1rem;background:#f8fafc;margin-bottom:0.5rem;}
+        .sidebar-search:focus{outline:2px solid var(--accent);border-color:var(--accent);}
+        .sidebar-list{list-style:none;padding:0;margin:0;}
+        .sidebar-list li{margin-bottom:0.7rem;}
+        .sidebar-list a{color:var(--primary);font-size:1rem;transition:color 0.2s;}
+        .sidebar-list a:hover{color:var(--accent);}
+        .sidebar-subscribe input[type="email"]{width:100%;padding:0.7rem 1.1rem;border-radius:2rem;border:1px solid #dbe6f3;font-size:1rem;background:#f8fafc;margin-bottom:0.7rem;}
+        .sidebar-subscribe button{background:var(--accent);color:var(--white);border:none;padding:0.7rem 2rem;border-radius:2rem;font-size:1.05rem;font-weight:600;cursor:pointer;transition:background 0.2s;width:100%;}
+        .sidebar-subscribe button:hover{background:#1abc9c;}
+        .pagination-section{display:flex;justify-content:center;margin:2.5rem 0 1.5rem 0;}
+        .load-more-btn{background:var(--accent);color:var(--white);border:none;padding:0.9rem 2.2rem;border-radius:2rem;font-size:1.08rem;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.2s;box-shadow:0 2px 8px rgba(34,197,94,0.07);}
+        .load-more-btn:hover{background:#1abc9c;transform:scale(1.04);}
+        .signup-section{background:var(--primary);color:var(--white);border-radius:1rem;padding:2.2rem 1.2rem;text-align:center;margin:2.5rem auto 2rem auto;box-shadow:var(--shadow);max-width:700px;}
+        .signup-title{font-size:1.3rem;font-weight:600;margin-bottom:0.7rem;}
+        .signup-form{margin-top:1.1rem;display:flex;flex-direction:column;align-items:center;gap:0.8rem;}
+        .signup-form input[type="email"]{padding:0.7rem 1.2rem;border-radius:2rem;border:none;font-size:1rem;width:260px;margin-bottom:0.5rem;}
+        .signup-form button{background:var(--accent);color:var(--white);border:none;padding:0.7rem 2rem;border-radius:2rem;font-size:1.05rem;font-weight:600;cursor:pointer;transition:background 0.2s;}
+        .signup-form button:hover{background:#1abc9c;}
+        .signup-trust{font-size:0.95rem;color:#a7f3d0;margin-top:0.7rem;}
+        footer{background:var(--primary);color:var(--white);padding:1.5rem 0 1rem 0;text-align:center;}
+        .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:0.7rem;}
+        .footer-links a{color:var(--accent);font-size:1rem;transition:color 0.2s;}
+        .footer-links a:hover{color:var(--white);}
+        .footer-social{margin-top:0.7rem;display:flex;justify-content:center;gap:1.2rem;}
+        .footer-social a{color:var(--white);font-size:1.3rem;transition:color 0.2s;}
+        .footer-social a:hover{color:var(--accent);}
+        @media (max-width:1100px){.blog-main{width:98%;}.nav-container{width:98%;}}
+        @media (max-width:900px){.blog-main{flex-direction:column;gap:1.5rem;}.sidebar{max-width:100%;flex-direction:row;gap:1.2rem;}.sidebar-box{flex:1;}}
+        @media (max-width:700px){.blog-hero-title{font-size:1.3rem;}.blog-main{margin-top:1.2rem;}.blog-grid{grid-template-columns:1fr;gap:1.2rem;}.sidebar{flex-direction:column;gap:1.2rem;}}
+        @media (max-width:500px){.nav-menu{gap:1rem;}.logo img{height:28px;}.signup-form input[type="email"]{width:98%;}}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+                <span class="brand-name">Global Money Lens</span>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="tools.html">Tools</a>
+                <a href="about-us.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="subscribe-page.html">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+    <section class="blog-hero">
+        <img class="blog-hero-img" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1200&q=80" alt="Passive Income Banner">
+        <div class="blog-hero-overlay"></div>
+        <div class="blog-hero-content">
+            <div class="blog-hero-title">Passive Income Ideas</div>
+            <div class="blog-hero-sub">Earn money while you sleep with smart strategies</div>
+        </div>
+    </section>
+    <nav class="category-bar" aria-label="Categories">
+        <a href="blog.html" class="category-btn">All</a>
+        <a href="investing.html" class="category-btn">Investing</a>
+        <a href="saving.html" class="category-btn">Saving</a>
+        <a href="passive-income.html" class="category-btn active">Passive Income</a>
+        <a href="crypto.html" class="category-btn">Crypto</a>
+        <a href="business.html" class="category-btn">Business</a>
+    </nav>
+    <main class="blog-main">
+        <section class="blog-content">
+            <div class="blog-grid" id="blogGrid"></div>
+            <div class="pagination-section">
+                <button class="load-more-btn" id="loadMoreBtn">Load More Articles</button>
+            </div>
+        </section>
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-title">Search</div>
+                <input class="sidebar-search" type="text" placeholder="Search articles..." id="searchInput">
+            </div>
+            <div class="sidebar-box">
+                <div class="sidebar-title">Popular Posts</div>
+                <ul class="sidebar-list" id="popularPosts"></ul>
+            </div>
+            <div class="sidebar-box">
+                <div class="sidebar-title">Subscribe</div>
+                <form class="sidebar-subscribe" autocomplete="off">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="sidebar-box">
+                <div class="sidebar-title">Categories</div>
+                <ul class="sidebar-list">
+                    <li><a href="investing.html">Investing</a></li>
+                    <li><a href="saving.html">Saving</a></li>
+                    <li><a href="passive-income.html">Passive Income</a></li>
+                    <li><a href="crypto.html">Crypto</a></li>
+                    <li><a href="business.html">Business</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+    <section class="signup-section">
+        <div class="signup-title">Join Smart Earners</div>
+        <form class="signup-form" autocomplete="off">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <div class="signup-trust">No spam. Unsubscribe anytime.</div>
+    </section>
+    <footer>
+        <div class="footer-links">
+            <a href="PP.html">Privacy Policy</a>
+            <a href="contact.html">Contact</a>
+            <a href="about-us.html">About</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+            </a>
+        </div>
+        <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
+    </footer>
+    <script src="../assets/posts.js"></script>
+    <script>
+    // Only show posts in the "Passive Income" category
+    const CATEGORY = "Passive Income";
+    const grid = document.getElementById("blogGrid");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const searchInput = document.getElementById("searchInput");
+    const popularPosts = document.getElementById("popularPosts");
+    let visibleCount = 6;
+    let filteredPosts = [];
+
+    function filterPosts() {
+        const q = (searchInput?.value || "").toLowerCase();
+        filteredPosts = window.BLOG_POSTS
+            .filter(post =>
+                post.category === CATEGORY &&
+                (
+                    post.title.toLowerCase().includes(q) ||
+                    post.desc.toLowerCase().includes(q)
+                )
+            )
+            .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort newest first
+    }
+
+    function renderPosts() {
+        filterPosts();
+        grid.innerHTML = "";
+        const posts = filteredPosts.slice(0, visibleCount);
+        if (posts.length === 0) {
+            grid.innerHTML = "<div>No articles found.</div>";
+            loadMoreBtn.style.display = "none";
+            return;
+        }
+        posts.forEach(post => {
+            grid.innerHTML += `
+                <article class="blog-card">
+                    <div class="blog-img-wrap">
+                        <img class="blog-img" src="${post.image}" alt="${post.title}">
+                    </div>
+                    <div class="blog-card-content">
+                        <span class="blog-category">${post.category}</span>
+                        <h3 class="blog-title">${post.title}</h3>
+                        <div class="blog-desc">${post.desc}</div>
+                        <div class="blog-date">${post.date}</div>
+                        <a href="${post.link}" class="read-btn">Read More</a>
+                    </div>
+                </article>
+            `;
+        });
+        loadMoreBtn.style.display = visibleCount >= filteredPosts.length ? "none" : "block";
+    }
+
+    function renderPopular() {
+        // Show top 2 most recent posts in this category
+        const posts = window.BLOG_POSTS
+            .filter(post => post.category === CATEGORY)
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, 2);
+        popularPosts.innerHTML = posts.map(post =>
+            `<li><a href="${post.link}">${post.title}</a></li>`
+        ).join("");
+    }
+
+    loadMoreBtn.addEventListener("click", () => {
+        visibleCount += 6;
+        renderPosts();
+    });
+
+    searchInput.addEventListener("input", () => {
+        visibleCount = 6;
+        renderPosts();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        renderPopular();
+        renderPosts();
+    });
+    </script>
+</body>
+</html>
