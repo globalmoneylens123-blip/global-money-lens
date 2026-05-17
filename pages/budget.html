@@ -180,6 +180,30 @@
         .calc-card:focus-within {
             box-shadow: 0 12px 36px rgba(26,188,156,0.10);
         }
+        /* Currency Selector */
+        .currency-group {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 10px;
+        }
+        .currency-group label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        .currency-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1.5px solid #e2e8f0;
+            font-size: 1rem;
+            background: var(--gray);
+            outline: none;
+            transition: border 0.2s;
+        }
+        .currency-select:focus {
+            border: 1.5px solid var(--accent);
+        }
         /* Inputs */
         .input-group {
             display: flex;
@@ -377,6 +401,17 @@
     <!-- Calculator Card -->
     <div class="calc-container">
         <form class="calc-card" id="budget-form" autocomplete="off" onsubmit="return false;">
+            <div class="currency-group">
+                <label for="currency">Currency</label>
+                <select id="currency" class="currency-select">
+                    <option value="USD" selected>USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="GBP">GBP (£)</option>
+                    <option value="INR">INR (₹)</option>
+                    <option value="JPY">JPY (¥)</option>
+                    <option value="TRY">TRY (₺)</option>
+                </select>
+            </div>
             <div class="input-group">
                 <label for="income">Monthly Income</label>
                 <input type="number" id="income" min="0" step="0.01" placeholder="e.g. 3000" required>
@@ -442,12 +477,25 @@
         });
     </script>
     <script>
+        // Currency symbols map
+        const currencySymbols = {
+            USD: "$",
+            EUR: "€",
+            GBP: "£",
+            INR: "₹",
+            JPY: "¥",
+            TRY: "₺"
+        };
         // Format as currency
-        function formatCurrency(val) {
-            return '$' + Number(val).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        function formatCurrency(val, currency) {
+            let symbol = currencySymbols[currency] || "$";
+            // For INR, JPY, TRY, show no decimals if integer
+            let decimals = (currency === "JPY" || currency === "INR" || currency === "TRY") ? 0 : 2;
+            return symbol + Number(val).toLocaleString(undefined, {minimumFractionDigits: decimals, maximumFractionDigits: decimals});
         }
         // Calculate and update results
         function updateBudgetResults() {
+            const currency = document.getElementById('currency').value;
             const income = parseFloat(document.getElementById('income').value) || 0;
             const rent = parseFloat(document.getElementById('rent').value) || 0;
             const food = parseFloat(document.getElementById('food').value) || 0;
@@ -472,11 +520,11 @@
             resultSection.innerHTML = `
                 <div class="result-row">
                     <span class="result-label">Total Expenses</span>
-                    <span class="result-value">${formatCurrency(totalExpenses)}</span>
+                    <span class="result-value">${formatCurrency(totalExpenses, currency)}</span>
                 </div>
                 <div class="result-row">
                     <span class="result-label">Remaining Balance</span>
-                    <span class="result-value ${balanceClass}">${formatCurrency(balance)}</span>
+                    <span class="result-value ${balanceClass}">${formatCurrency(balance, currency)}</span>
                 </div>
                 <div class="result-row">
                     <span class="result-label">Savings Rate</span>
@@ -503,6 +551,8 @@
                 input.addEventListener('keyup', updateBudgetResults);
                 input.addEventListener('change', updateBudgetResults);
             });
+            // Update on currency change
+            document.getElementById('currency').addEventListener('change', updateBudgetResults);
             // Initial state
             updateBudgetResults();
         });
