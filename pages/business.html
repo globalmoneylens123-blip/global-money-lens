@@ -7,29 +7,84 @@
     <meta name="description" content="Business articles and guides from Global Money Lens.">
     <style>
         :root { --primary: #0a2342; --accent: #1abc9c; --white: #fff; --gray: #f4f6fa; --text: #222; --shadow: 0 2px 16px rgba(15,23,42,0.07);}
-        html, body {margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--gray);color:var(--text);}
+        html, body {margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--gray);color:var(--text);overflow-x:hidden;}
+        body {max-width:100vw;overflow-x:hidden;}
         a{text-decoration:none;color:inherit;}
         .navbar{position:sticky;top:0;z-index:100;background:var(--white);box-shadow:0 2px 8px rgba(10,35,66,0.06);display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0;}
-        .nav-container{width:92%;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+        .nav-container{width:100%;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
         .logo{display:flex;align-items:center;}
         .logo img{height:42px;max-height:50px;width:auto;margin-right:0.7rem;}
         .brand-name{font-size:1.3rem;font-weight:700;color:var(--primary);letter-spacing:1px;}
         .nav-menu{display:flex;gap:2.2rem;}
         .nav-menu a{color:var(--primary);font-size:1.05rem;font-weight:500;padding:0.4rem 0.7rem;border-radius:2rem;transition:background 0.2s,color 0.2s;}
         .nav-menu a:hover{background:var(--accent);color:var(--white);}
-        .blog-hero{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;min-height:220px;max-height:320px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--primary);}
+        /* Hamburger for mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 3px;
+            background: var(--primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        @media (max-width: 800px) {
+            .nav-menu {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                left: auto;
+                background: var(--white);
+                flex-direction: column;
+                width: 100vw;
+                max-width: 320px;
+                box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+                gap: 0;
+                padding: 1rem 0;
+                display: none;
+                z-index: 1000;
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-radius: 0;
+                border-bottom: 1px solid #eee;
+                font-size: 1.1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-container {
+                position: relative;
+            }
+        }
+        .blog-hero{position:relative;width:100%;min-height:220px;max-height:320px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--primary);}
         .blog-hero-img{width:100%;height:100%;min-height:220px;max-height:320px;object-fit:cover;filter:brightness(0.6);position:absolute;top:0;left:0;z-index:1;}
         .blog-hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,rgba(15,23,42,0.85) 60%,rgba(34,197,94,0.10) 100%);z-index:2;}
         .blog-hero-content{position:relative;z-index:3;text-align:left;max-width:700px;margin:0 2rem;color:var(--white);display:flex;flex-direction:column;align-items:flex-start;}
         .blog-hero-title{font-size:2.2rem;font-weight:800;margin-bottom:0.7rem;letter-spacing:1px;}
         .blog-hero-sub{font-size:1.15rem;color:#d1fae5;font-weight:400;}
-        .category-bar{width:100%;background:var(--white);box-shadow:0 1px 8px rgba(15,23,42,0.04);padding:1.1rem 0 0.7rem 0;display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;}
-        .category-btn{background:#f4f6fa;color:var(--primary);border:none;border-radius:2rem;padding:0.5rem 1.3rem;font-size:1rem;font-weight:500;cursor:pointer;transition:background 0.18s,color 0.18s,box-shadow 0.18s;outline:none;}
+        .category-bar{width:100%;background:var(--white);box-shadow:0 1px 8px rgba(15,23,42,0.04);padding:1.1rem 0 0.7rem 0;display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;overflow-x:auto;}
+        .category-btn{background:#f4f6fa;color:var(--primary);border:none;border-radius:2rem;padding:0.5rem 1.3rem;font-size:1rem;font-weight:500;cursor:pointer;transition:background 0.18s,color 0.18s,box-shadow 0.18s;outline:none;display:flex;align-items:center;}
         .category-btn.active,.category-btn:focus{background:var(--accent);color:var(--white);box-shadow:0 2px 12px rgba(34,197,94,0.13);}
         .category-btn:hover{background:#e6f9f0;color:var(--accent);}
+        .category-btn a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
         .blog-main{width:92%;max-width:1200px;margin:0 auto;margin-top:2.5rem;display:flex;gap:2.5rem;}
         .blog-content{flex:3;min-width:0;}
-        .featured-post{display:none;} /* Hide featured on category pages */
+        .featured-post{display:none;}
         .blog-grid{
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -78,7 +133,7 @@
         .signup-form button:hover{background:#1abc9c;}
         .signup-trust{font-size:0.95rem;color:#a7f3d0;margin-top:0.7rem;}
         footer{background:var(--primary);color:var(--white);padding:1.5rem 0 1rem 0;text-align:center;}
-        .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:0.7rem;}
+        .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:0.7rem;flex-wrap:wrap;}
         .footer-links a{color:var(--accent);font-size:1rem;transition:color 0.2s;}
         .footer-links a:hover{color:var(--white);}
         .footer-social{margin-top:0.7rem;display:flex;justify-content:center;gap:1.2rem;}
@@ -86,6 +141,7 @@
         .footer-social a:hover{color:var(--accent);}
         @media (max-width:1100px){.blog-main{width:98%;}.nav-container{width:98%;}}
         @media (max-width:900px){.blog-main{flex-direction:column;gap:1.5rem;}.sidebar{max-width:100%;flex-direction:row;gap:1.2rem;}.sidebar-box{flex:1;}}
+        @media (max-width:800px){.sidebar{flex-direction:column;gap:1.2rem;}}
         @media (max-width:700px){.blog-hero-title{font-size:1.3rem;}.blog-main{margin-top:1.2rem;}.blog-grid{grid-template-columns:1fr;gap:1.2rem;}.sidebar{flex-direction:column;gap:1.2rem;}}
         @media (max-width:500px){.nav-menu{gap:1rem;}.logo img{height:28px;}.signup-form input[type="email"]{width:98%;}}
     </style>
@@ -97,7 +153,12 @@
                 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
                 <span class="brand-name">Global Money Lens</span>
             </div>
-            <div class="nav-menu">
+            <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-menu" id="navMenu">
                 <a href="../index.html">Home</a>
                 <a href="blog.html">Blog</a>
                 <a href="tools.html">Tools</a>
@@ -116,12 +177,12 @@
         </div>
     </section>
     <nav class="category-bar" aria-label="Categories">
-        <a href="blog.html" class="category-btn">All</a>
-        <a href="investing.html" class="category-btn">Investing</a>
-        <a href="saving.html" class="category-btn">Saving</a>
-        <a href="passive-income.html" class="category-btn">Passive Income</a>
-        <a href="crypto.html" class="category-btn">Crypto</a>
-        <a href="business.html" class="category-btn active">Business</a>
+        <button class="category-btn" onclick="window.location.href='blog.html'">All</button>
+        <button class="category-btn" onclick="window.location.href='investing.html'">Investing</button>
+        <button class="category-btn" onclick="window.location.href='saving.html'">Saving</button>
+        <button class="category-btn" onclick="window.location.href='passive-income.html'">Passive Income</button>
+        <button class="category-btn" onclick="window.location.href='crypto.html'">Crypto</button>
+        <button class="category-btn active" onclick="window.location.href='business.html'">Business</button>
     </nav>
     <main class="blog-main">
         <section class="blog-content">
@@ -182,7 +243,28 @@
         </div>
         <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
     </footer>
-<script src="../assets/posts.js"></script>
+    <script src="../assets/posts.js"></script>
+    <script>
+    // Mobile nav hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+    });
+    hamburger.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        }
+    });
+    Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+        });
+    });
+    </script>
     <script>
     // Only show posts in the "Business" category
     const CATEGORY = "Business";
@@ -203,7 +285,7 @@
                     post.desc.toLowerCase().includes(q)
                 )
             )
-            .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort newest first
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
     function renderPosts() {
