@@ -39,5 +39,13 @@ window.BLOG_POSTS = [
     image: "https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?auto=format&fit=crop&w=1200&q=80",
     category: "Investing",
     date: "2026-05-12"
-  }
+  },
+  {
+  link: "blogs/why-beginners-lose-money-in-investing.html",
+  title: "Why Beginners Lose Money in Investing (2026 Guide)",
+  desc: "Discover the most common investing mistakes beginners make in 2026, including emotional trading, poor risk management, chasing hype stocks, and unrealistic expectations — and learn how to avoid them.",
+  image: "https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-05-18"
+}
 ];
