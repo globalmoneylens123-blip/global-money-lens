@@ -20,7 +20,7 @@
     :root {
       --primary: #0a2342;
       --accent: #1abc9c;
-      --accent-dark: #1abc9c;
+      --accent-dark: #159c7c;
       --bg: #f8fafc;
       --white: #fff;
       --shadow: 0 8px 32px rgba(15,23,42,0.10);
@@ -36,6 +36,9 @@
       background: var(--bg);
       color: var(--primary);
       min-height: 100vh;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
     a {
       text-decoration: none;
@@ -91,6 +94,53 @@
     .nav-menu a:hover {
       background: var(--accent);
       color: var(--white);
+    }
+    /* Hamburger for mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 800px) {
+      .nav-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: auto;
+        background: var(--white);
+        flex-direction: column;
+        width: 100vw;
+        max-width: 320px;
+        box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+        gap: 0;
+        padding: 1rem 0;
+        display: none;
+        z-index: 1000;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .nav-menu a {
+        padding: 1rem 2rem;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-container {
+        position: relative;
+      }
     }
     .hero-header {
       background: var(--white);
@@ -186,6 +236,26 @@
       line-height: 2;
       letter-spacing: 0.5px;
     }
+    .tip-box {
+      background: #f1f5f9;
+      border-left: 5px solid var(--accent);
+      border-radius: 0.7rem;
+      padding: 1.1rem 1.3rem;
+      margin: 2rem 0;
+      font-size: 1.13rem;
+      color: var(--primary);
+      font-style: italic;
+      box-shadow: 0 1px 4px rgba(34,197,94,0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7em;
+    }
+    .tip-icon {
+      font-size: 1.5em;
+      margin-right: 0.3em;
+      flex-shrink: 0;
+      margin-top: 0.1em;
+    }
     .cta-section {
       background: var(--primary);
       color: var(--white);
@@ -223,12 +293,18 @@
       color: var(--white);
       padding: 1.5rem 0 1rem 0;
       text-align: center;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     .footer-links {
       display: flex;
       justify-content: center;
       gap: 2rem;
       margin-bottom: 0.7rem;
+      flex-wrap: wrap;
     }
     .footer-links a {
       color: var(--accent);
@@ -270,176 +346,276 @@
       }
       .blog-main {
         margin-top: 1.2rem;
+        padding: 1.2rem 0.7rem;
+      }
+      .nav-menu {
+        gap: 1rem;
+      }
+      .logo img {
+        height: 28px;
+      }
+    }
+    @media (max-width: 500px) {
+      html, body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      #page-wrap, .blog-main, footer {
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
       }
     }
   </style>
+  <script>
+    // Mobile nav hamburger
+    document.addEventListener("DOMContentLoaded", function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+          hamburger.classList.toggle('active');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+          }
+        });
+        Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
-        <span class="brand-name">Global Money Lens</span>
+  <div id="page-wrap">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+          <span class="brand-name">Global Money Lens</span>
+        </div>
+        <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-menu" id="navMenu">
+          <a href="../index.html">Home</a>
+          <a href="../pages/blog.html">Blog</a>
+          <a href="../pages/tools.html">Tools</a>
+          <a href="../pages/about-us.html">About</a>
+          <a href="../pages/contact.html">Contact</a>
+          <a href="../pages/subscribe-page.html">Subscribe</a>
+        </div>
       </div>
-      <div class="nav-menu">
-        <a href="../index.html">Home</a>
-        <a href="../pages/blog.html">Blog</a>
-        <a href="../pages/tools.html">Tools</a>
-        <a href="../pages/about us.html">About</a>
+    </nav>
+    <!-- Hero/Header Section -->
+    <header class="hero-header">
+      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80" alt="Start Investing With $10" class="hero-banner">
+      <div class="blog-title">How to Start Investing With $10 in 2026 (Beginner Guide)</div>
+      <div class="blog-meta">Published May 12, 2026 · by Global Money Lens</div>
+    </header>
+    <!-- Blog Content -->
+    <main class="blog-main">
+      <h1>How to Start Investing With $10 in 2026 (Beginner Guide)</h1>
+      <h2>Introduction</h2>
+      <p>Many people think that investing requires a lot of money. However, in 2026, that’s no longer true. Thanks to modern technology and user-friendly platforms, anyone can start investing with as little as $10.</p>
+      <p>If you’re new to investing, this guide will show you practical, step-by-step methods to begin your journey—even with a small budget. The goal is not how much you start with, but how consistently you invest and learn over time.</p>
+
+      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80" alt="Investing with $10">
+
+      <h2>Why Start Investing With Just $10?</h2>
+      <p>Starting small is far better than not starting at all. Even $10 can help you build strong financial habits and gain real-world experience.</p>
+      <ul>
+        <li>It helps you learn without taking big risks</li>
+        <li>It builds confidence in investing</li>
+        <li>It allows your money to grow over time</li>
+        <li>It develops discipline and consistency</li>
+      </ul>
+      <p>Most successful investors started small and stayed consistent. The earlier you begin, the more time your money has to grow.</p>
+
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" alt="Stock chart">
+
+      <h2>Step 1: Set Your Financial Goal</h2>
+      <p>Before you invest, you should understand why you want to invest. Having a clear goal helps you stay focused and avoid emotional decisions.</p>
+      <ul>
+        <li>Saving for future needs</li>
+        <li>Building long-term wealth</li>
+        <li>Achieving financial independence</li>
+      </ul>
+      <p>Clear goals make it easier to stay disciplined, especially during market changes.</p>
+
+      <div class="tip-box">
+        <span class="tip-icon">💡</span>
+        <span>
+          <span class="blog-tip">Pro Tip:</span>
+          <strong> Write your investment goal down and review it monthly to stay motivated.</strong>
+        </span>
+      </div>
+
+      <h2>Step 2: Choose the Right Investment Platform</h2>
+      <p>To invest with $10, you need a platform that supports small investments. Many modern apps allow beginners to invest with very low amounts.</p>
+      <ul>
+        <li>Low or zero fees</li>
+        <li>Easy-to-use interface</li>
+        <li>Fractional investing</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Tip:</strong> Fractional investing allows you to buy small parts of expensive stocks, making investing more accessible.
+      </div>
+
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Fractional investing">
+
+      <h2>Step 3: Start With Index Funds or ETFs</h2>
+      <p>Index funds and ETFs are among the safest options for beginners. They spread your investment across many companies, reducing risk.</p>
+      <ul>
+        <li>Diversification</li>
+        <li>Lower risk</li>
+        <li>Stable long-term growth</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Tip:</strong> Index funds and ETFs are ideal for beginners who want simple and reliable investments.
+      </div>
+
+      <h2>Step 4: Use Dollar-Cost Averaging</h2>
+      <p>This strategy involves investing a fixed amount regularly.</p>
+      <p>Example: Invest $10 every week or month.</p>
+      <p>This reduces risk and builds consistency while avoiding market timing mistakes.</p>
+      <div class="highlight-box">
+        <strong>Tip:</strong> Consistency is more important than timing the market. Stick to your plan!
+      </div>
+
+      <h2>Step 5: Avoid Common Beginner Mistakes</h2>
+      <p>Many beginners lose money because of simple mistakes.</p>
+      <ul>
+        <li>Trying to get rich quickly</li>
+        <li>Following trends blindly</li>
+        <li>Investing without research</li>
+        <li>Panic selling</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Tip:</strong> Stay calm and focus on long-term growth.
+      </div>
+
+      <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80" alt="Long term investing">
+
+      <h2>Best Investment Options for $10</h2>
+      <ul>
+        <li>Index funds</li>
+        <li>ETFs</li>
+        <li>Fractional stocks</li>
+        <li>Cryptocurrency (higher risk)</li>
+      </ul>
+      <p>Choose based on your risk tolerance and goals.</p>
+
+      <h2>Example: How $10 Can Grow Over Time</h2>
+      <p>If you invest $10 regularly, your money can grow significantly over time.</p>
+      <ul>
+        <li>1 year → small growth</li>
+        <li>5 years → noticeable growth</li>
+        <li>10+ years → strong growth</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Tip:</strong> This shows the power of consistency and compounding.
+      </div>
+
+      <h2>Tips to Grow Your Investments Faster</h2>
+      <ul>
+        <li>Increase your investment gradually</li>
+        <li>Reinvest your earnings</li>
+        <li>Stay consistent</li>
+        <li>Keep learning</li>
+      </ul>
+
+      <div class="tip-box">
+        <span class="tip-icon">📈</span>
+        <span>
+          <span class="blog-tip">Did you know?</span>
+          <strong> Many platforms offer educational resources—use them to improve your investing skills for free!</strong>
+        </span>
+      </div>
+
+      <h2>Can $10 Really Grow?</h2>
+      <p>Yes, it can. Consistent investing and patience are the key factors to growth.</p>
+
+      <h2>How to Stay Motivated as a Beginner Investor</h2>
+      <ul>
+        <li>Track your progress with a simple spreadsheet or app</li>
+        <li>Join online communities for support and tips</li>
+        <li>Celebrate small milestones</li>
+        <li>Remember: Every investor started somewhere!</li>
+      </ul>
+
+      <h2>Final Thoughts</h2>
+      <p>You don’t need a lot of money to start investing in 2026. Start small, stay consistent, and focus on long-term growth. Over time, your investments can help you achieve financial freedom.</p>
+      <hr class="divider">
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="cta-title">Ready to Start Investing?</div>
+        <a href="../pages/tools.html" class="cta-btn">Explore Investment Tools</a>
+      </section>
+      <h2>Related Posts</h2>
+      <div id="related-posts"></div>
+      <script src="../related-posts.js"></script>
+      <script src="../blog-system.js"></script>
+      <script src="../posts.js"></script>
+      <script>
+        document.addEventListener("blogPostsReady", function() {
+          window.renderRelatedPosts("blogs/how-to-start-investing-with-10-in-2026.html", "#related-posts");
+        });
+      </script>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="../pages/PP.html">Privacy Policy</a>
         <a href="../pages/contact.html">Contact</a>
-        <a href="../pages/subscribe page.html">Subscribe</a>
+        <a href="../pages/about-us.html">About</a>
       </div>
-    </div>
-  </nav>
-  <!-- Hero/Header Section -->
-  <header class="hero-header">
-    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80" alt="Start Investing With $10" class="hero-banner">
-    <div class="blog-title">How to Start Investing With $10 in 2026 (Beginner Guide)</div>
-    <div class="blog-meta">Published May 12, 2026 · by Global Money Lens</div>
-  </header>
-  <!-- Blog Content -->
-  <main class="blog-main">
-    <h1>How to Start Investing With $10 in 2026 (Beginner Guide)</h1>
-    <h2>Introduction</h2>
-    <p>Many people think that investing requires a lot of money. However, in 2026, that’s no longer true. Thanks to modern technology and user-friendly platforms, anyone can start investing with as little as $10.</p>
-    <p>If you’re new to investing, this guide will show you practical, step-by-step methods to begin your journey—even with a small budget. The goal is not how much you start with, but how consistently you invest and learn over time.</p>
-
-    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80" alt="Investing with $10">
-
-    <h2>Why Start Investing With Just $10?</h2>
-    <p>Starting small is far better than not starting at all. Even $10 can help you build strong financial habits and gain real-world experience.</p>
-    <ul>
-      <li>It helps you learn without taking big risks</li>
-      <li>It builds confidence in investing</li>
-      <li>It allows your money to grow over time</li>
-      <li>It develops discipline and consistency</li>
-    </ul>
-    <p>Most successful investors started small and stayed consistent. The earlier you begin, the more time your money has to grow.</p>
-
-    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" alt="Stock chart">
-
-    <h2>Step 1: Set Your Financial Goal</h2>
-    <p>Before you invest, you should understand why you want to invest. Having a clear goal helps you stay focused and avoid emotional decisions.</p>
-    <ul>
-      <li>Saving for future needs</li>
-      <li>Building long-term wealth</li>
-      <li>Achieving financial independence</li>
-    </ul>
-    <p>Clear goals make it easier to stay disciplined, especially during market changes.</p>
-
-    <h2>Step 2: Choose the Right Investment Platform</h2>
-    <p>To invest with $10, you need a platform that supports small investments. Many modern apps allow beginners to invest with very low amounts.</p>
-    <ul>
-      <li>Low or zero fees</li>
-      <li>Easy-to-use interface</li>
-      <li>Fractional investing</li>
-    </ul>
-    <div class="highlight-box">
-      <strong>Tip:</strong> Fractional investing allows you to buy small parts of expensive stocks, making investing more accessible.
-    </div>
-
-    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Fractional investing">
-
-    <h2>Step 3: Start With Index Funds or ETFs</h2>
-    <p>Index funds and ETFs are among the safest options for beginners. They spread your investment across many companies, reducing risk.</p>
-    <ul>
-      <li>Diversification</li>
-      <li>Lower risk</li>
-      <li>Stable long-term growth</li>
-    </ul>
-    <div class="highlight-box">
-      <strong>Tip:</strong> Index funds and ETFs are ideal for beginners who want simple and reliable investments.
-    </div>
-
-    <h2>Step 4: Use Dollar-Cost Averaging</h2>
-    <p>This strategy involves investing a fixed amount regularly.</p>
-    <p>Example: Invest $10 every week or month.</p>
-    <p>This reduces risk and builds consistency while avoiding market timing mistakes.</p>
-    <div class="highlight-box">
-      <strong>Tip:</strong> Consistency is more important than timing the market. Stick to your plan!
-    </div>
-
-    <h2>Step 5: Avoid Common Beginner Mistakes</h2>
-    <p>Many beginners lose money because of simple mistakes.</p>
-    <ul>
-      <li>Trying to get rich quickly</li>
-      <li>Following trends blindly</li>
-      <li>Investing without research</li>
-      <li>Panic selling</li>
-    </ul>
-    <div class="highlight-box">
-      <strong>Tip:</strong> Stay calm and focus on long-term growth.
-    </div>
-
-    <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80" alt="Long term investing">
-
-    <h2>Best Investment Options for $10</h2>
-    <ul>
-      <li>Index funds</li>
-      <li>ETFs</li>
-      <li>Fractional stocks</li>
-      <li>Cryptocurrency (higher risk)</li>
-    </ul>
-    <p>Choose based on your risk tolerance and goals.</p>
-
-    <h2>Example: How $10 Can Grow Over Time</h2>
-    <p>If you invest $10 regularly, your money can grow significantly over time.</p>
-    <ul>
-      <li>1 year → small growth</li>
-      <li>5 years → noticeable growth</li>
-      <li>10+ years → strong growth</li>
-    </ul>
-    <div class="highlight-box">
-      <strong>Tip:</strong> This shows the power of consistency and compounding.
-    </div>
-
-    <h2>Tips to Grow Your Investments Faster</h2>
-    <ul>
-      <li>Increase your investment gradually</li>
-      <li>Reinvest your earnings</li>
-      <li>Stay consistent</li>
-      <li>Keep learning</li>
-    </ul>
-
-    <h2>Can $10 Really Grow?</h2>
-    <p>Yes, it can. Consistent investing and patience are the key factors to growth.</p>
-
-    <h2>Final Thoughts</h2>
-    <p>You don’t need a lot of money to start investing in 2026. Start small, stay consistent, and focus on long-term growth. Over time, your investments can help you achieve financial freedom.</p>
-    <hr class="divider">
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="cta-title">Ready to Start Investing?</div>
-      <a href="../pages/tools.html" class="cta-btn">Explore Investment Tools</a>
-    </section>
-    <h2>Related Posts</h2>
-    <div id="related-posts"></div>
-    <script src="../related-posts.js"></script>
-    <script src="../blog-system.js"></script>
-    <script src="../posts.js"></script>
-    <script>
-      document.addEventListener("blogPostsReady", function() {
-        window.renderRelatedPosts("blogs/How-to-Start-Investing-With-10-in-2026.html", "#related-posts");
-      });
-    </script>
-  </main>
-  <!-- Footer -->
-  <footer>
-    <div class="footer-links">
-     <a href="../pages/PP.html">Privacy Policy</a>
-      <a href="../pages/contact.html">Contact</a>
-      <a href="../pages/about us.html">About</a>
-    </div>
-    <div class="footer-social">
-      <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
-      </a>
-    </div>
-    <div style="margin-top:1rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
-  </footer>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+        </a>
+      </div>
+      <div style="margin-top:1rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
+    </footer>
+  </div>
+  <script>
+    // Mobile nav hamburger
+    document.addEventListener("DOMContentLoaded", function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+          hamburger.classList.toggle('active');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+          }
+        });
+        Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
