@@ -33,6 +33,9 @@
       background: var(--bg);
       color: var(--primary);
       min-height: 100vh;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
     a {
       text-decoration: none;
@@ -88,6 +91,53 @@
     .nav-menu a:hover {
       background: var(--accent);
       color: var(--white);
+    }
+    /* Hamburger for mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 800px) {
+      .nav-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: auto;
+        background: var(--white);
+        flex-direction: column;
+        width: 100vw;
+        max-width: 320px;
+        box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+        gap: 0;
+        padding: 1rem 0;
+        display: none;
+        z-index: 1000;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .nav-menu a {
+        padding: 1rem 2rem;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-container {
+        position: relative;
+      }
     }
     .hero-header {
       background: var(--white);
@@ -220,12 +270,18 @@
       color: var(--white);
       padding: 1.5rem 0 1rem 0;
       text-align: center;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     .footer-links {
       display: flex;
       justify-content: center;
       gap: 2rem;
       margin-bottom: 0.7rem;
+      flex-wrap: wrap;
     }
     .footer-links a {
       color: var(--accent);
@@ -249,6 +305,9 @@
     .footer-social a:hover {
       color: var(--accent);
     }
+    @media (max-width: 1100px) {
+      .nav-container { width: 98%; }
+    }
     @media (max-width: 900px) {
       .blog-main {
         width: 99%;
@@ -269,210 +328,259 @@
         margin-top: 1.2rem;
       }
     }
+    @media (max-width: 500px) {
+      html, body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      .nav-menu {
+        gap: 1rem;
+      }
+      .logo img {
+        height: 28px;
+      }
+      #page-wrap, .blog-main, footer {
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+    }
   </style>
+  <script>
+    // Mobile nav hamburger
+    document.addEventListener("DOMContentLoaded", function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+          hamburger.classList.toggle('active');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+          }
+        });
+        Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
-        <span class="brand-name">Global Money Lens</span>
+  <div id="page-wrap">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+          <span class="brand-name">Global Money Lens</span>
+        </div>
+        <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-menu" id="navMenu">
+          <a href="../index.html">Home</a>
+          <a href="../pages/blog.html">Blog</a>
+          <a href="../pages/tools.html">Tools</a>
+          <a href="../pages/about-us.html">About</a>
+          <a href="../pages/contact.html">Contact</a>
+          <a href="../pages/subscribe-page.html">Subscribe</a>
+        </div>
       </div>
-      <div class="nav-menu">
-        <a href="../index.html">Home</a>
-        <a href="../pages/blog.html">Blog</a>
-        <a href="../pages/tools.html">Tools</a>
-        <a href="../pages/about us.html">About</a>
+    </nav>
+    <!-- Hero/Header Section -->
+    <header class="hero-header">
+      <img src="https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg" alt="make money online laptop money" class="hero-banner">
+      <div class="blog-title">How to Make Money Online: A Complete Beginner’s Guide (2026)</div>
+      <div class="blog-meta">Published 2026 · by Global Money Lens</div>
+    </header>
+    <!-- Blog Content -->
+    <main class="blog-main">
+      <h2>Introduction</h2>
+      <p>In today’s digital age, making money online has become one of the best ways to build income. Whether you’re a student, a full-time employee, or someone seeking financial independence, the internet offers countless opportunities to earn from anywhere.</p>
+      <p>Thanks to platforms like YouTube, Fiverr, and Upwork, millions are now making money online, with some turning it into full-time careers.</p>
+      <p>This guide will show you the best beginner-friendly ways to make money online in 2026, step by step.</p>
+
+      <h2>Why Making Money Online is Growing Fast</h2>
+      <p>The global shift towards remote work and digital services has made online earning more accessible.</p>
+      <p><strong>Key Reasons:</strong></p>
+      <ul>
+        <li>Low startup cost</li>
+        <li>Work from anywhere</li>
+        <li>Flexible schedule</li>
+        <li>Unlimited income potential</li>
+      </ul>
+      <p>Unlike traditional jobs, online income lets you scale your earnings based on your skills and effort.</p>
+
+      <h2>1. Freelancing (Best Starting Point)</h2>
+      <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg" alt="freelancer working on laptop" width="100%">
+      <p>Freelancing is one of the easiest and fastest ways to start earning online.</p>
+      <p><strong>Popular Skills:</strong></p>
+      <ul>
+        <li>Writing</li>
+        <li>Graphic design</li>
+        <li>Video editing</li>
+        <li>Social media management</li>
+        <li>Data entry</li>
+      </ul>
+      <p><strong>Platforms to Use:</strong></p>
+      <ul>
+        <li>Fiverr</li>
+        <li>Upwork</li>
+      </ul>
+      <p><strong>Earnings:</strong></p>
+      <ul>
+        <li>Beginners: $5 to $50 per job</li>
+        <li>Intermediate: $100 to $500 per month</li>
+        <li>Experts: $1000 or more</li>
+      </ul>
+      <p><strong>Tip:</strong> Start with small jobs, build reviews, and increase your price over time.</p>
+
+      <h2>2. Start a YouTube Channel</h2>
+      <img src="https://images.pexels.com/photos/5077048/pexels-photo-5077048.jpeg" alt="YouTube creator setup" width="100%">
+      <p>Creating content on YouTube is a popular long-term income method.</p>
+      <p><strong>Content Ideas:</strong></p>
+      <ul>
+        <li>Tutorials</li>
+        <li>Tech reviews</li>
+        <li>Finance tips</li>
+        <li>Entertainment</li>
+      </ul>
+      <p><strong>How You Earn:</strong></p>
+      <ul>
+        <li>Ads via Google AdSense</li>
+        <li>Sponsorships</li>
+        <li>Affiliate marketing</li>
+      </ul>
+      <p><strong>Requirements:</strong></p>
+      <ul>
+        <li>1000 subscribers</li>
+        <li>4000 watch hours</li>
+      </ul>
+      <p>Consistency is key to growth.</p>
+
+      <h2>3. Blogging (Passive Income Method)</h2>
+      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" alt="blogging workspace laptop" width="100%">
+      <p>Blogging lets you earn passive income by writing helpful content.</p>
+      <p><strong>What You Can Write:</strong></p>
+      <ul>
+        <li>Finance</li>
+        <li>Tech</li>
+        <li>Online earning</li>
+        <li>Reviews</li>
+      </ul>
+      <p><strong>Monetization:</strong></p>
+      <ul>
+        <li>Google AdSense</li>
+        <li>Affiliate marketing</li>
+        <li>Sponsored posts</li>
+      </ul>
+      <p>Once your blog ranks on Google, it can generate daily income.</p>
+
+      <h2>4. Affiliate Marketing</h2>
+      <img src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg" alt="affiliate marketing concept" width="100%">
+      <p>Affiliate marketing is one of the highest-paying online income methods.</p>
+      <p><strong>How It Works:</strong></p>
+      <ul>
+        <li>Promote products</li>
+        <li>Share your link</li>
+        <li>Earn commission</li>
+      </ul>
+      <p><strong>Platforms:</strong></p>
+      <ul>
+        <li>Amazon Associates</li>
+      </ul>
+      <p><strong>Example:</strong></p>
+      <p>Write a blog post like “Best laptops in 2026” then add links. You earn money when people buy through your links.</p>
+
+      <h2>5. Social Media Content Creation</h2>
+      <img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg" alt="social media content creation phone" width="100%">
+      <p>Platforms like Instagram and TikTok help you grow quickly.</p>
+      <p><strong>Ways to Earn:</strong></p>
+      <ul>
+        <li>Brand deals</li>
+        <li>Promotions</li>
+        <li>Selling products</li>
+      </ul>
+      <p>Viral content can lead to significant income opportunities.</p>
+
+      <h2>6. Selling Digital Products</h2>
+      <p>Creating digital products is an effective way to earn passive income.</p>
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li>E-books</li>
+        <li>Online courses</li>
+        <li>Templates</li>
+      </ul>
+      <p>You create once and sell multiple times.</p>
+
+      <h2>7. Learn High-Income Skills</h2>
+      <p>To earn more online, focus on learning valuable skills.</p>
+      <p><strong>High-Paying Skills:</strong></p>
+      <ul>
+        <li>Copywriting</li>
+        <li>Video editing</li>
+        <li>Web development</li>
+        <li>Digital marketing</li>
+      </ul>
+      <p>Skills equal higher income potential.</p>
+
+      <h2>Common Mistakes to Avoid</h2>
+      <p>Many beginners fail due to these mistakes:</p>
+      <ul>
+        <li>Expecting quick money</li>
+        <li>Not staying consistent</li>
+        <li>Falling for scams</li>
+        <li>Not learning skills</li>
+      </ul>
+      <p>Success takes time and effort.</p>
+
+      <h2>Best Strategy for Beginners</h2>
+      <p>Here’s a simple plan to follow:</p>
+      <ul>
+        <li>Choose one method, either freelancing or YouTube.</li>
+        <li>Learn a skill.</li>
+        <li>Practice daily.</li>
+        <li>Build an audience.</li>
+        <li>Monetize with Google AdSense and affiliate links.</li>
+      </ul>
+
+      <h2>Final Thoughts</h2>
+      <p>Making money online is one of the best opportunities available today. With the right approach, anyone can start earning from anywhere.</p>
+      <p>The key is to start small, stay consistent, and keep improving your skills. Over time, your efforts will lead to real income and financial freedom.</p>
+      <hr class="divider">
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="cta-title">Start Your Financial Journey Today</div>
+        <a href="../pages/tools.html" class="cta-btn">Explore Financial Tools</a>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="../pages/PP.html">Privacy Policy</a>
         <a href="../pages/contact.html">Contact</a>
-        <a href="../pages/subscribe page.html">Subscribe</a>
+        <a href="../pages/about-us.html">About</a>
       </div>
-    </div>
-  </nav>
-  <!-- Hero/Header Section -->
-  <header class="hero-header">
-    <img src="https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg" alt="make money online laptop money" class="hero-banner">
-    <div class="blog-title">How to Make Money Online: A Complete Beginner’s Guide (2026)</div>
-    <div class="blog-meta">Published 2026 · by Global Money Lens</div>
-  </header>
-  <!-- Blog Content -->
-  <main class="blog-main">
-    <h2>Introduction</h2>
-    <p>In today’s digital age, making money online has become one of the best ways to build income. Whether you’re a student, a full-time employee, or someone seeking financial independence, the internet offers countless opportunities to earn from anywhere.</p>
-    <p>Thanks to platforms like YouTube, Fiverr, and Upwork, millions are now making money online, with some turning it into full-time careers.</p>
-    <p>This guide will show you the best beginner-friendly ways to make money online in 2026, step by step.</p>
-
-    <h2>Why Making Money Online is Growing Fast</h2>
-    <p>The global shift towards remote work and digital services has made online earning more accessible.</p>
-    <p><strong>Key Reasons:</strong></p>
-    <ul>
-      <li>Low startup cost</li>
-      <li>Work from anywhere</li>
-      <li>Flexible schedule</li>
-      <li>Unlimited income potential</li>
-    </ul>
-    <p>Unlike traditional jobs, online income lets you scale your earnings based on your skills and effort.</p>
-
-    <h2>1. Freelancing (Best Starting Point)</h2>
-    <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg" alt="freelancer working on laptop" width="100%">
-    <p>Freelancing is one of the easiest and fastest ways to start earning online.</p>
-    <p><strong>Popular Skills:</strong></p>
-    <ul>
-      <li>Writing</li>
-      <li>Graphic design</li>
-      <li>Video editing</li>
-      <li>Social media management</li>
-      <li>Data entry</li>
-    </ul>
-    <p><strong>Platforms to Use:</strong></p>
-    <ul>
-      <li>Fiverr</li>
-      <li>Upwork</li>
-    </ul>
-    <p><strong>Earnings:</strong></p>
-    <ul>
-      <li>Beginners: $5 to $50 per job</li>
-      <li>Intermediate: $100 to $500 per month</li>
-      <li>Experts: $1000 or more</li>
-    </ul>
-    <p><strong>Tip:</strong> Start with small jobs, build reviews, and increase your price over time.</p>
-
-    <h2>2. Start a YouTube Channel</h2>
-    <img src="https://images.pexels.com/photos/5077048/pexels-photo-5077048.jpeg" alt="YouTube creator setup" width="100%">
-    <p>Creating content on YouTube is a popular long-term income method.</p>
-    <p><strong>Content Ideas:</strong></p>
-    <ul>
-      <li>Tutorials</li>
-      <li>Tech reviews</li>
-      <li>Finance tips</li>
-      <li>Entertainment</li>
-    </ul>
-    <p><strong>How You Earn:</strong></p>
-    <ul>
-      <li>Ads via Google AdSense</li>
-      <li>Sponsorships</li>
-      <li>Affiliate marketing</li>
-    </ul>
-    <p><strong>Requirements:</strong></p>
-    <ul>
-      <li>1000 subscribers</li>
-      <li>4000 watch hours</li>
-    </ul>
-    <p>Consistency is key to growth.</p>
-
-    <h2>3. Blogging (Passive Income Method)</h2>
-    <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" alt="blogging workspace laptop" width="100%">
-    <p>Blogging lets you earn passive income by writing helpful content.</p>
-    <p><strong>What You Can Write:</strong></p>
-    <ul>
-      <li>Finance</li>
-      <li>Tech</li>
-      <li>Online earning</li>
-      <li>Reviews</li>
-    </ul>
-    <p><strong>Monetization:</strong></p>
-    <ul>
-      <li>Google AdSense</li>
-      <li>Affiliate marketing</li>
-      <li>Sponsored posts</li>
-    </ul>
-    <p>Once your blog ranks on Google, it can generate daily income.</p>
-
-    <h2>4. Affiliate Marketing</h2>
-    <img src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg" alt="affiliate marketing concept" width="100%">
-    <p>Affiliate marketing is one of the highest-paying online income methods.</p>
-    <p><strong>How It Works:</strong></p>
-    <ul>
-      <li>Promote products</li>
-      <li>Share your link</li>
-      <li>Earn commission</li>
-    </ul>
-    <p><strong>Platforms:</strong></p>
-    <ul>
-      <li>Amazon Associates</li>
-    </ul>
-    <p><strong>Example:</strong></p>
-    <p>Write a blog post like “Best laptops in 2026” then add links. You earn money when people buy through your links.</p>
-
-    <h2>5. Social Media Content Creation</h2>
-    <img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg" alt="social media content creation phone" width="100%">
-    <p>Platforms like Instagram and TikTok help you grow quickly.</p>
-    <p><strong>Ways to Earn:</strong></p>
-    <ul>
-      <li>Brand deals</li>
-      <li>Promotions</li>
-      <li>Selling products</li>
-    </ul>
-    <p>Viral content can lead to significant income opportunities.</p>
-
-    <h2>6. Selling Digital Products</h2>
-    <p>Creating digital products is an effective way to earn passive income.</p>
-    <p><strong>Examples:</strong></p>
-    <ul>
-      <li>E-books</li>
-      <li>Online courses</li>
-      <li>Templates</li>
-    </ul>
-    <p>You create once and sell multiple times.</p>
-
-    <h2>7. Learn High-Income Skills</h2>
-    <p>To earn more online, focus on learning valuable skills.</p>
-    <p><strong>High-Paying Skills:</strong></p>
-    <ul>
-      <li>Copywriting</li>
-      <li>Video editing</li>
-      <li>Web development</li>
-      <li>Digital marketing</li>
-    </ul>
-    <p>Skills equal higher income potential.</p>
-
-    <h2>Common Mistakes to Avoid</h2>
-    <p>Many beginners fail due to these mistakes:</p>
-    <ul>
-      <li>Expecting quick money</li>
-      <li>Not staying consistent</li>
-      <li>Falling for scams</li>
-      <li>Not learning skills</li>
-    </ul>
-    <p>Success takes time and effort.</p>
-
-    <h2>Best Strategy for Beginners</h2>
-    <p>Here’s a simple plan to follow:</p>
-    <ul>
-      <li>Choose one method, either freelancing or YouTube.</li>
-      <li>Learn a skill.</li>
-      <li>Practice daily.</li>
-      <li>Build an audience.</li>
-      <li>Monetize with Google AdSense and affiliate links.</li>
-    </ul>
-
-    <h2>Final Thoughts</h2>
-    <p>Making money online is one of the best opportunities available today. With the right approach, anyone can start earning from anywhere.</p>
-    <p>The key is to start small, stay consistent, and keep improving your skills. Over time, your efforts will lead to real income and financial freedom.</p>
-    <hr class="divider">
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="cta-title">Start Your Financial Journey Today</div>
-      <a href="../pages/tools.html" class="cta-btn">Explore Financial Tools</a>
-    </section>
-  </main>
-  <!-- Footer -->
-  <footer>
-    <div class="footer-links">
-      <a href="../pages/PP.html">Privacy Policy</a>
-      <a href="../pages/contact.html">Contact</a>
-      <a href="../pages/about us.html">About</a>
-    </div>
-    <div class="footer-social">
-      <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
-      </a>
-    </div>
-    <div style="margin-top:1rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
-  </footer>
-  
+      <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
+        </a>
+      </div>
+      <div style="margin-top:1rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
+    </footer>
+  </div>
 </body>
 </html>
