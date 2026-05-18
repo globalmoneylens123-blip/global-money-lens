@@ -121,6 +121,53 @@
             background: var(--accent);
             color: var(--white);
         }
+        /* Hamburger for mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 3px;
+            background: var(--primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        @media (max-width: 800px) {
+            .nav-menu {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                left: auto;
+                background: var(--white);
+                flex-direction: column;
+                width: 100vw;
+                max-width: 320px;
+                box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+                gap: 0;
+                padding: 1rem 0;
+                display: none;
+                z-index: 1000;
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-radius: 0;
+                border-bottom: 1px solid #eee;
+                font-size: 1.1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-container {
+                position: relative;
+            }
+        }
         /* Page Header */
         .page-header {
             background: var(--white);
