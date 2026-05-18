@@ -20,6 +20,7 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             background: var(--gray);
             color: var(--text);
+            /* Prevent horizontal scroll */
             overflow-x: hidden;
         }
         body {
@@ -81,6 +82,7 @@
             background: var(--accent);
             color: var(--white);
         }
+        /* Hamburger for mobile */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -744,7 +746,7 @@
         <div>&copy; 2026 Global Money Lens. All rights reserved.</div>
     </footer>
     <div id="footer"></div>
-    <script src="../posts.js"></script>
+    <script src="../assets/posts.js"></script>
     <script>
     // Mobile nav hamburger
     const hamburger = document.getElementById('hamburger');
@@ -767,29 +769,37 @@
     });
     </script>
     <script>
-    // Wait for posts.js to load and BLOG_POSTS to be available
-    function renderPopular() {
-        if (!window.BLOG_POSTS || !Array.isArray(window.BLOG_POSTS)) {
-            setTimeout(renderPopular, 100); // Try again shortly
-            return;
-        }
-        const posts = window.BLOG_POSTS
-            .slice()
-            .sort((a, b) => (b.views || 0) - (a.views || 0))
-            .slice(0, 4);
-        const popularPosts = document.getElementById("popularPosts");
-        if (popularPosts) {
-            popularPosts.innerHTML = posts.map(post =>
-                `<li><a href="../${post.link}">${post.title}</a></li>`
-            ).join("");
-        }
+    const grid = document.getElementById("blogGrid");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const searchInput = document.getElementById("searchInput");
+    const popularPosts = document.getElementById("popularPosts");
+    let visibleCount = 6;
+    let filteredPosts = [];
+    let currentCategory = "All";
+
+    function setCategory(category, btn) {
+        currentCategory = category;
+        visibleCount = 6;
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPosts();
+    }
+
+    function filterPosts() {
+        const q = (searchInput?.value || "").toLowerCase();
+        filteredPosts = window.BLOG_POSTS
+            .filter(post => {
+                if (currentCategory !== "All" && post.category !== currentCategory) return false;
+                return (
+                    post.title.toLowerCase().includes(q) ||
+                    post.desc.toLowerCase().includes(q) ||
+                    post.category.toLowerCase().includes(q)
+                );
+            })
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
     function renderPosts() {
-        if (!window.BLOG_POSTS || !Array.isArray(window.BLOG_POSTS)) {
-            setTimeout(renderPosts, 100); // Try again shortly
-            return;
-        }
         filterPosts();
         grid.innerHTML = "";
         const posts = filteredPosts.slice(0, visibleCount);
@@ -798,6 +808,7 @@
             loadMoreBtn.style.display = "none";
             return;
         }
+        
         posts.forEach(post => {
             grid.innerHTML += `
                 <article class="blog-card">
@@ -817,33 +828,13 @@
         loadMoreBtn.style.display = visibleCount >= filteredPosts.length ? "none" : "block";
     }
 
-    function filterPosts() {
-        const q = (searchInput?.value || "").toLowerCase();
-        filteredPosts = window.BLOG_POSTS
-            .filter(post => {
-                if (currentCategory !== "All" && post.category !== currentCategory) return false;
-                return (
-                    post.title.toLowerCase().includes(q) ||
-                    post.desc.toLowerCase().includes(q) ||
-                    post.category.toLowerCase().includes(q)
-                );
-            })
-            .sort((a, b) => new Date(b.date) - new Date(a.date));
-    }
-
-    const grid = document.getElementById("blogGrid");
-    const loadMoreBtn = document.getElementById("loadMoreBtn");
-    const searchInput = document.getElementById("searchInput");
-    let visibleCount = 6;
-    let filteredPosts = [];
-    let currentCategory = "All";
-
-    function setCategory(category, btn) {
-        currentCategory = category;
-        visibleCount = 6;
-        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderPosts();
+    function renderPopular() {
+        const posts = window.BLOG_POSTS
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, 4);
+        popularPosts.innerHTML = posts.map(post =>
+            `<li><a href="../${post.link}">${post.title}</a></li>`
+        ).join("");
     }
 
     loadMoreBtn.addEventListener("click", () => {
