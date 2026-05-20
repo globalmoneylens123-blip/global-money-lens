@@ -8,13 +8,14 @@
   <meta name="category" content="Investing">
   <meta property="og:image" content="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?auto=format&fit=crop&w=1200&q=80">
   <meta name="publish-date" content="2026-05-13">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WZ6EF1PZ5"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EGV78MQ1S"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-1WZ6EF1PZ5');
+
+    gtag('config', 'G-0EGV78MQ1S');
   </script>
   <style>
     :root {
@@ -376,31 +377,6 @@
       }
     }
   </style>
-  <script>
-    // Mobile nav hamburger
-    document.addEventListener("DOMContentLoaded", function() {
-      const hamburger = document.getElementById('hamburger');
-      const navMenu = document.getElementById('navMenu');
-      if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-          navMenu.classList.toggle('open');
-          hamburger.classList.toggle('active');
-        });
-        hamburger.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            navMenu.classList.toggle('open');
-            hamburger.classList.toggle('active');
-          }
-        });
-        Array.from(navMenu.querySelectorAll('a')).forEach(link => {
-          link.addEventListener('click', () => {
-            navMenu.classList.remove('open');
-            hamburger.classList.remove('active');
-          });
-        });
-      }
-    });
-  </script>
 </head>
 <body>
   <div id="page-wrap">
@@ -651,28 +627,30 @@
     </footer>
   </div>
   <script>
-    // Mobile nav hamburger
+    // Mobile nav hamburger (moved to end of body for reliability)
     document.addEventListener("DOMContentLoaded", function() {
-      const hamburger = document.getElementById('hamburger');
-      const navMenu = document.getElementById('navMenu');
-      if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-          navMenu.classList.toggle('open');
-          hamburger.classList.toggle('active');
-        });
-        hamburger.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+      setTimeout(function() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (hamburger && navMenu) {
+          hamburger.addEventListener('click', function(e) {
             navMenu.classList.toggle('open');
             hamburger.classList.toggle('active');
-          }
-        });
-        Array.from(navMenu.querySelectorAll('a')).forEach(link => {
-          link.addEventListener('click', () => {
-            navMenu.classList.remove('open');
-            hamburger.classList.remove('active');
           });
-        });
-      }
+          hamburger.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              navMenu.classList.toggle('open');
+              hamburger.classList.toggle('active');
+            }
+          });
+          Array.from(navMenu.querySelectorAll('a')).forEach(function(link) {
+            link.addEventListener('click', function() {
+              navMenu.classList.remove('open');
+              hamburger.classList.remove('active');
+            });
+          });
+        }
+      }, 0);
     });
   </script>
 </body>
