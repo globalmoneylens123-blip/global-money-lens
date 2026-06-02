@@ -28,6 +28,7 @@
       --divider: #e5e7eb;
       --tip-border: #1abc9c;
     }
+    /* Prevent horizontal scrolling on small devices */
     html, body {
       margin: 0;
       padding: 0;
@@ -36,6 +37,7 @@
       color: var(--primary);
       min-height: 100vh;
       width: 100%;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -66,14 +68,317 @@
     footer { background:var(--primary); color:var(--white); padding:1.25rem 0; text-align:center; margin-top:2rem; }
     .small { font-size:0.95rem; color:#666; }
     .faq q { font-style: italic; color:#0a2342; }
+
+    /* Mobile adjustments */
     @media (max-width:800px) {
-      .nav-menu { position:absolute; top:62px; right:0; background:var(--white); flex-direction:column; width:100vw; max-width:320px; padding:0.8rem 0; display:none; box-shadow:0 8px 24px rgba(10,35,66,0.12); z-index:1000; }
+      /* Make mobile nav width match the nav-container to avoid viewport overflow */
+      .nav-menu {
+        position:absolute;
+        top:62px;
+        right:0;
+        background:var(--white);
+        flex-direction:column;
+        width:100%;
+        max-width:320px;
+        padding:0.8rem 0;
+        display:none;
+        box-shadow:0 8px 24px rgba(10,35,66,0.12);
+        z-index:1000;
+        box-sizing: border-box;
+      }
       .nav-menu.open { display:flex; }
       .nav-menu a { padding:0.9rem 1.2rem; border-radius:0; border-bottom:1px solid #eee; }
       .hamburger { display:flex; }
       .nav-container { position:relative; }
       .blog-title { font-size:1.4rem; margin-top:1rem; }
-      .blog-main { padding:1rem; margin:1rem auto; width:98%; }
+      .blog-main { padding:1rem; margin:1rem auto; width:98%; box-sizing:border-box; }
+    }
+    @media (max-width:480px) {
+      .hero-banner { max-height:240px; }
+      .blog-main { padding:0.9rem; }
+      .brand-name { font-size:1.05rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="page-wrap">
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+          <span class="brand-name">Global Money Lens</span>
+        </div>
+        <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="nav-menu" id="navMenu">
+          <a href="../index.html">Home</a>
+          <a href="../pages/blog.html">Blog</a>
+          <a href="../pages/tools.html">Tools</a>
+          <a href="../pages/about-us.html">About</a>
+          <a href="../pages/contact.html">Contact</a>
+          <a href="../pages/subscribe-page.html">Subscribe</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero-header">
+      <img class="hero-banner" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1400&q=80" alt="investment planning finance concept">
+      <div class="blog-title">How to Avoid Common Investment Mistakes (Beginner Guide 2026)</div>
+      <div class="blog-meta small">Published Jun 02, 2026 · by Global Money Lens</div>
+    </header>
+
+    <main class="blog-main">
+      <h1 class="sr-only">How to Avoid Common Investment Mistakes (Beginner Guide 2026)</h1>
+
+      <h2>Introduction</h2>
+      <p>Investing grows wealth but beginners often make preventable mistakes. This guide explains the top pitfalls and provides practical, actionable steps to avoid them — tailored for 2026 markets and modern investment platforms.</p>
+
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80" alt="financial planning strategy notebook">
+
+      <h2>Top 10 Mistakes and How to Avoid Them</h2>
+
+      <h3>1. Investing Without a Plan</h3>
+      <p>Start with clear goals, timeframes and an allocation strategy.</p>
+      <ul>
+        <li>Set SMART financial goals (specific, measurable, achievable, relevant, time-bound).</li>
+        <li>Decide allocation between growth, income and cash.</li>
+        <li>Write a simple plan and review quarterly.</li>
+      </ul>
+
+      <h3>2. Trying to Time the Market</h3>
+      <p>Timing is rarely reliable. Dollar-cost averaging and consistent contributions reduce timing risk.</p>
+
+      <h3>3. Lack of Diversification</h3>
+      <p>Diversify across asset classes and geographies to reduce single-point failure.</p>
+      <div class="tip-box">
+        <div style="font-size:1.2rem;">💡</div>
+        <div>
+          <strong>Simple mix for beginners:</strong> broad market index ETF + bond ETF + emergency cash.
+        </div>
+      </div>
+
+      <h3>4. Emotional Investing</h3>
+      <p>Set rules for rebalancing and avoid impulse trades after headlines.</p>
+
+      <h3>5. Ignoring Research</h3>
+      <p>Before investing, check fundamentals, fees, and how an asset fits your plan.</p>
+
+      <h3>6. Investing Too Much Too Soon</h3>
+      <p>Start small, increase contributions as confidence and savings grow.</p>
+
+      <h3>7. Not Understanding Risk</h3>
+      <p>Match investments to your risk tolerance and horizon. Use conservative allocations for short-term goals.</p>
+
+      <h3>8. Ignoring Fees and Costs</h3>
+      <p>Compare expense ratios, platform fees and spreads. Small differences compound over time.</p>
+
+      <h3>9. Lack of Patience</h3>
+      <p>Investing is a long-term activity — expect short-term volatility.</p>
+
+      <h3>10. Not Learning from Mistakes</h3>
+      <p>Keep a trade log, review decisions, and make incremental improvements.</p>
+
+      <hr style="border:none;border-top:1px solid var(--divider);margin:1.2rem 0;">
+
+      <h2>Practical Checklist (Printable)</h2>
+      <ul>
+        <li>Define goal & time horizon</li>
+        <li>Set monthly contribution amount</li>
+        <li>Pick low-cost diversified funds</li>
+        <li>Establish emergency fund (3–6 months)</li>
+        <li>Set rebalancing rules (annually or threshold)</li>
+      </ul>
+
+      <h2>Example Scenario</h2>
+      <p>A beginner bought a trending stock, panicked after a 30% drop and sold at a loss. Better approach:</p>
+      <ul>
+        <li>Research the business</li>
+        <li>Only allocate a small position initially</li>
+        <li>Use buy-the-dip contributions if conviction remains</li>
+      </ul>
+
+      <h2>Advanced Tips (When You're Ready)</h2>
+      <ul>
+        <li>Use tax-advantaged accounts to boost after-tax returns</li>
+        <li>Consider tactical tilts only after mastering core allocation</li>
+        <li>Use limit orders to control entry price and avoid slippage</li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong>Reminder:</strong> preserving capital is as important as chasing returns — especially early in your investing journey.
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        <p><strong>Q:</strong> How much should I start with?</p>
+        <p><strong>A:</strong> Any amount. Start with what you can afford and be consistent — contributions matter more than timing.</p>
+
+        <p><strong>Q:</strong> How often should I rebalance?</p>
+        <p><strong>A:</strong> Annually or when allocations deviate by ~5% from targets.</p>
+      </div>
+
+      <h2>Resources & Next Steps</h2>
+      <ul>
+        <li>Beginner index funds list (search your broker for low-cost total market ETFs)</li>
+        <li>Personal finance books and free online courses</li>
+        <li>Use the Tools page on this site for calculators and portfolio checkers</li>
+      </ul>
+
+      <section class="cta-section" aria-label="Call to action">
+        <div class="cta-title">Ready to improve your investing process?</div>
+        <a class="cta-btn" href="../pages/tools.html">Explore Investment Tools</a>
+      </section>
+
+      <h2>Related Posts</h2>
+      <div id="related-posts"></div>
+      <script src="../related-posts.js"></script>
+      <script src="../blog-system.js"></script>
+      <script src="../posts.js"></script>
+      <script>
+        document.addEventListener("blogPostsReady", function() {
+          if (window.renderRelatedPosts) {
+            window.renderRelatedPosts("blogs/how-to-avoid-common-investment-mistakes-2026.html", "#related-posts");
+          }
+        });
+      </script>
+
+    </main>
+
+    <footer>
+      <div class="small">
+        <a href="../pages/PP.html" style="color:var(--accent);margin-right:1rem;">Privacy Policy</a>
+        <a href="../pages/contact.html" style="color:var(--accent);margin-right:1rem;">Contact</a>
+        <a href="../pages/about-us.html" style="color:var(--accent);">About</a>
+      </div>
+      <div style="margin-top:0.6rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile nav hamburger (end of body for reliability)
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (hamburger && navMenu) {
+          hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+          });
+          hamburger.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              navMenu.classList.toggle('open');
+              hamburger.classList.toggle('active');
+            }
+          });
+          Array.from(navMenu.querySelectorAll('a')).forEach(function(link) {
+            link.addEventListener('click', function() {
+              navMenu.classList.remove('open');
+              hamburger.classList.remove('active');
+            });
+          });
+        }
+      }, 0);
+    });
+  </script>
+</body>
+</html>
+```// filepath: d:\web\blogs\how-to-avoid-common-investment-mistakes.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How to Avoid Common Investment Mistakes (Beginner Guide 2026) | Global Money Lens</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Avoid common investing mistakes in 2026. Practical, beginner-friendly steps to protect capital and grow wealth.">
+  <meta name="category" content="Investing">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1200&q=80">
+  <meta name="publish-date" content="2026-06-02">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EGV78MQ1S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0EGV78MQ1S');
+  </script>
+  <style>
+    :root {
+      --primary: #0a2342;
+      --accent: #1abc9c;
+      --accent-dark: #159c7c;
+      --bg: #f8fafc;
+      --white: #fff;
+      --shadow: 0 8px 32px rgba(15,23,42,0.10);
+      --card-radius: 1.1rem;
+      --divider: #e5e7eb;
+      --tip-border: #1abc9c;
+    }
+    /* Prevent horizontal scrolling on small devices */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { text-decoration: none; color: inherit; }
+    .navbar { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: 0 2px 8px rgba(10,35,66,0.06); display:flex; align-items:center; padding:0.5rem 0; }
+    .nav-container { width:92%; max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+    .logo { display:flex; align-items:center; }
+    .logo img { height:42px; margin-right:0.7rem; }
+    .brand-name { font-weight:700; font-size:1.25rem; letter-spacing:1px; }
+    .nav-menu { display:flex; gap:2rem; }
+    .nav-menu a { padding:0.4rem 0.8rem; border-radius:2rem; font-weight:600; }
+    .nav-menu a:hover { background:var(--accent); color:var(--white); }
+    .hamburger { display:none; cursor:pointer; flex-direction:column; gap:4px; margin-left:1rem; }
+    .hamburger span { width:26px; height:3px; background:var(--primary); border-radius:2px; transition:all .25s; }
+    .hero-header { background:var(--white); padding:0; text-align:center; border-bottom:1px solid var(--divider); box-shadow:0 2px 8px rgba(15,23,42,0.04); }
+    .hero-banner { width:100%; max-height:360px; object-fit:cover; border-radius:0 0 12px 12px; display:block; }
+    .blog-title { font-size:2rem; font-weight:800; margin:1.6rem 0 0.6rem; color:var(--primary); }
+    .blog-meta { color:#666; margin-bottom:1.2rem; }
+    .blog-main { width:96%; max-width:900px; margin:2rem auto; background:var(--white); padding:2.2rem; border-radius:var(--card-radius); box-shadow:var(--shadow); }
+    .blog-main img { width:100%; border-radius:10px; margin:18px 0; display:block; }
+    h2 { color:var(--primary); font-size:1.35rem; margin-top:1.6rem; }
+    p, li { color:#222; line-height:1.7; font-size:1.05rem; }
+    ul { margin-left:1.4rem; }
+    .tip-box { background:#f1f5f9; border-left:5px solid var(--accent); padding:1rem 1.1rem; border-radius:8px; margin:1rem 0; display:flex; gap:0.8rem; align-items:flex-start; }
+    .highlight-box { background:#e6f9ef; border-left:5px solid var(--tip-border); padding:1rem; border-radius:8px; margin:1rem 0; font-weight:600; }
+    .cta-section { background:var(--primary); color:var(--white); padding:1.8rem; border-radius:10px; text-align:center; margin-top:1.6rem; }
+    .cta-btn { background:var(--accent); color:var(--white); padding:0.9rem 1.6rem; border-radius:999px; font-weight:700; display:inline-block; margin-top:0.6rem; }
+    footer { background:var(--primary); color:var(--white); padding:1.25rem 0; text-align:center; margin-top:2rem; }
+    .small { font-size:0.95rem; color:#666; }
+    .faq q { font-style: italic; color:#0a2342; }
+
+    /* Mobile adjustments */
+    @media (max-width:800px) {
+      /* Make mobile nav width match the nav-container to avoid viewport overflow */
+      .nav-menu {
+        position:absolute;
+        top:62px;
+        right:0;
+        background:var(--white);
+        flex-direction:column;
+        width:100%;
+        max-width:320px;
+        padding:0.8rem 0;
+        display:none;
+        box-shadow:0 8px 24px rgba(10,35,66,0.12);
+        z-index:1000;
+        box-sizing: border-box;
+      }
+      .nav-menu.open { display:flex; }
+      .nav-menu a { padding:0.9rem 1.2rem; border-radius:0; border-bottom:1px solid #eee; }
+      .hamburger { display:flex; }
+      .nav-container { position:relative; }
+      .blog-title { font-size:1.4rem; margin-top:1rem; }
+      .blog-main { padding:1rem; margin:1rem auto; width:98%; box-sizing:border-box; }
     }
     @media (max-width:480px) {
       .hero-banner { max-height:240px; }
