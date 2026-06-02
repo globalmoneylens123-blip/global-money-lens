@@ -56,7 +56,13 @@ window.BLOG_POSTS = [
   image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1200&q=80",
   category: "Investing",
   date: "2026-06-02"
+},
+{
+  link: "blogs/index-funds-explained-simply.html",
+  title: "Index Funds Explained Simply (Beginner Guide 2026)",
+  desc: "Learn what index funds are, how they work, and why they are one of the most popular investment choices for beginners in 2026. Discover the benefits, risks, costs, and simple steps to start investing in index funds for long-term wealth growth.",
+  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-02"
 }
-
-
 ];
