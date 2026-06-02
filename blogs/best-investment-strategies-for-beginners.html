@@ -25,7 +25,6 @@
     gtag('js', new Date());
     gtag('config', 'G-1WZ6EF1PZ5');
   </script>
-
   <style>
     :root {
       --primary: #0a2342;
@@ -39,8 +38,6 @@
       --tip-bg: #e6f9ef;
       --tip-border: #1abc9c;
     }
-
-    /* base layout */
     html, body {
       margin: 0;
       padding: 0;
@@ -51,16 +48,15 @@
       width: 100vw;
       max-width: 100vw;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
-    a { text-decoration: none; color: inherit; }
-
-    /* navbar layout */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 1200;
+      z-index: 100;
       background: var(--white);
       box-shadow: 0 2px 8px rgba(10,35,66,0.06);
       display: flex;
@@ -75,14 +71,27 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
     }
-    .logo { display:flex; align-items:center; }
-    .logo img { height:42px; max-height:50px; width:auto; margin-right:0.7rem; }
-    .brand-name { font-size:1.3rem; font-weight:700; color:var(--primary); letter-spacing:1px; }
-
-    /* original desktop nav */
-    .nav-menu { display:flex; gap:2.2rem; align-items:center; }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 42px;
+      max-height: 50px;
+      width: auto;
+      margin-right: 0.7rem;
+    }
+    .brand-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2.2rem;
+    }
     .nav-menu a {
       color: var(--primary);
       font-size: 1.05rem;
@@ -91,47 +100,57 @@
       border-radius: 2rem;
       transition: background 0.2s, color 0.2s;
     }
-    .nav-menu a:hover { background: var(--accent); color: var(--white); }
-
-    /* new hamburger (reusable) */
+    .nav-menu a:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+    /* Hamburger for mobile */
     .hamburger {
-      display:none;
-      width:44px;
-      height:44px;
-      padding:6px;
-      border-radius:8px;
-      background:transparent;
-      border:0;
-      cursor:pointer;
-      -webkit-tap-highlight-color: transparent;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:6px;
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 1rem;
     }
-    .hamburger:focus { outline:2px solid rgba(26,188,156,0.18); outline-offset:2px; }
     .hamburger span {
-      display:block;
-      width:22px;
-      height:3px;
-      background:var(--primary);
-      border-radius:2px;
-      transition:transform .28s cubic-bezier(.2,.8,.2,1), opacity .2s;
-      transform-origin:center;
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
     }
-    .hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(.6); }
-    .hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    /* mobile nav - controlled by .open on nav-menu */
-    .nav-menu.mobile { display:none; }
-    .nav-menu.mobile.open {
-      display:flex;
-      flex-direction:column;
-      gap:0;
+    @media (max-width: 800px) {
+      .nav-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: auto;
+        background: var(--white);
+        flex-direction: column;
+        width: 100vw;
+        max-width: 320px;
+        box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+        gap: 0;
+        padding: 1rem 0;
+        display: none;
+        z-index: 1000;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .nav-menu a {
+        padding: 1rem 2rem;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-container {
+        position: relative;
+      }
     }
-
-    /* rest of page styles kept from original */
     .hero-header {
       background: var(--white);
       box-shadow: 0 2px 8px rgba(15,23,42,0.04);
@@ -157,8 +176,12 @@
       letter-spacing: 1px;
       line-height: 1.15;
     }
-    .blog-meta { color: #888; font-size: 1rem; margin-top: 0.5rem; margin-bottom: 1.5rem; }
-
+    .blog-meta {
+      color: #888;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
     .blog-main {
       width: 96%;
       max-width: 800px;
@@ -168,21 +191,92 @@
       background: var(--white);
       border-radius: var(--card-radius);
       box-shadow: var(--shadow);
-      padding: 2.5rem 2rem;
+      padding: 2.5rem 2rem 2.5rem 2rem;
     }
-    .blog-main img { width:100%; border-radius:10px; margin:20px 0; display:block; box-shadow:0 2px 8px rgba(15,23,42,0.07); }
-    h1 { display:none; }
-    h2 { font-size:1.45rem; color:var(--primary); font-weight:700; margin-top:2.2rem; margin-bottom:1rem; line-height:1.2; }
-    p { font-size:1.13rem; color:#222; line-height:1.8; margin-bottom:1.3rem; }
-    ul, ol { margin:1.2rem 0 1.2rem 2.2rem; font-size:1.13rem; color:#222; line-height:1.8; }
-    li { margin-bottom:0.7rem; }
-    .divider { border:none; border-top:1.5px solid var(--divider); margin:2.5rem 0; }
-    .highlight-box { background:#e6f9ef; border-left:5px solid var(--tip-border); border-radius:0.7rem; padding:1.1rem 1.3rem; margin:1.7rem 0; font-size:1.13rem; color:var(--primary); font-weight:600; box-shadow:0 1px 4px rgba(15,23,42,0.04); line-height:2; letter-spacing:0.5px; }
-    .cta-section { background:var(--primary); color:var(--white); border-radius:1rem; padding:2.2rem 1.2rem; text-align:center; margin-top:2.5rem; margin-bottom:2.5rem; box-shadow:var(--shadow); }
-    .cta-title { font-size:1.3rem; font-weight:600; margin-bottom:1.1rem; }
-    .cta-btn { background:var(--accent); color:var(--white); border:none; padding:1rem 2.2rem; border-radius:2rem; font-size:1.1rem; font-weight:700; cursor:pointer; transition:background 0.2s, transform 0.2s; text-decoration:none; display:inline-block; }
-    .cta-btn:hover { background:var(--accent-dark); transform:scale(1.05); }
-
+    .blog-main img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: block;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.07);
+    }
+    h1 {
+      display: none;
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-top: 2.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    p {
+      font-size: 1.13rem;
+      color: #222;
+      line-height: 1.8;
+      margin-bottom: 1.3rem;
+    }
+    ul, ol {
+      margin: 1.2rem 0 1.2rem 2.2rem;
+      font-size: 1.13rem;
+      color: #222;
+      line-height: 1.8;
+    }
+    li {
+      margin-bottom: 0.7rem;
+    }
+    .divider {
+      border: none;
+      border-top: 1.5px solid var(--divider);
+      margin: 2.5rem 0;
+    }
+    .highlight-box {
+      background: #e6f9ef;
+      border-left: 5px solid var(--tip-border);
+      border-radius: 0.7rem;
+      padding: 1.1rem 1.3rem;
+      margin: 1.7rem 0;
+      font-size: 1.13rem;
+      color: var(--primary);
+      font-weight: 600;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.04);
+      line-height: 2;
+      letter-spacing: 0.5px;
+    }
+    .cta-section {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 1rem;
+      padding: 2.2rem 1.2rem;
+      text-align: center;
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .cta-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+    }
+    .cta-btn {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 1rem 2.2rem;
+      border-radius: 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta-btn:hover {
+      background: var(--accent-dark);
+      transform: scale(1.05);
+    }
     footer {
       background: var(--primary);
       color: var(--white);
@@ -194,40 +288,102 @@
       box-sizing: border-box;
       flex-shrink: 0;
     }
-    .footer-links { display:flex; justify-content:center; gap:2rem; margin-bottom:0.7rem; flex-wrap:wrap; }
-    .footer-links a { color: var(--accent); font-size:1rem; transition:color 0.2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-social { margin-top:0.7rem; display:flex; justify-content:center; gap:1.2rem; }
-    .footer-social a { color:var(--white); font-size:1.3rem; transition:color 0.2s; }
-    .footer-social a:hover { color:var(--accent); }
-
-    /* Responsive adjustments */
-    @media (max-width:1100px) { .nav-container { width:98%; } }
-    @media (max-width:900px) {
-      .blog-main { width:99%; padding:1.2rem 0.7rem; }
-      .nav-container { width:98%; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.7rem;
+      flex-wrap: wrap;
     }
-    @media (max-width:800px) {
-      /* show hamburger and switch nav menu to mobile mode */
-      .hamburger { display:flex; }
-      .nav-menu { display:none; }             /* ensure desktop menu hidden */
-      .nav-menu.mobile { display:none; }      /* mobile menu default */
-      .nav-menu.mobile.open { display:flex; position: fixed; top: 64px; left: 4%; width: calc(100% - 8%); max-width: 340px; background:var(--white); box-shadow:0 12px 40px rgba(10,35,66,0.12); border-radius:8px; padding:0.5rem 0; z-index:1100; flex-direction:column; box-sizing:border-box; }
-      .nav-menu.mobile.open a { padding: 0.9rem 1.2rem; border-bottom:1px solid #eee; font-size:1.05rem; border-radius:0; }
+    .footer-links a {
+      color: var(--accent);
+      font-size: 1rem;
+      transition: color 0.2s;
     }
-    @media (max-width:600px) {
-      .blog-title { font-size:1.3rem; }
-      .hero-header { padding:0; }
-      .blog-main { margin-top:1.2rem; }
+    .footer-links a:hover {
+      color: var(--white);
     }
-    @media (max-width:500px) {
-      html, body { width:100vw; max-width:100vw; overflow-x:hidden; }
-      .logo img { height:28px; }
-      #page-wrap, .blog-main, footer { width:100vw; max-width:100vw; box-sizing:border-box; }
+    .footer-social {
+      margin-top: 0.7rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
     }
-    /* utility: prevent body scroll when menu open */
-    .no-scroll { overflow: hidden; }
+    .footer-social a {
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover {
+      color: var(--accent);
+    }
+    @media (max-width: 1100px) {
+      .nav-container { width: 98%; }
+    }
+    @media (max-width: 900px) {
+      .blog-main {
+        width: 99%;
+        padding: 1.2rem 0.7rem;
+      }
+      .nav-container {
+        width: 98%;
+      }
+    }
+    @media (max-width: 600px) {
+      .blog-title {
+        font-size: 1.3rem;
+      }
+      .hero-header {
+        padding: 0;
+      }
+      .blog-main {
+        margin-top: 1.2rem;
+      }
+    }
+    @media (max-width: 500px) {
+      html, body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      .nav-menu {
+        gap: 1rem;
+      }
+      .logo img {
+        height: 28px;
+      }
+      #page-wrap, .blog-main, footer {
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+    }
   </style>
+  <script>
+    // Mobile nav hamburger
+    document.addEventListener("DOMContentLoaded", function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+          hamburger.classList.toggle('active');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+          }
+        });
+        Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
 </head>
 <body>
   <div id="page-wrap">
@@ -238,24 +394,12 @@
           <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
           <span class="brand-name">Global Money Lens</span>
         </div>
-
-        <!-- Reusable hamburger button (aria-controls / data-target) -->
-        <button class="hamburger" id="hamburger" aria-controls="navMenu" data-target="#navMenu" aria-expanded="false" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-
-        <!-- Desktop nav (kept for larger screens) -->
-        <div class="nav-menu desktop" id="navMenuDesktop" aria-hidden="false">
-          <a href="../index.html">Home</a>
-          <a href="../pages/blog.html">Blog</a>
-          <a href="../pages/tools.html">Tools</a>
-          <a href="../pages/about-us.html">About</a>
-          <a href="../pages/contact.html">Contact</a>
-          <a href="../pages/subscribe-page.html">Subscribe</a>
+        <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-
-        <!-- Mobile nav (same links) -->
-        <div class="nav-menu mobile" id="navMenu" aria-hidden="true">
+        <div class="nav-menu" id="navMenu">
           <a href="../index.html">Home</a>
           <a href="../pages/blog.html">Blog</a>
           <a href="../pages/tools.html">Tools</a>
@@ -265,14 +409,12 @@
         </div>
       </div>
     </nav>
-
     <!-- Hero/Header Section -->
     <header class="hero-header">
       <img src="https://images.unsplash.com/photo-1559526324-593bc073d938" alt="investment strategies" class="hero-banner">
       <div class="blog-title">Best Investment Strategies for Beginners (2026 Guide) | How to Start Investing Smartly</div>
       <div class="blog-meta">Published 2026 · by Global Money Lens</div>
     </header>
-
     <!-- Blog Content -->
     <main class="blog-main">
       <h1>Best Investment Strategies for Beginners (2026 Guide) | How to Start Investing Smartly</h1>
@@ -355,13 +497,11 @@
       <h2>Final Thoughts</h2>
       <p>Start small, stay consistent, and focus on long-term growth. Over time, investing can build strong financial freedom.</p>
       <hr class="divider">
-
       <!-- CTA Section -->
       <section class="cta-section">
         <div class="cta-title">Ready to Start Investing?</div>
         <a href="../pages/tools.html" class="cta-btn">Explore Investment Tools</a>
       </section>
-
       <h2>Related Posts</h2>
       <div id="related-posts"></div>
       <script src="../related-posts.js"></script>
@@ -373,7 +513,6 @@
         });
       </script>
     </main>
-
     <!-- Footer -->
     <footer>
       <div class="footer-links">
@@ -392,534 +531,56 @@
       <div style="margin-top:1rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
     </footer>
   </div>
-
   <script>
-    // Reusable hamburger + mobile nav script.
-    (function () {
-      function toggleMenu(btn, nav, open) {
-        const isOpen = typeof open === 'boolean' ? open : !nav.classList.contains('open');
-        nav.classList.toggle('open', isOpen);
-        btn.classList.toggle('active', isOpen);
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    // Robust mobile menu behavior
+    document.addEventListener('DOMContentLoaded', function () {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+
+      if (!hamburger || !navMenu) return;
+
+      function setMenuOpen(open) {
+        const isOpen = Boolean(open);
+        navMenu.classList.toggle('open', isOpen);
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        navMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
         document.body.classList.toggle('no-scroll', isOpen);
       }
 
-      document.addEventListener('DOMContentLoaded', function () {
-        const btn = document.querySelector('.hamburger[data-target], .hamburger[aria-controls]');
-        if (!btn) return;
-        const selector = btn.dataset.target || ('#' + (btn.getAttribute('aria-controls') || '').replace(/^#/, ''));
-        const nav = document.querySelector(selector);
-        if (!nav) return;
+      hamburger.addEventListener('click', function (e) {
+        setMenuOpen(!navMenu.classList.contains('open'));
+      });
 
-        // Ensure mobile nav has .mobile class so CSS applies
-        nav.classList.add('mobile');
+      hamburger.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setMenuOpen(!navMenu.classList.contains('open'));
+        }
+      });
 
-        // click / tap
-        btn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          toggleMenu(btn, nav);
-        });
-
-        // keyboard support
-        btn.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu(btn, nav);
-          }
-        });
-
-        // close when clicking a link inside nav
-        nav.querySelectorAll('a').forEach(function (a) {
-          a.addEventListener('click', function () { toggleMenu(btn, nav, false); });
-        });
-
-        // outside click closes
-        document.addEventListener('click', function (e) {
-          if (!nav.classList.contains('open')) return;
-          if (!nav.contains(e.target) && !btn.contains(e.target)) {
-            toggleMenu(btn, nav, false);
-          }
-        });
-
-        // ESC closes
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && nav.classList.contains('open')) {
-            toggleMenu(btn, nav, false);
-          }
-        });
-
-        // close when switching to desktop width
-        window.addEventListener('resize', function () {
-          if (window.innerWidth > 800 && nav.classList.contains('open')) {
-            toggleMenu(btn, nav, false);
-          }
+      // Close menu when a link is clicked
+      Array.from(navMenu.querySelectorAll('a')).forEach(function (link) {
+        link.addEventListener('click', function () {
+          setMenuOpen(false);
         });
       });
-    })();
-  </script>
-</body>
-</html>
-```// filepath: d:\web\blogs\best-investment-strategies-for-beginners.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EGV78MQ1S"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-0EGV78MQ1S');
-  </script>
-  <title>Best Investment Strategies for Beginners (2026 Guide) | How to Start Investing Smartly</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Learn the best beginner investment strategies in 2026 to build wealth, reduce risk, and achieve financial freedom.">
-  <meta name="category" content="Investing">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1559526324-593bc073d938">
-  <meta name="publish-date" content="2026-05-11">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WZ6EF1PZ5"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-1WZ6EF1PZ5');
-  </script>
-
-  <style>
-    :root {
-      --primary: #0a2342;
-      --accent: #1abc9c;
-      --accent-dark: #1abc9c;
-      --bg: #f8fafc;
-      --white: #fff;
-      --shadow: 0 8px 32px rgba(15,23,42,0.10);
-      --card-radius: 1.1rem;
-      --divider: #e5e7eb;
-      --tip-bg: #e6f9ef;
-      --tip-border: #1abc9c;
-    }
-
-    /* base layout */
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--primary);
-      min-height: 100vh;
-      width: 100vw;
-      max-width: 100vw;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    a { text-decoration: none; color: inherit; }
-
-    /* navbar layout */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1200;
-      background: var(--white);
-      box-shadow: 0 2px 8px rgba(10,35,66,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-    }
-    .nav-container {
-      width: 92%;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-    .logo { display:flex; align-items:center; }
-    .logo img { height:42px; max-height:50px; width:auto; margin-right:0.7rem; }
-    .brand-name { font-size:1.3rem; font-weight:700; color:var(--primary); letter-spacing:1px; }
-
-    /* original desktop nav */
-    .nav-menu { display:flex; gap:2.2rem; align-items:center; }
-    .nav-menu a {
-      color: var(--primary);
-      font-size: 1.05rem;
-      font-weight: 500;
-      padding: 0.4rem 0.7rem;
-      border-radius: 2rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nav-menu a:hover { background: var(--accent); color: var(--white); }
-
-    /* new hamburger (reusable) */
-    .hamburger {
-      display:none;
-      width:44px;
-      height:44px;
-      padding:6px;
-      border-radius:8px;
-      background:transparent;
-      border:0;
-      cursor:pointer;
-      -webkit-tap-highlight-color: transparent;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:6px;
-    }
-    .hamburger:focus { outline:2px solid rgba(26,188,156,0.18); outline-offset:2px; }
-    .hamburger span {
-      display:block;
-      width:22px;
-      height:3px;
-      background:var(--primary);
-      border-radius:2px;
-      transition:transform .28s cubic-bezier(.2,.8,.2,1), opacity .2s;
-      transform-origin:center;
-    }
-    .hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(.6); }
-    .hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    /* mobile nav - controlled by .open on nav-menu */
-    .nav-menu.mobile { display:none; }
-    .nav-menu.mobile.open {
-      display:flex;
-      flex-direction:column;
-      gap:0;
-    }
-
-    /* rest of page styles kept from original */
-    .hero-header {
-      background: var(--white);
-      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
-      padding: 0;
-      text-align: center;
-      border-bottom: 1px solid var(--divider);
-    }
-    .hero-banner {
-      width: 100%;
-      max-height: 320px;
-      object-fit: cover;
-      object-position: center;
-      border-radius: 0 0 1.1rem 1.1rem;
-      display: block;
-      margin: 0 auto;
-    }
-    .blog-title {
-      font-size: 2.3rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 0.7rem;
-      margin-top: 2.2rem;
-      letter-spacing: 1px;
-      line-height: 1.15;
-    }
-    .blog-meta { color: #888; font-size: 1rem; margin-top: 0.5rem; margin-bottom: 1.5rem; }
-
-    .blog-main {
-      width: 96%;
-      max-width: 800px;
-      margin: 0 auto;
-      margin-top: 2.5rem;
-      margin-bottom: 2.5rem;
-      background: var(--white);
-      border-radius: var(--card-radius);
-      box-shadow: var(--shadow);
-      padding: 2.5rem 2rem;
-    }
-    .blog-main img { width:100%; border-radius:10px; margin:20px 0; display:block; box-shadow:0 2px 8px rgba(15,23,42,0.07); }
-    h1 { display:none; }
-    h2 { font-size:1.45rem; color:var(--primary); font-weight:700; margin-top:2.2rem; margin-bottom:1rem; line-height:1.2; }
-    p { font-size:1.13rem; color:#222; line-height:1.8; margin-bottom:1.3rem; }
-    ul, ol { margin:1.2rem 0 1.2rem 2.2rem; font-size:1.13rem; color:#222; line-height:1.8; }
-    li { margin-bottom:0.7rem; }
-    .divider { border:none; border-top:1.5px solid var(--divider); margin:2.5rem 0; }
-    .highlight-box { background:#e6f9ef; border-left:5px solid var(--tip-border); border-radius:0.7rem; padding:1.1rem 1.3rem; margin:1.7rem 0; font-size:1.13rem; color:var(--primary); font-weight:600; box-shadow:0 1px 4px rgba(15,23,42,0.04); line-height:2; letter-spacing:0.5px; }
-    .cta-section { background:var(--primary); color:var(--white); border-radius:1rem; padding:2.2rem 1.2rem; text-align:center; margin-top:2.5rem; margin-bottom:2.5rem; box-shadow:var(--shadow); }
-    .cta-title { font-size:1.3rem; font-weight:600; margin-bottom:1.1rem; }
-    .cta-btn { background:var(--accent); color:var(--white); border:none; padding:1rem 2.2rem; border-radius:2rem; font-size:1.1rem; font-weight:700; cursor:pointer; transition:background 0.2s, transform 0.2s; text-decoration:none; display:inline-block; }
-    .cta-btn:hover { background:var(--accent-dark); transform:scale(1.05); }
-
-    footer {
-      background: var(--primary);
-      color: var(--white);
-      padding: 1.5rem 0 1rem 0;
-      text-align: center;
-      width: 100vw;
-      max-width: 100vw;
-      overflow-x: hidden;
-      box-sizing: border-box;
-      flex-shrink: 0;
-    }
-    .footer-links { display:flex; justify-content:center; gap:2rem; margin-bottom:0.7rem; flex-wrap:wrap; }
-    .footer-links a { color: var(--accent); font-size:1rem; transition:color 0.2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-social { margin-top:0.7rem; display:flex; justify-content:center; gap:1.2rem; }
-    .footer-social a { color:var(--white); font-size:1.3rem; transition:color 0.2s; }
-    .footer-social a:hover { color:var(--accent); }
-
-    /* Responsive adjustments */
-    @media (max-width:1100px) { .nav-container { width:98%; } }
-    @media (max-width:900px) {
-      .blog-main { width:99%; padding:1.2rem 0.7rem; }
-      .nav-container { width:98%; }
-    }
-    @media (max-width:800px) {
-      /* show hamburger and switch nav menu to mobile mode */
-      .hamburger { display:flex; }
-      .nav-menu { display:none; }             /* ensure desktop menu hidden */
-      .nav-menu.mobile { display:none; }      /* mobile menu default */
-      .nav-menu.mobile.open { display:flex; position: fixed; top: 64px; left: 4%; width: calc(100% - 8%); max-width: 340px; background:var(--white); box-shadow:0 12px 40px rgba(10,35,66,0.12); border-radius:8px; padding:0.5rem 0; z-index:1100; flex-direction:column; box-sizing:border-box; }
-      .nav-menu.mobile.open a { padding: 0.9rem 1.2rem; border-bottom:1px solid #eee; font-size:1.05rem; border-radius:0; }
-    }
-    @media (max-width:600px) {
-      .blog-title { font-size:1.3rem; }
-      .hero-header { padding:0; }
-      .blog-main { margin-top:1.2rem; }
-    }
-    @media (max-width:500px) {
-      html, body { width:100vw; max-width:100vw; overflow-x:hidden; }
-      .logo img { height:28px; }
-      #page-wrap, .blog-main, footer { width:100vw; max-width:100vw; box-sizing:border-box; }
-    }
-    /* utility: prevent body scroll when menu open */
-    .no-scroll { overflow: hidden; }
-  </style>
-</head>
-<body>
-  <div id="page-wrap">
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="logo">
-          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
-          <span class="brand-name">Global Money Lens</span>
-        </div>
-
-        <!-- Reusable hamburger button (aria-controls / data-target) -->
-        <button class="hamburger" id="hamburger" aria-controls="navMenu" data-target="#navMenu" aria-expanded="false" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-
-        <!-- Desktop nav (kept for larger screens) -->
-        <div class="nav-menu desktop" id="navMenuDesktop" aria-hidden="false">
-          <a href="../index.html">Home</a>
-          <a href="../pages/blog.html">Blog</a>
-          <a href="../pages/tools.html">Tools</a>
-          <a href="../pages/about-us.html">About</a>
-          <a href="../pages/contact.html">Contact</a>
-          <a href="../pages/subscribe-page.html">Subscribe</a>
-        </div>
-
-        <!-- Mobile nav (same links) -->
-        <div class="nav-menu mobile" id="navMenu" aria-hidden="true">
-          <a href="../index.html">Home</a>
-          <a href="../pages/blog.html">Blog</a>
-          <a href="../pages/tools.html">Tools</a>
-          <a href="../pages/about-us.html">About</a>
-          <a href="../pages/contact.html">Contact</a>
-          <a href="../pages/subscribe-page.html">Subscribe</a>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Hero/Header Section -->
-    <header class="hero-header">
-      <img src="https://images.unsplash.com/photo-1559526324-593bc073d938" alt="investment strategies" class="hero-banner">
-      <div class="blog-title">Best Investment Strategies for Beginners (2026 Guide) | How to Start Investing Smartly</div>
-      <div class="blog-meta">Published 2026 · by Global Money Lens</div>
-    </header>
-
-    <!-- Blog Content -->
-    <main class="blog-main">
-      <h1>Best Investment Strategies for Beginners (2026 Guide) | How to Start Investing Smartly</h1>
-      <h2>Introduction: Why Learn Investment Strategies in 2026?</h2>
-      <p>Investing is one of the most effective ways to build long-term wealth and achieve financial independence. Unlike saving money alone, investing allows your money to grow through compound returns over time.</p>
-      <p>Many beginners avoid investing because they believe it is complicated or risky. However, with the right investment strategies for beginners in 2026, anyone can start building wealth—even with small amounts of money.</p>
-      <p>This guide explains the best beginner-friendly investment strategies that can help you grow your money safely and consistently.</p>
-
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3" alt="stock market chart">
-
-      <h2>Why Investing is Important for Financial Growth</h2>
-      <ul>
-        <li>Grow your money over time</li>
-        <li>Protect against inflation</li>
-        <li>Build long-term wealth</li>
-        <li>Create financial independence</li>
-      </ul>
-      <p>The earlier you start investing, the more you benefit from compound growth.</p>
-
-      <h2>Understanding Investment Risk and Return</h2>
-      <ul>
-        <li>Low risk: Savings accounts, bonds</li>
-        <li>Medium risk: ETFs, mutual funds</li>
-        <li>High risk: Stocks, cryptocurrency</li>
-      </ul>
-      <p>The key is to balance risk based on your financial goals and comfort level.</p>
-
-      <div class="highlight-box">
-        <strong>Tip:</strong> Never invest money you can't afford to lose. Always keep an emergency fund before investing.
-      </div>
-
-      <h2>1. Build an Emergency Fund Before Investing</h2>
-      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f" alt="emergency fund">
-      <p>Save at least 3–6 months of living expenses to protect yourself from financial emergencies.</p>
-
-      <div class="highlight-box">
-        <strong>Tip:</strong> Keep your emergency fund in a high-yield savings account for easy access and better returns.
-      </div>
-
-      <h2>2. Invest in Index Funds (Best for Beginners)</h2>
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3" alt="index funds">
-      <p>Index funds track major market indexes and provide instant diversification at a low cost.</p>
-
-      <div class="highlight-box">
-        <strong>Tip:</strong> Set up automatic monthly investments into index funds to build wealth consistently.
-      </div>
-
-      <h2>3. Diversify Your Investment Portfolio</h2>
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="diversify portfolio">
-      <ul>
-        <li>Stocks</li>
-        <li>Bonds</li>
-        <li>Real estate</li>
-        <li>ETFs</li>
-      </ul>
-      <div class="highlight-box">
-        <strong>Tip:</strong> Don’t put all your eggs in one basket. Diversification reduces risk.
-      </div>
-
-      <h2>4. Focus on Long-Term Investing</h2>
-      <img src="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2" alt="long term investing">
-      <p>Avoid short-term trading and focus on holding investments for years.</p>
-
-      <h2>5. Dollar-Cost Averaging Strategy</h2>
-      <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c" alt="dollar cost averaging">
-      <p>Invest fixed amounts regularly (example: monthly investments) to reduce risk and emotional decisions.</p>
-
-      <div class="highlight-box">
-        <strong>Tip:</strong> Stick to your investment plan even during market downturns. Consistency pays off.
-      </div>
-
-      <h2>Common Investment Mistakes</h2>
-      <ul>
-        <li>Investing without research</li>
-        <li>Following hype trends</li>
-        <li>Panic selling during drops</li>
-        <li>Investing money needed for emergencies</li>
-      </ul>
-
-      <h2>Final Thoughts</h2>
-      <p>Start small, stay consistent, and focus on long-term growth. Over time, investing can build strong financial freedom.</p>
-      <hr class="divider">
-
-      <!-- CTA Section -->
-      <section class="cta-section">
-        <div class="cta-title">Ready to Start Investing?</div>
-        <a href="../pages/tools.html" class="cta-btn">Explore Investment Tools</a>
-      </section>
-
-      <h2>Related Posts</h2>
-      <div id="related-posts"></div>
-      <script src="../related-posts.js"></script>
-      <script src="../blog-system.js"></script>
-      <script src="../posts.js"></script>
-      <script>
-        document.addEventListener("blogPostsReady", function() {
-          window.renderRelatedPosts("blogs/Best Investment Strategies for Beginners.html", "#related-posts");
-        });
-      </script>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-      <div class="footer-links">
-        <a href="../pages/PP.html">Privacy Policy</a>
-        <a href="../pages/contact.html">Contact</a>
-        <a href="../pages/about-us.html">About</a>
-      </div>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/profile.php?id=61560201026218" title="Facebook" aria-label="Facebook">
-          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.02 3.66 9.16 8.44 9.93v-7.03h-2.54v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.23 22 17.09 22 12.07z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/global_money_lens?igsh=c2F5cHQxcmU0eTY0" title="Instagram" aria-label="Instagram">
-          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.13 1.13a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z"/></svg>
-        </a>
-      </div>
-      <div style="margin-top:1rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
-    </footer>
-  </div>
-
-  <script>
-    // Reusable hamburger + mobile nav script.
-    (function () {
-      function toggleMenu(btn, nav, open) {
-        const isOpen = typeof open === 'boolean' ? open : !nav.classList.contains('open');
-        nav.classList.toggle('open', isOpen);
-        btn.classList.toggle('active', isOpen);
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-        document.body.classList.toggle('no-scroll', isOpen);
-      }
-
-      document.addEventListener('DOMContentLoaded', function () {
-        const btn = document.querySelector('.hamburger[data-target], .hamburger[aria-controls]');
-        if (!btn) return;
-        const selector = btn.dataset.target || ('#' + (btn.getAttribute('aria-controls') || '').replace(/^#/, ''));
-        const nav = document.querySelector(selector);
-        if (!nav) return;
-
-        // Ensure mobile nav has .mobile class so CSS applies
-        nav.classList.add('mobile');
-
-        // click / tap
-        btn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          toggleMenu(btn, nav);
-        });
-
-        // keyboard support
-        btn.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu(btn, nav);
-          }
-        });
-
-        // close when clicking a link inside nav
-        nav.querySelectorAll('a').forEach(function (a) {
-          a.addEventListener('click', function () { toggleMenu(btn, nav, false); });
-        });
-
-        // outside click closes
-        document.addEventListener('click', function (e) {
-          if (!nav.classList.contains('open')) return;
-          if (!nav.contains(e.target) && !btn.contains(e.target)) {
-            toggleMenu(btn, nav, false);
-          }
-        });
-
-        // ESC closes
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && nav.classList.contains('open')) {
-            toggleMenu(btn, nav, false);
-          }
-        });
-
-        // close when switching to desktop width
-        window.addEventListener('resize', function () {
-          if (window.innerWidth > 800 && nav.classList.contains('open')) {
-            toggleMenu(btn, nav, false);
-          }
-        });
+      // Close menu when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!navMenu.classList.contains('open')) return;
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+          setMenuOpen(false);
+        }
       });
-    })();
+
+      // Close on resize if switching to desktop
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 800 && navMenu.classList.contains('open')) {
+          setMenuOpen(false);
+        }
+      });
+    });
   </script>
 </body>
 </html>
