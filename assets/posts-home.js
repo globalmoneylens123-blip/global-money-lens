@@ -47,5 +47,15 @@ window.BLOG_POSTS = [
   image: "https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1200&q=80",
   category: "Investing",
   date: "2026-05-18"
+},
+{
+  link: "blogs/how-to-avoid-common-investment-mistakes.html",
+  title: "How to Avoid Common Investment Mistakes (Beginner Guide 2026)",
+  desc: "Learn how to avoid the most common investment mistakes beginners make in 2026. Discover practical strategies for managing risk, controlling emotions, diversifying your portfolio, avoiding scams, and building long-term wealth through smart investing.",
+  image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-02"
 }
+
+
 ];
