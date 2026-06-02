@@ -296,6 +296,15 @@
   </div>
   <script>
     // Robust mobile menu behavior
+    (function () {
+      function toggleMenu(button, targetEl, open) {
+        const isOpen = typeof open === 'boolean' ? open : !targetEl.classList.contains('open');
+        targetEl.classList.toggle('open', isOpen);
+        button.classList.toggle('active', isOpen);
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        targetEl.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        document.body.classList.toggle('no-scroll', isOpen);
+      }
     document.addEventListener('DOMContentLoaded', function () {
       const hamburger = document.getElementById('hamburger');
       const navMenu = document.getElementById('navMenu');
@@ -344,6 +353,7 @@
         }
       });
     });
+    })();
   </script>
 </body>
 </html>
