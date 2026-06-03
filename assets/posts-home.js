@@ -63,5 +63,13 @@ window.BLOG_POSTS = [
   image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
   category: "Investing",
   date: "2026-06-02"
+},
+{
+  link: "blogs/best-index-funds-for-beginners.html",
+  title: "Best Index Funds for Beginners (2026 Guide)",
+  desc: "Explore some of the best index funds for beginners in 2026. Learn how index funds work, what to look for when choosing one, and how low-cost, diversified funds can help build long-term wealth with less effort and risk.",
+  image: "https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-02"
 }
 ];
