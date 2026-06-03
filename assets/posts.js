@@ -96,5 +96,69 @@ window.BLOG_POSTS = [
   image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
   category: "Investing",
   date: "2026-06-02"
+},
+{
+  link: "blogs/passive-income-ideas-for-beginners.html",
+  title: "Passive Income Ideas for Beginners (2026 Guide)",
+  desc: "Discover beginner-friendly passive income ideas in 2026. Learn how to generate extra income through investments, digital products, affiliate marketing, dividend stocks, online businesses, and other proven strategies for building long-term wealth.",
+  image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
+  category: "Passive Income",
+  date: "2026-06-02"
+},
+{
+  link: "blogs/how-passive-income-works.html",
+  title: "How Passive Income Works (Beginner Guide 2026)",
+  desc: "Learn how passive income works and why it is a powerful tool for building wealth in 2026. This beginner-friendly guide explains different passive income sources, common misconceptions, benefits, risks, and practical steps to get started.",
+  image: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=80",
+  category: "Passive Income",
+  date: "2026-06-02"
+},
+{
+  link: "blogs/how-rich-people-invest-money.html",
+  title: "How Rich People Invest Money (Beginner Guide 2026)",
+  desc: "Discover how wealthy individuals invest their money to build and preserve long-term wealth. Learn about stocks, index funds, real estate, businesses, diversification, risk management, and key investing principles used by successful investors in 2026.",
+  image: "https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-02"
+},
+{
+  link: "blogs/daily-habits-that-build-wealth.html",
+  title: "Daily Habits That Build Wealth (Beginner Guide 2026)",
+  desc: "Learn the daily habits that help build wealth over time. This beginner-friendly 2026 guide covers smart spending, consistent saving, investing, goal setting, financial discipline, and productivity habits used by financially successful people.",
+  image: "https://images.unsplash.com/photo-1518459031867-a89b944bffe4?auto=format&fit=crop&w=1200&q=80",
+  category: "Personal Finance",
+  date: "2026-06-02"
+},
+{
+  link: "blogs/top-10-money-mistakes.html",
+  title: "Top 10 Money Mistakes (2026 Guide)",
+  desc: "Discover the top 10 money mistakes people make in 2026 and learn how to avoid them. From overspending and poor budgeting to high-interest debt and investing errors, this guide provides practical tips for improving your financial future.",
+  image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+  category: "Personal Finance",
+  date: "2026-06-02"
+},
+{
+  link: "blogs/how-to-stop-wasting-money.html",
+  title: "How to Stop Wasting Money (Beginner Guide 2026)",
+  desc: "Learn how to stop wasting money and take control of your finances in 2026. This beginner-friendly guide covers common spending traps, budgeting techniques, smart saving habits, and practical strategies to reduce unnecessary expenses and build wealth.",
+  image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+  category: "Personal Finance",
+  date: "2026-06-02"
+},
+{
+  link: "blogs/etf-vs-stocks-beginner-guide-2026.html",
+  title: "ETF vs Stocks (Beginner Guide 2026)",
+  desc: "ETF or individual stocks? Learn the key differences between ETFs and stocks in this beginner-friendly 2026 guide. Discover the pros, cons, risks, potential returns, and which option may be better for new investors.",
+  image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-03"
+},
+{
+  link: "blogs/which-investment-is-safer-beginner-guide-2026.html",
+  title: "Which Investment is Safer? (Beginner Guide 2026)",
+  desc: "Wondering which investment is safest in 2026? Learn about savings accounts, bonds, index funds, ETFs, stocks, and other investment options. Discover the risks, rewards, and how beginners can choose investments that match their financial goals and risk tolerance.",
+  image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-03"
 }
 ];
