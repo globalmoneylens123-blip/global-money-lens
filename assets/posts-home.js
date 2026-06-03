@@ -87,5 +87,13 @@ window.BLOG_POSTS = [
   image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
   category: "Investing",
   date: "2026-06-02"
+},
+{
+  link: "blogs/how-to-buy-your-first-stock.html",
+  title: "How to Buy Your First Stock (Beginner Guide 2026)",
+  desc: "Learn how to buy your first stock step-by-step in 2026. This beginner-friendly guide covers choosing a brokerage account, researching companies, placing your first trade, managing risk, and building a strong foundation for long-term investing.",
+  image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-02"
 }
 ];
