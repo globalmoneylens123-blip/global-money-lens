@@ -72,5 +72,13 @@ window.BLOG_POSTS = [
   image: "https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1200&q=80",
   category: "Investing",
   date: "2026-06-02"
+},
+{
+  link: "blogs/simple-budgeting-plan-for-beginners.html",
+  title: "Simple Budgeting Plan for Beginners (2026 Guide)",
+  desc: "Learn how to create a simple and effective budget in 2026. This beginner-friendly guide covers budgeting basics, the 50/30/20 rule, expense tracking, saving strategies, and practical tips to help you take control of your finances.",
+  image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+  category: "Budgeting",
+  date: "2026-06-02"
 }
 ];
