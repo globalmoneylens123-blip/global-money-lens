@@ -80,5 +80,13 @@ window.BLOG_POSTS = [
   image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
   category: "Budgeting",
   date: "2026-06-02"
+},
+{
+  link: "blogs/guide-to-stocks-beginner-2026.html",
+  title: "Guide to Stocks (Beginner 2026)",
+  desc: "Learn the fundamentals of stock investing in this beginner-friendly 2026 guide. Discover what stocks are, how the stock market works, different types of stocks, potential risks and rewards, and practical steps to start investing with confidence.",
+  image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+  category: "Investing",
+  date: "2026-06-02"
 }
 ];

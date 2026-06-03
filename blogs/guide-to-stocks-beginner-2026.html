@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Guide to Stocks (Beginner 2026) | Global Money Lens</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Beginner-friendly guide to stocks in 2026 — how the market works, types of stocks, basic analysis and a simple plan to get started." />
+  <meta name="category" content="Investing" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="publish-date" content="2026-06-03" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WZ6EF1PZ5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1WZ6EF1PZ5');
+  </script>
+
+  <style>
+    :root {
+      --primary: #0a2342;
+      --accent: #1abc9c;
+      --accent-dark: #1abc9c;
+      --bg: #f8fafc;
+      --white: #fff;
+      --shadow: 0 8px 32px rgba(15,23,42,0.10);
+      --card-radius: 1.1rem;
+      --divider: #e5e7eb;
+      --tip-bg: #e6f9ef;
+      --tip-border: #1abc9c;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+    .nav-container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 42px;
+      max-height: 50px;
+      width: auto;
+      margin-right: 0.7rem;
+    }
+    .brand-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-menu a {
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 500;
+      padding: 0.4rem 0.7rem;
+      border-radius: 2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-menu a:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+    /* Hamburger for mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 800px) {
+      .nav-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: auto;
+        background: var(--white);
+        flex-direction: column;
+        width: 100vw;
+        max-width: 320px;
+        box-shadow: 0 8px 24px rgba(10,35,66,0.13);
+        gap: 0;
+        padding: 1rem 0;
+        display: none;
+        z-index: 1000;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .nav-menu a {
+        padding: 1rem 2rem;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-container {
+        position: relative;
+      }
+    }
+    .hero-header {
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+      padding: 0;
+      text-align: center;
+      border-bottom: 1px solid var(--divider);
+    }
+    .hero-banner {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 0 0 1.1rem 1.1rem;
+      display: block;
+      margin: 0 auto;
+    }
+    .blog-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+      margin-top: 2.2rem;
+      letter-spacing: 1px;
+      line-height: 1.15;
+    }
+    .blog-meta {
+      color: #888;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .blog-main {
+      width: 96%;
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      background: var(--white);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding: 2.5rem 2rem 2.5rem 2rem;
+    }
+    .blog-main img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: block;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.07);
+    }
+    h1 {
+      display: none;
+    }
+    h2 {
+      font-size: 1.45rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-top: 2.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    p {
+      font-size: 1.13rem;
+      color: #222;
+      line-height: 1.8;
+      margin-bottom: 1.3rem;
+    }
+    ul, ol {
+      margin: 1.2rem 0 1.2rem 2.2rem;
+      font-size: 1.13rem;
+      color: #222;
+      line-height: 1.8;
+    }
+    li {
+      margin-bottom: 0.7rem;
+    }
+    .divider {
+      border: none;
+      border-top: 1.5px solid var(--divider);
+      margin: 2.5rem 0;
+    }
+    .highlight-box {
+      background: #e6f9ef;
+      border-left: 5px solid var(--tip-border);
+      border-radius: 0.7rem;
+      padding: 1.1rem 1.3rem;
+      margin: 1.7rem 0;
+      font-size: 1.13rem;
+      color: var(--primary);
+      font-weight: 600;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.04);
+      line-height: 2;
+      letter-spacing: 0.5px;
+    }
+    .cta-section {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 1rem;
+      padding: 2.2rem 1.2rem;
+      text-align: center;
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .cta-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+    }
+    .cta-btn {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 1rem 2.2rem;
+      border-radius: 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta-btn:hover {
+      background: var(--accent-dark);
+      transform: scale(1.05);
+    }
+    footer {
+      background: var(--primary);
+      color: var(--white);
+      padding: 1.5rem 0 1rem 0;
+      text-align: center;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--accent);
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--white);
+    }
+    .footer-social {
+      margin-top: 0.7rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    .footer-social a {
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover {
+      color: var(--accent);
+    }
+    @media (max-width: 1100px) {
+      .nav-container { width: 98%; }
+    }
+    @media (max-width: 900px) {
+      .blog-main {
+        width: 99%;
+        padding: 1.2rem 0.7rem;
+      }
+      .nav-container {
+        width: 98%;
+      }
+    }
+    @media (max-width: 600px) {
+      .blog-title {
+        font-size: 1.3rem;
+      }
+      .hero-header {
+        padding: 0;
+      }
+      .blog-main {
+        margin-top: 1.2rem;
+      }
+    }
+    @media (max-width: 500px) {
+      html, body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      .nav-menu {
+        gap: 1rem;
+      }
+      .logo img {
+        height: 28px;
+      }
+      #page-wrap, .blog-main, footer {
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+  <script>
+    // Mobile nav hamburger
+    document.addEventListener("DOMContentLoaded", function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+          hamburger.classList.toggle('active');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            navMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+          }
+        });
+        Array.from(navMenu.querySelectorAll('a')).forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+          });
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="page-wrap">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmIMu_wNq1Ex_A9tM-SDkxYA-v0UodSi4fgn7s1bcreBVausUOopa5aVABrUgxxv5PGuAeWyn7Y_WpFA14QiboaQkXgJbaXYH_F0CHrMAHI9SJpZoEjFLqoEiPdJ39fsQSKZXhrdlvlvXjexmuMHMPH-J-Nhd9BCZWExjC3Fr5cXU1IIPnJGwL7au2tMpE/s1600/ChatGPT%20Image%20Apr%2022,%202026,%2008_51_59%20PM.png" alt="Global Money Lens Logo">
+          <span class="brand-name">Global Money Lens</span>
+        </div>
+
+       <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="nav-menu" id="navMenu" aria-hidden="true">
+          <a href="../index.html">Home</a>
+          <a href="../pages/blog.html">Blog</a>
+          <a href="../pages/tools.html">Tools</a>
+          <a href="../pages/about-us.html">About</a>
+          <a href="../pages/contact.html">Contact</a>
+          <a href="../pages/subscribe-page.html">Subscribe</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero-header">
+      <img class="hero-banner" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1400&q=80" alt="stock market charts finance trading" />
+      <div class="blog-title">Guide to Stocks (Beginner 2026)</div>
+      <div class="blog-meta muted">Published Jun 03, 2026 · by Global Money Lens</div>
+    </header>
+
+    <main class="blog-main" role="main">
+      <h1 style="display:none;">Guide to Stocks (Beginner 2026)</h1>
+
+      <h2>Introduction</h2>
+      <p>The stock market can help you build long-term wealth. This guide explains what stocks are, how markets work, basic analysis, common mistakes and a simple plan to get started in 2026.</p>
+
+      <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1400&q=80" alt="stock ownership concept finance" />
+
+      <h2>What is a Stock?</h2>
+      <p>Stocks represent partial ownership in a company. Owning shares means you participate in the company's gains (and losses).</p>
+
+      <h2>How Investors Make Money</h2>
+      <ul>
+        <li><strong>Capital gains:</strong> sell shares for more than you paid.</li>
+        <li><strong>Dividends:</strong> companies may pay part of profits to shareholders.</li>
+      </ul>
+
+      <h2>Why Companies Issue Stock</h2>
+      <p>Companies raise capital by selling shares to fund growth, pay debt, or invest in new projects. Public markets also provide liquidity for founders and early investors.</p>
+
+      <h2>How the Market Works (Simple)</h2>
+      <p>Prices reflect supply and demand. News, earnings, economic data and investor sentiment move prices. Over time, company fundamentals tend to drive long-term returns.</p>
+
+      <h2>Common Types of Stocks</h2>
+      <h3>Growth stocks</h3>
+      <p>Companies expected to grow faster than the market; higher upside and volatility.</p>
+      <h3>Dividend stocks</h3>
+      <p>Provide income and often belong to more established firms.</p>
+      <h3>Blue-chip stocks</h3>
+      <p>Large, stable companies that form the backbone of many portfolios.</p>
+
+      <h2>Basic Metrics Beginners Should Know</h2>
+      <ul>
+        <li><strong>Price-to-Earnings (P/E):</strong> price relative to earnings — quick valuation signal.</li>
+        <li><strong>Revenue & profit trends:</strong> consistent growth is positive.</li>
+        <li><strong>Dividend yield:</strong> annual dividend divided by share price.</li>
+      </ul>
+      <p class="muted">These are starting points — deeper analysis comes later.</p>
+
+      <h2>Stock Market Indexes</h2>
+      <p>Indexes like the S&P 500 or Nasdaq show overall market performance. Index funds let you own a broad slice of the market with low cost.</p>
+
+      <h2>How to Start — 5 Simple Steps</h2>
+      <ol>
+        <li>Set a goal and time horizon (retirement, house, education).</li>
+        <li>Open a low-cost brokerage or retirement account.</li>
+        <li>Build an emergency fund (3–6 months) first.</li>
+        <li>Start with diversified options: index funds or ETFs.</li>
+        <li>Contribute regularly and review annually.</li>
+      </ol>
+
+      <div class="card">
+        <h3>Beginner portfolio ideas</h3>
+        <ul>
+          <li>Conservative: 40% stocks (broad), 50% bonds, 10% cash</li>
+          <li>Balanced: 70% stocks (total market/index), 30% bonds</li>
+          <li>Growth: 90% stocks (global), 10% bonds</li>
+        </ul>
+      </div>
+
+      <h2>Common Beginner Mistakes</h2>
+      <ul>
+        <li>Chasing short-term gains</li>
+        <li>Panic selling during downturns</li>
+        <li>Not diversifying</li>
+        <li>Ignoring fees and taxes</li>
+      </ul>
+
+      <h2>Simple Fundamental Checklist Before Buying a Stock</h2>
+      <ul>
+        <li>Does the company have a clear business model?</li>
+        <li>Are revenues and profits growing?</li>
+        <li>Is the valuation reasonable compared to peers?</li>
+        <li>Does the company have manageable debt?</li>
+      </ul>
+
+      <h2>Basic Trading vs Investing</h2>
+      <p>Trading focuses on short-term price moves and requires active management. Investing focuses on long-term ownership and compounding — recommended for most beginners.</p>
+
+      <h2>Taxes, Fees & Accounts</h2>
+      <p>Use tax-advantaged accounts where available (IRAs, 401(k), ISAs). Watch expense ratios for funds and commissions for brokers — low fees compound into better returns.</p>
+
+      <h2>Behavioral Tips</h2>
+      <ul>
+        <li>Set automatic contributions</li>
+        <li>Ignore daily noise; focus on long-term progress</li>
+        <li>Use checklists to avoid emotional decisions</li>
+      </ul>
+
+      <h2>Quick FAQ</h2>
+      <h3>Q: How much do I need to start?</h3>
+      <p>A: Many brokers allow small or even zero minimums. Start with any amount you can consistently invest.</p>
+      <h3>Q: Should I buy individual stocks or funds?</h3>
+      <p>A: Funds (index ETFs/mutual funds) are better for beginners due to instant diversification.</p>
+
+      <h2>30-Day Starter Plan</h2>
+      <ol>
+        <li>Week 1: Open an account and read fund basics.</li>
+        <li>Week 2: Build emergency savings and decide allocation.</li>
+        <li>Week 3: Buy a broad market ETF or set up contributions to a target-date fund.</li>
+        <li>Week 4: Automate monthly contributions and set an annual review date.</li>
+      </ol>
+
+      <div class="highlight">Quick action: pick one low-cost index fund, set a small monthly contribution, and forget about daily price moves.</div>
+
+      <section class="cta-section" aria-label="Call to action">
+        <div class="cta-title" style="font-weight:700;color:var(--white);">Ready to learn more about building a stock portfolio?</div>
+        <a class="cta-btn" href="../pages/tools.html">Explore Our Investment Tools</a>
+      </section>
+
+      <h2 style="margin-top:1rem;">Further Reading & Tools</h2>
+      <ul>
+        <li>Look up index funds and their expense ratios on your broker.</li>
+        <li>Use compound interest calculators to model returns.</li>
+        <li>Read simple valuation guides (P/E, revenue growth).</li>
+      </ul>
+
+      <h2 style="margin-top:1rem;">Related Posts</h2>
+      <div id="related-posts"></div>
+      <script src="../related-posts.js"></script>
+      <script src="../blog-system.js"></script>
+      <script src="../posts.js"></script>
+      <script>
+        document.addEventListener("blogPostsReady", function () {
+          if (window.renderRelatedPosts) {
+            window.renderRelatedPosts("blogs/guide-to-stocks-beginner-2026.html", "#related-posts");
+          }
+        });
+      </script>
+    </main>
+
+    <footer>
+      <div class="small">
+        <a href="../pages/PP.html" style="color:var(--accent);margin-right:1rem;">Privacy Policy</a>
+        <a href="../pages/contact.html" style="color:var(--accent);margin-right:1rem;">Contact</a>
+        <a href="../pages/about-us.html" style="color:var(--accent);">About</a>
+      </div>
+      <div style="margin-top:0.6rem;">&copy; 2026 Global Money Lens. All rights reserved.</div>
+    </footer>
+  </div>
+</body>
+</html>
